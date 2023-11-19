@@ -1,0 +1,47 @@
+body {
+    background-color: #ffff ;
+}
+#email {
+    padding-left: 10px;
+    width: 340px;
+    height: 62px;
+    border-radius: 10px;
+    font-size: 20px;
+    margin-left: 17px;
+    border: 0px;
+}
+#password {
+    padding-left: 10px;
+    width: 340px;
+    height: 62px;
+    border-radius: 10px;
+    font-size: 20px;
+    margin-top: 29px;
+    margin-left: 17px;
+    border: 0px;
+}
+#log-in-button {
+    font-weight: bold; 
+    width: 350px; 
+    height: 62px; 
+    border-radius: 10px; 
+    font-size: 20px; 
+    margin-top: 29px; 
+    margin-left: 18px; 
+    border: 0px;
+    background-color: #00FD8F; 
+    color: #02231c;
+}
+#create-new-account-button {
+    font-weight: bold; 
+    text-decoration: none; 
+    border: 0px;
+    background-color: #ffff; 
+    color: #02231c;
+    width: 260px; 
+    height: 62px; 
+    border-radius: 10px; 
+    font-size: 20px; 
+    margin-top: 18px; 
+    margin-left: 63px;
+}
