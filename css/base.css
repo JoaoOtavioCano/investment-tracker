@@ -11,6 +11,7 @@ html {
 
 body {
     margin: 0%;
+    display: grid;
 }
 
 header {
@@ -28,6 +29,7 @@ header {
 ul{
     margin: 0%;
     color: var(--white);
+    list-style: none;
 }
 
 header ul li {
@@ -47,7 +49,7 @@ header ul li a {
 #user {
     position: absolute;
     border: 0.1rem solid var(--light_green);
-    border-radius: 1rem;
+    border-radius: 1.5rem;
     padding: 0.3rem;
     right: 0.6rem;
     margin: 0%;
@@ -59,4 +61,15 @@ header ul li a {
     padding: 0.3rem;
     background-color: var(--light_green);
     color: var(--dark_green);
+}
+
+main {
+    margin-top: 4rem;
+}
+
+h1 {
+    margin-left: 1rem;
+    position: relative;
+    color: var(--dark_green);
+    font-size: 2rem;
 }
