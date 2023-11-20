@@ -1,0 +1,26 @@
+:root {
+    --dark_green: #02231c;
+    --light_green: #00FD8F;
+    --white: #ffffff;
+  }
+
+button {
+    font-size: 1.33rem;
+    background-color: var(--light_green);
+    color: var(--dark_green);
+    font-weight: normal;
+    border: 0px;
+    border-radius: 0.6rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+
+
+#title-and-button{
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 12rem auto 12rem 1rem;
+    grid-template-rows: 4rem;
+}
+
