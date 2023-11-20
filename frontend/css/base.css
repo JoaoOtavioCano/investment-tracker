@@ -73,3 +73,26 @@ h1 {
     color: var(--dark_green);
     font-size: 2rem;
 }
+
+table {
+    border-radius: 0.6rem;
+    background-color: var(--dark_green);
+    color: var(--white);
+    border: 1px solid var(--white);
+    margin: auto;
+    border-collapse: collapse;
+    text-align: center;
+    width: 65rem;
+
+}
+
+th, td {
+    border: 1px solid var(--white);
+    padding: 0.5rem;
+}
+
+#table-grid {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: auto 65rem auto;
+}
