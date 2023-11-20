@@ -1,0 +1,73 @@
+:root {
+    --dark_green: #02231c;
+    --light_green: #00FD8F;
+    --white: #ffffff;
+  }
+
+#new-transaction{
+    background-color: var(--dark_green);
+    color: var(--white);
+    width: 31rem;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 0.6rem;
+}
+
+input{
+    width: 10.5rem;
+    height: 2rem;
+    border-radius: 0.6rem;
+    border: 0px;
+    margin: 0%;
+    padding-left: 0.5rem;
+    font-size: 1.1rem;
+
+}
+
+.inputs{
+    font-size: 1.1rem;
+    margin-left: 3rem;
+    display: inline-block;
+    width: 11rem;
+    margin-bottom: 1rem;
+}
+
+#buy, #sell{
+    padding: 0%;
+    display: inline-block;
+    width: 5rem;
+}
+
+#buy{
+    margin-right: 0.68rem;
+}
+
+#title{
+    color: var(--white);
+    font-size: 1.3rem;
+}
+
+hr{
+    border: 0.5px solid var(--light_green);
+    margin-left: 3rem;
+    margin-right: 3rem;
+}
+
+#total, #confirm{
+    display: inline-block;
+    margin-left: 3rem;
+}
+
+#total{
+    width: 11rem;
+}
+
+#confirm{
+    margin-left: 6.5rem;
+    background-color: var(--light_green);
+    color: var(--dark_green);
+    width: 7rem;
+}

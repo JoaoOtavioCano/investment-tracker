@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Transaction</title>
+    <link rel="stylesheet" href="../css/new-transaction.css">
+    <link rel="stylesheet" href="../css/base.css">
+</head>
+<body>
+    <div id="new-transaction">
+        <h1 id="title">New transaction</h1>
+        <form action="">
+            <div class="inputs">
+                <label for="type">Type</label><br>
+                <input type="text" id="type">
+            </div>
+            <div class="inputs">
+                <input type="button" value="buy" id="buy">
+                <input type="button" value="sell" id="sell">
+            </div>
+            <div class="inputs">
+                <label for="asset">Asset</label><br>
+                <input type="text" id="asset">
+            </div>
+            <div class="inputs">
+                <label for="date">Date</label><br>
+                <input type="text" id="date" placeholder="01/11/1999">
+            </div>
+            <div class="inputs">
+                <label for="price">Price</label><br>
+                <input type="text" id="price">
+            </div>
+            <div class="inputs">
+                <label for="quantity">Quantity</label><br>
+                <input type="text" id="quantity">
+            </div>
+            <hr>
+            <p id="total">TOTAL: $XXX,XX</p>
+            <input type="submit" value="confirm" id="confirm">
+        </form>
+    </div>
+</body>
+</html>
