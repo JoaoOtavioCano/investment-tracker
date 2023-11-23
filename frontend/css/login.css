@@ -32,6 +32,11 @@ body {
     background-color: #00FD8F; 
     color: #02231c;
 }
+
+#log-in-button:hover{
+    background-color: rgb(134, 255, 203);
+}
+
 #create-new-account-button {
     font-weight: bold; 
     text-decoration: none; 
