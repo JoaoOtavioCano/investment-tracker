@@ -45,6 +45,14 @@ input{
     margin-right: 0.68rem;
 }
 
+#buy:hover{
+    background-color: var(--light_green);
+}
+
+#sell:hover{
+    background-color: red;
+}
+
 #title{
     color: var(--white);
     font-size: 1.3rem;
