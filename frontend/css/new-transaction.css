@@ -84,3 +84,7 @@ hr{
     color: var(--dark_green);
     width: 7rem;
 }
+
+#confirm:hover{
+    background-color: rgb(134, 255, 203);
+}
