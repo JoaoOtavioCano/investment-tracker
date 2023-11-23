@@ -9,14 +9,15 @@
 <body>
     <div id="new-transaction">
         <h1 id="title">New transaction</h1>
-        <form action="">
+        <form name="new-transaction">
             <div class="inputs">
                 <label for="type">Type</label><br>
                 <input type="text" id="type" value="stock" disabled>
             </div>
             <div class="inputs">
-                <input type="button" value="buy" id="buy">
-                <input type="button" value="sell" id="sell">
+                <input type="button" value="buy" id="buy" onclick="clickBuy()">
+                <input type="button" value="sell" id="sell" onclick="clickSell()">
+                <input type="text" id="buy/sell" name="buy/sell" hidden>
             </div>
             <div class="inputs">
                 <label for="asset">Asset</label><br>
@@ -40,4 +41,5 @@
         </form>
     </div>
 </body>
+    <script src="../javascript/new-transaction.js"></script>
 </html>
