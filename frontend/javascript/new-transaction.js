@@ -37,10 +37,10 @@ function calculateTotal(){
 
     const total = price * quantity;
 
-    document.getElementById("total").textContent = "TOTAL: $" + total.toString();
+    document.getElementById("total").textContent = "TOTAL: $" + total.toFixed(2).toString();
 }
 
-function recalculateTotal(){
+function listenEventRecalculateTotal(){
     document.getElementById("price").addEventListener("input", () => {
         calculateTotal();
     })
@@ -50,4 +50,4 @@ function recalculateTotal(){
     })
 }
 
-recalculateTotal()
+listenEventRecalculateTotal()
