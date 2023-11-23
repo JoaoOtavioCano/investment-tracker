@@ -15,6 +15,9 @@ button {
     padding-bottom: 0.5rem;
 }
 
+button:hover{
+    background-color: rgb(134, 255, 203);
+}
 
 
 #title-and-button{
