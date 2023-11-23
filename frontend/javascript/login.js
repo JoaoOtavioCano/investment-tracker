@@ -14,13 +14,3 @@ function validateFormInputs(){
         return true;
     }
 }
-
-function submitForm(){
-
-    if(!validateFormInputs()){
-        return false;
-    }
-
-
-
-}

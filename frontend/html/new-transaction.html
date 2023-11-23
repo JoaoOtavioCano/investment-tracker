@@ -9,31 +9,31 @@
 <body>
     <div id="new-transaction">
         <h1 id="title">New transaction</h1>
-        <form name="new-transaction" onsubmit="return submitForm()">
+        <form name="new-transaction" onsubmit="return validateFormInputs()" method="post">
             <div class="inputs">
                 <label for="type">Type</label><br>
-                <input type="text" id="type" value="stock" disabled>
+                <input type="text" id="type" name="type" value="stock" disabled>
             </div>
             <div class="inputs">
                 <input type="button" value="buy" id="buy" onclick="clickBuy()">
                 <input type="button" value="sell" id="sell" onclick="clickSell()">
-                <input type="text" id="buy/sell" name="buy/sell" hidden>
+                <input type="text" id="buy/sell" name="buyOrSell" hidden>
             </div>
             <div class="inputs">
                 <label for="asset">Asset</label><br>
-                <input type="text" id="asset">
+                <input type="text" name="asset" id="asset">
             </div>
             <div class="inputs">
                 <label for="date">Date</label><br>
-                <input type="date" id="date" placeholder="01/11/1999">
+                <input type="date" name="date" id="date" placeholder="01/11/1999">
             </div>
             <div class="inputs">
                 <label for="price">Price</label><br>
-                <input type="number" id="price" min="0">
+                <input type="number" name="price" id="price" min="0">
             </div>
             <div class="inputs">
                 <label for="quantity">Quantity</label><br>
-                <input type="number" id="quantity" min="0">
+                <input type="number" name="quantity" id="quantity" min="0">
             </div>
             <hr>
             <p id="total">TOTAL: $0.00</p>
@@ -41,5 +41,4 @@
         </form>
     </div>
 </body>
-    <script src="../javascript/new-transaction.js"></script>
 </html>

@@ -2,14 +2,14 @@ function clickBuy(){
     document.getElementById("buy").style.backgroundColor = "#00FD8F";
     document.getElementById("sell").style.backgroundColor = "";
 
-    document.getElementById("buy/sell").value = 'buy';
+    document.getElementById("buyOrSell").value = 'buy';
 }
 
 function clickSell(){
     document.getElementById("buy").style.backgroundColor = "";
     document.getElementById("sell").style.backgroundColor = "red";
 
-    document.getElementById("buy/sell").value = 'sell';
+    document.getElementById("buyOrSell").value = 'sell';
 }
 
 function validateFormInputs(){
@@ -23,12 +23,6 @@ function validateFormInputs(){
     }
 
     return true
-}
-
-function submitForm(){
-    if(!validateFormInputs()){
-        return false;
-    }
 }
 
 function calculateTotal(){
