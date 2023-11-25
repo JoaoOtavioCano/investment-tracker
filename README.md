@@ -1,1 +1,2 @@
 # investment-tracker
+This is an investment portfolio management system. This software allows the user to create investment wallets, register trades and follow the progress of the portfolio. It provides some graphs and indicators with important information to track the investments.
