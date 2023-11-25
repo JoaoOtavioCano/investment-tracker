@@ -13,7 +13,7 @@ def checkMultipleFiles(path, list_of_files_path):
         counter = counter + 1
     return -2
 
-class DefaultPageRequestHandle:
+class DefaultPageRequestHandler:
     def __init__(self, request_handler):
         self.request_handler = request_handler
 

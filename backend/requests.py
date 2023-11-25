@@ -1,6 +1,6 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from pages import Pages
-from defaultPageRequestHandle import DefaultPageRequestHandle
+from defaultPageRequestHandler import DefaultPageRequestHandler
 import re
 
 class RequestsHandler(BaseHTTPRequestHandler):
@@ -12,7 +12,7 @@ class RequestsHandler(BaseHTTPRequestHandler):
         for page in self.pages:
 
             if re.compile(r"^/" + page).match(self.path) or re.compile(r"^/css").match(self.path) or re.compile(r"^/javascript").match(self.path):
-                page_request_handler = DefaultPageRequestHandle(self)
+                page_request_handler = DefaultPageRequestHandler(self)
                 page_request_handler.handle()
                 break
            
