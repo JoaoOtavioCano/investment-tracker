@@ -59,7 +59,10 @@ function addRow(assets){
 function getIndicators(){
     fetch('/indicators', { method: 'GET' })
         .then((response) => response.json())
-        .then((json) => addIndicators(json))
+        .then((json) => {
+            addIndicators(json);
+            gainLossIndicatorColor();
+        })
 }
 
 function addIndicators(indicators){
@@ -70,6 +73,16 @@ function addIndicators(indicators){
     document.getElementById("net_worth").textContent = net_worth;
     document.getElementById("gain_loss").textContent = gain_loss;
     document.getElementById("price").textContent = price;
+}
+
+function gainLossIndicatorColor(){
+    let gain_loss_value = document.getElementById("gain_loss").textContent;
+    
+    if (Number(gain_loss_value) >= 0){
+        document.getElementById("gain_loss").style.color = "#00FD8F";
+    }else{
+        document.getElementById("gain_loss").style.color = "red";
+    }
 }
 
 function main(){
