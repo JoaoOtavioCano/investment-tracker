@@ -1,0 +1,63 @@
+function getAssets(){
+    fetch('/assets', { method: 'GET' })
+        .then((response) => response.json())
+        .then((json) => {
+            for(let i = 0; i < json.length; i++){
+                addRow(json[i]);
+            }
+        })
+}
+
+function addRow(assets){
+    let type;
+    let asset;
+    let quantity;
+    let avg_price;
+    let gain_loss;
+    let gain_loss_percent;
+    let total;
+
+    let td_type = document.createElement("td");
+    let td_asset = document.createElement("td");
+    let td_quantity = document.createElement("td");
+    let td_avg_price = document.createElement("td");
+    let td_gain_loss = document.createElement("td");
+    let td_gain_loss_percent = document.createElement("td");
+    let td_total = document.createElement("td");
+
+    let tr = document.createElement("tr");
+
+    let table = document.getElementById("assets-table");
+
+    type = document.createTextNode(assets["type"]);
+    asset = document.createTextNode(assets["asset"]);
+    quantity = document.createTextNode(assets["quantity"]);
+    avg_price = document.createTextNode(assets["avg_price"]);
+    gain_loss = document.createTextNode(assets["gain_loss"]);
+    gain_loss_percent = document.createTextNode(assets["gain_loss_percent"]);
+    total = document.createTextNode(assets["total"]);
+    
+    td_type.appendChild(type);
+    td_asset.appendChild(asset);
+    td_quantity.appendChild(quantity);
+    td_avg_price.appendChild(avg_price);
+    td_gain_loss.appendChild(gain_loss);
+    td_gain_loss_percent.appendChild(gain_loss_percent);
+    td_total.appendChild(total);
+
+    tr.appendChild(td_type);
+    tr.appendChild(td_asset);
+    tr.appendChild(td_quantity);
+    tr.appendChild(td_avg_price);
+    tr.appendChild(td_gain_loss);
+    tr.appendChild(td_gain_loss_percent);
+    tr.appendChild(td_total);
+
+    table.appendChild(tr);
+}
+
+function main(){
+    getAssets();
+}
+
+main()
