@@ -45,6 +45,14 @@ function addRow(assets){
     td_gain_loss_percent.appendChild(gain_loss_percent);
     td_total.appendChild(total);
 
+    if(Number(assets["gain_loss"]) >= 0){
+        td_gain_loss.style.color = "#00FD8F";
+        td_gain_loss_percent.style.color = "#00FD8F";
+    }else{
+        td_gain_loss.style.color = "red";
+        td_gain_loss_percent.style.color = "red";
+    }
+
     tr.appendChild(td_type);
     tr.appendChild(td_asset);
     tr.appendChild(td_quantity);
