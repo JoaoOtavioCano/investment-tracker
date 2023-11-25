@@ -56,8 +56,25 @@ function addRow(assets){
     table.appendChild(tr);
 }
 
+function getIndicators(){
+    fetch('/indicators', { method: 'GET' })
+        .then((response) => response.json())
+        .then((json) => addIndicators(json))
+}
+
+function addIndicators(indicators){
+    let net_worth = indicators["net_worth"];
+    let gain_loss = indicators["gain_loss"];
+    let price = indicators["price"];
+
+    document.getElementById("net_worth").textContent = net_worth;
+    document.getElementById("gain_loss").textContent = gain_loss;
+    document.getElementById("price").textContent = price;
+}
+
 function main(){
     getAssets();
+    getIndicators();
 }
 
 main()
