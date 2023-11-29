@@ -2,20 +2,34 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 from pages import Pages
 from defaultPageRequestHandler import DefaultPageRequestHandler
 import re
+from getAssets import GetAssets
 
 class RequestsHandler(BaseHTTPRequestHandler):
 
-    pages = Pages.pages
 
     def do_GET(self):
+        pages = Pages()
         
+        '''
         for page in self.pages:
 
             if re.compile(r"^/" + page).match(self.path) or re.compile(r"^/css").match(self.path) or re.compile(r"^/javascript").match(self.path):
                 page_request_handler = DefaultPageRequestHandler(self)
                 page_request_handler.handle()
                 break
-           
+        '''
+        for path in pages.listPaths():
+            if self.path in path:
+                page_request_handler = DefaultPageRequestHandler(self)
+                page_request_handler.handle()
+                break
+        
+        if self.path == "/assets":
+            GetAssets(self)
+        
+        elif self.path == "/indicators":
+            pass
+
     def do_POST(self):
         pass
 

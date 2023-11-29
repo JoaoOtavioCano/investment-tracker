@@ -22,7 +22,7 @@ class DefaultPageRequestHandler:
         pages = Pages.pages
 
         for page in pages:
-            if re.compile(r"^/" + page).match(self.request_handler.path):
+            if re.compile(page).match(self.request_handler.path):
                 with open(Pages.pages[page]["html"], 'rb') as html_file:
                     html_content = html_file.read()
 
