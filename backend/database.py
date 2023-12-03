@@ -23,17 +23,22 @@ class Database:
 
         assets_list = []
 
-        for x in self.__mycursor__:
-            assets_list.append(x)
+        for turple in self.__mycursor__:
+            assets_list.append(turple)
 
         return assets_list
 
-'''
     def getTransactions(self, user):
-        all_transactions = self.__mycursor__.execute(
-            f"SELECT date_time, asset, quantity, cost FROM User 
-            JOIN Transactions ON User.userID = Transactions.userID 
-            WHERE User.userID = {user};"
-        )
-        return all_transactions
-'''
+        sql_querry = ("SELECT date_time, asset, quantity, cost FROM Transactions "
+            "JOIN User ON Transactions.userID = User.userID "
+            f"WHERE User.userID = {user} "
+            "ORDER BY date_time ASC")
+        
+        self.__mycursor__.execute(sql_querry)
+
+        transactions_list = []
+
+        for turple in self.__mycursor__:
+            transactions_list.append(turple)
+
+        return transactions_list

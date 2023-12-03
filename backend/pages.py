@@ -11,7 +11,7 @@ class Pages:
             "/transactions": {
                 "html": "../frontend/html/transactions.html",
                 "css": ["../frontend/css/transactions.css", "../frontend/css/base.css"],
-                "javascript": "../frontendjavascript/transactions.js"},
+                "javascript": "../frontend/javascript/transactions.js"},
             "/new-transaction": {
                 "html": "../frontend/html/new-transaction.html",
                 "css": ["../frontend/css/new-transaction.css", "../frontend/css/base.css"],
