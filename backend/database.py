@@ -42,3 +42,6 @@ class Database:
             transactions_list.append(turple)
 
         return transactions_list
+
+    def getIndicators(self, user):
+        return self.getAssets(user)

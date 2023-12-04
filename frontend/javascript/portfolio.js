@@ -74,6 +74,7 @@ function getIndicators(){
 }
 
 function addIndicators(indicators){
+
     let net_worth = indicators["net_worth"];
     let gain_loss = indicators["gain_loss"];
     let price = indicators["price"];

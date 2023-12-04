@@ -3,6 +3,7 @@ from pages import Pages
 from defaultPageRequestHandler import DefaultPageRequestHandler
 from getAssets import GetAssets
 from getTransactions import GetTransactions
+from getIndicators import GetIndicators
 
 class RequestsHandler(BaseHTTPRequestHandler):
 
@@ -18,6 +19,10 @@ class RequestsHandler(BaseHTTPRequestHandler):
         
         if self.path == "/assets":
             request_handler = GetAssets(self)
+            request_handler.respond()
+        
+        if self.path == "/indicators":
+            request_handler = GetIndicators(self)
             request_handler.respond()
         
         elif self.path == "/gettransactions":
