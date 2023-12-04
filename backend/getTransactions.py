@@ -26,7 +26,7 @@ class GetTransactions:
 
         for transaction in transactions:
 
-            date_time = str(transaction[0])
+            date_time = formatDate(str(transaction[0]))
             asset_name = transaction[1]
             quantity = transaction[2]
             price = transaction[3]
@@ -46,3 +46,11 @@ class GetTransactions:
     
 def calculateTotal(quantity, price_per_un):
     return quantity * price_per_un
+
+def formatDate(date):
+    year =  date.split()[0].split("-")[0]
+    month =  date.split()[0].split("-")[1]
+    day =  date.split()[0].split("-")[2]
+    hour_minute = date.split()[1][0] + date.split()[1][1] + ":" + date.split()[1][3] + date.split()[1][4]
+
+    return day + "/" + month + "/" + year + " " + hour_minute
