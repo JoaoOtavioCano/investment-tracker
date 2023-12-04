@@ -7,6 +7,8 @@ class GetAssets:
     def __init__(self, request_handler):
         self.request_handler =  request_handler
 
+    def respond(self):
+
         response = self.__getDataFromDB__()
 
         json_response = json.dumps(response)
@@ -35,7 +37,7 @@ class GetAssets:
             gain_loss = calculateGainLoss(current_price, avg_price, quantity) 
             gain_loss_percent = calculateGainLossPercentage(current_price, avg_price)
 
-            asset_dict = {
+            asset_json = {
             "type": asset_type,
             "asset": asset_name,
             "quantity": quantity,
@@ -45,7 +47,7 @@ class GetAssets:
             "total": total,
             }
             
-            data.append(asset_dict)
+            data.append(asset_json)
 
         return data
     
