@@ -45,13 +45,15 @@ function addRow(assets){
     td_gain_loss_percent.appendChild(gain_loss_percent);
     td_total.appendChild(total);
 
-    if(Number(assets["gain_loss"]) >= 0){
+    
+    if(Number(assets["gain_loss"].replace('$','')) >= 0){
         td_gain_loss.style.color = "#00FD8F";
         td_gain_loss_percent.style.color = "#00FD8F";
     }else{
         td_gain_loss.style.color = "red";
         td_gain_loss_percent.style.color = "red";
     }
+    
 
     tr.appendChild(td_type);
     tr.appendChild(td_asset);
@@ -60,6 +62,21 @@ function addRow(assets){
     tr.appendChild(td_gain_loss);
     tr.appendChild(td_gain_loss_percent);
     tr.appendChild(td_total);
+
+    tr.addEventListener("mouseover", function () {
+        td_gain_loss.style.color = "#02231c";
+        td_gain_loss_percent.style.color = "#02231c";
+    });
+
+    tr.addEventListener("mouseout", function () {
+            if(Number(td_gain_loss.innerText.replace('$','')) >= 0){
+                td_gain_loss.style.color = "#00FD8F";
+                td_gain_loss_percent.style.color = "#00FD8F";
+            }else{
+                td_gain_loss.style.color = "red";
+                td_gain_loss_percent.style.color = "red";
+            }   
+    });
 
     table.appendChild(tr);
 }
@@ -87,7 +104,7 @@ function addIndicators(indicators){
 function gainLossIndicatorColor(){
     let gain_loss_value = document.getElementById("gain_loss").textContent;
     
-    if (Number(gain_loss_value) >= 0){
+    if (Number(gain_loss_value.replace('$', '')) >= 0){
         document.getElementById("gain_loss").style.color = "#00FD8F";
     }else{
         document.getElementById("gain_loss").style.color = "red";
