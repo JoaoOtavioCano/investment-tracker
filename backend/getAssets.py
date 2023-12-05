@@ -37,6 +37,10 @@ class GetAssets:
             gain_loss = calculateGainLoss(current_price, avg_price, quantity) 
             gain_loss_percent = calculateGainLossPercentage(current_price, avg_price)
 
+            gain_loss = "${:.2f}".format(gain_loss)
+            gain_loss_percent = "{:.2f}%".format(gain_loss_percent)
+            total = "${:.2f}".format(total)
+
             asset_json = {
             "type": asset_type,
             "asset": asset_name,
