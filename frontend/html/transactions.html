@@ -5,6 +5,7 @@
     <title>Transactions</title>
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/transactions.css">
+    <link rel="stylesheet" href="../css/new-transaction.css">
 </head>
 <body>
     <header>
@@ -14,11 +15,46 @@
             <li id="user"><a href="">JO</a></li>
         </ul>
     </header>
+    <div id="overlay" class="overlay"></div>
+    <div id="new-transaction">
+        <h1 id="title">New transaction</h1>
+        <button id="close-button" onclick="closeModal()"></button>
+        <form name="new-transaction" onsubmit="return validateFormInputs()" method="post">
+            <div class="inputs">
+                <label for="type">Type</label><br>
+                <input type="text" id="type" name="type" value="stock" disabled>
+            </div>
+            <div class="inputs">
+                <input type="button" value="buy" id="buy" onclick="clickBuy()">
+                <input type="button" value="sell" id="sell" onclick="clickSell()">
+                <input type="text" id="buy/sell" name="buyOrSell" hidden>
+            </div>
+            <div class="inputs">
+                <label for="asset">Asset</label><br>
+                <input type="text" name="asset" id="asset">
+            </div>
+            <div class="inputs">
+                <label for="date">Date</label><br>
+                <input type="date" name="date" id="date" placeholder="01/11/1999">
+            </div>
+            <div class="inputs">
+                <label for="price">Price</label><br>
+                <input type="number" name="price" id="price" min="0">
+            </div>
+            <div class="inputs">
+                <label for="quantity">Quantity</label><br>
+                <input type="number" name="quantity" id="quantity" min="0">
+            </div>
+            <hr>
+            <p id="total">TOTAL: $0.00</p>
+            <input type="submit" value="confirm" id="confirm">
+        </form>
+    </div>
     <main>
         <div id="title-and-button">
             <h1>Transactions</h1>
             <div></div>
-            <button>new transaction</button>
+            <button onclick="openModal()">new transaction</button>
             <div></div>
         </div>
         <div id="table-grid">
@@ -38,3 +74,4 @@
 </body>
 </html>
 <script src="../javascript/transactions.js"></script>
+<script src="../javascript/new-transaction.js"></script>

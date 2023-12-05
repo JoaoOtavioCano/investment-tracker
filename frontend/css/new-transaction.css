@@ -4,7 +4,18 @@
     --white: #ffffff;
   }
 
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
 #new-transaction{
+    display: none;
     background-color: var(--dark_green);
     color: var(--white);
     width: 31rem;
@@ -14,6 +25,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 0.6rem;
+    z-index: 1;
 }
 
 input{
@@ -44,6 +56,7 @@ input{
     padding: 0%;
     display: inline-block;
     width: 5rem;
+    cursor: pointer;
 }
 
 #buy{
@@ -59,6 +72,7 @@ input{
 }
 
 #title{
+    display: inline-block;
     color: var(--white);
     font-size: 1.3rem;
 }
@@ -83,8 +97,22 @@ hr{
     background-color: var(--light_green);
     color: var(--dark_green);
     width: 7rem;
+    cursor: pointer;
 }
 
 #confirm:hover{
     background-color: rgb(134, 255, 203);
+}
+
+#close-button{
+    position: absolute;
+    background-color: red;
+    border: none;
+    outline: none; 
+    cursor: pointer;
+    border-radius: 50%; 
+    right: 0.5rem;
+    top: 0.5rem;
+    height: 1rem;
+    width: 1rem;
 }

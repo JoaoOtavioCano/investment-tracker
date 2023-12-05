@@ -14,7 +14,7 @@ class Pages:
                 "javascript": "../frontend/javascript/transactions.js"},
             "/new-transaction": {
                 "html": "../frontend/html/new-transaction.html",
-                "css": ["../frontend/css/new-transaction.css", "../frontend/css/base.css"],
+                "css": "../frontend/css/new-transaction.css",
                 "javascript": "../frontend/javascript/new-transaction.js"},
     }
 

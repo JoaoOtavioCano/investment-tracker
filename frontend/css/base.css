@@ -49,7 +49,7 @@ header ul li a {
 #user {
     position: absolute;
     border: 0.1rem solid var(--light_green);
-    border-radius: 1.5rem;
+    border-radius: 50%; 
     padding: 0.3rem;
     right: 0.6rem;
     margin: 0%;

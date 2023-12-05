@@ -45,6 +45,23 @@ function addRow(transaction){
 
     table.appendChild(tr);
 }
+
+function openModal() {
+    let modal = document.getElementById("new-transaction")
+    let overlay = document.getElementById("overlay");
+
+    overlay.style.display = 'block';
+    modal.style.display = 'block';
+}
+
+function closeModal(){
+    let modal = document.getElementById("new-transaction")
+    let overlay = document.getElementById("overlay");
+
+    overlay.style.display = '';
+    modal.style.display = '';
+}
+
 function main(){
     getTransactions()
 }
