@@ -31,6 +31,7 @@ body {
     border: 0px;
     background-color: #00FD8F; 
     color: #02231c;
+    cursor: pointer;
 }
 
 #log-in-button:hover{
