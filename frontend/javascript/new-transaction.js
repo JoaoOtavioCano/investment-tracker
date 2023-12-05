@@ -2,14 +2,14 @@ function clickBuy(){
     document.getElementById("buy").style.backgroundColor = "#00FD8F";
     document.getElementById("sell").style.backgroundColor = "";
 
-    document.getElementById("buyOrSell").value = 'buy';
+    document.getElementById("buy/sell").value = 'buy';
 }
 
 function clickSell(){
     document.getElementById("buy").style.backgroundColor = "";
     document.getElementById("sell").style.backgroundColor = "red";
 
-    document.getElementById("buyOrSell").value = 'sell';
+    document.getElementById("buy/sell").value = 'sell';
 }
 
 function validateFormInputs(){
@@ -17,7 +17,7 @@ function validateFormInputs(){
 
     for(let i = 0; i < inputs.length; i++){
         if(inputs[i].value == ""){
-            alert("All the fields must be filled")
+            alert(`${inputs[i].name} field must be filled`)
             return false;
         }
     }
