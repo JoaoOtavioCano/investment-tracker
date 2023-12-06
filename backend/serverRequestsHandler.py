@@ -4,8 +4,14 @@ from defaultPageRequestHandler import DefaultPageRequestHandler
 from getAssets import GetAssets
 from getTransactions import GetTransactions
 from getIndicators import GetIndicators
+from login import Login
+
 
 class RequestsHandler(BaseHTTPRequestHandler):
+
+    def __init__(self, *args, **kwargs):
+        self.authorization_list = []
+        super().__init__(*args, **kwargs)
 
 
     def do_GET(self):
@@ -30,12 +36,32 @@ class RequestsHandler(BaseHTTPRequestHandler):
             request_handler.respond()
 
     def do_POST(self):
-        pass
+
+        payload_data = formatPayload(self)
+
+        if self.path == "/login":
+            request_handler  = Login(self, payload_data)
+            request_handler.respond()
+        
+        
 
 def run(server_class=HTTPServer, handler_class=RequestsHandler):
     server_address = ('', 8000)
     httpd = server_class(server_address, handler_class)
     httpd.serve_forever()
+
+def formatPayload(request):
+    content_length = int(request.headers['Content-Length'])
+    payload_data = str(request.rfile.read(content_length)).replace("b'", "", 1).replace("'", '').replace('{', '').replace('}', '').replace(',',':').replace('"', '').split(':')
+
+    
+    dict = {
+        "email": payload_data[1],
+        "password": payload_data[3]
+    }
+   
+    return dict
+
 
 def main():
     run()

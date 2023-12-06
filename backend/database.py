@@ -45,3 +45,17 @@ class Database:
 
     def getIndicators(self, user):
         return self.getAssets(user)
+    
+    def getUser(self, email, password):
+        sql_querry = ("SELECT User.userID FROM User  "
+            f"WHERE User.email = '{email}' "
+            f"AND User.password = '{password}'")
+        
+        self.__mycursor__.execute(sql_querry)
+
+        user = []
+
+        for turple in self.__mycursor__:
+            user.append(turple)
+
+        return user

@@ -14,3 +14,49 @@ function validateFormInputs(){
         return true;
     }
 }
+
+function redirectUserToPortfolioWhenLoginConfirmed(){
+
+    email =document.forms.login.email.value
+    password =document.forms.login.password.value
+
+    const requestData = {
+        email: email,
+        password: password,
+    };
+    
+
+    const jsonString = JSON.stringify(requestData);
+
+    fetch('/login', { 
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: jsonString,
+    })
+    .then((response) => response.json())
+    .then((json) => {
+
+        console.log('Response:', json);
+
+        if (json.authorized === "true"){
+
+            console.log(json.authorized);
+
+            const redirectPath = "/portfolio";
+
+            localStorage.setItem('authenticationKey', json['authenticationKey']);
+
+            window.location.href = redirectPath;
+        }else{
+            return false
+        }
+    })
+}
+
+function main(){
+    if(validateFormInputs() == true){
+        redirectUserToPortfolioWhenLoginConfirmed()
+    }
+}
