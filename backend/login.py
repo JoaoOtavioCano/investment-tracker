@@ -1,6 +1,7 @@
 import json
 import database
 import random
+import hashlib
 
 class Login():
 
@@ -16,15 +17,12 @@ class Login():
             self.request_handler.send_error(500, "USER NOT FOUND")
             self.request_handler.end_headers()
         else:
+
             authentication_key = __createAuthenticationKey__()
 
-            authentication_register = {
-                'authentication_key': authentication_key,
-                'IP_address': self.request_handler.client_address[0],
-                'user_id': user[0]["userID"]
-            }
+            user_id = authentication_key.split('#', 1)[0]
 
-            self.request_handler.authorization_list.append(authentication_register)
+            self.request_handler.authorization_list[user_id] = authentication_key
 
             authentication_json = {
                 'authorized': 'true',
@@ -54,5 +52,8 @@ class Login():
 
             return data
          
-def __createAuthenticationKey__():
-    return random.randrange(9999999999)
+def __createAuthenticationKey__(user_id):
+    part01 = str(user_id).zfill(10)
+    part02 = hashlib.sha256(str(random.randrange(9999999999))).hexdigest()
+    return part01 + '#' + part02
+    

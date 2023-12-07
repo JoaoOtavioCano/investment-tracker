@@ -10,7 +10,7 @@ from login import Login
 class RequestsHandler(BaseHTTPRequestHandler):
 
     def __init__(self, *args, **kwargs):
-        self.authorization_list = []
+        self.authorization_list = {}
         super().__init__(*args, **kwargs)
 
 
@@ -37,12 +37,12 @@ class RequestsHandler(BaseHTTPRequestHandler):
 
     def do_POST(self):
 
-        payload_data = formatPayload(self)
-
         if self.path == "/login":
+            payload_data = formatPayload(self)
             request_handler  = Login(self, payload_data)
             request_handler.respond()
         
+
         
 
 def run(server_class=HTTPServer, handler_class=RequestsHandler):
