@@ -18,7 +18,7 @@ class Login():
             self.request_handler.end_headers()
         else:
 
-            authentication_key = __createAuthenticationKey__()
+            authentication_key = __createAuthenticationKey__(user["userID"])
 
             user_id = authentication_key.split('#', 1)[0]
 
@@ -46,14 +46,14 @@ class Login():
             return False
         else:
             for info in user:
-                data = [{
+                data = {
                     "userID": info[0],
-                }]
+                }
 
             return data
          
 def __createAuthenticationKey__(user_id):
     part01 = str(user_id).zfill(10)
-    part02 = hashlib.sha256(str(random.randrange(9999999999))).hexdigest()
+    part02 = hashlib.sha256(str(random.randrange(9999999999)).encode()).hexdigest()
     return part01 + '#' + part02
     
