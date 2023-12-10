@@ -15,6 +15,7 @@ class RequestsHandler(BaseHTTPRequestHandler):
 
 
     def do_GET(self):
+
         pages = Pages()
         
         for path in pages.listPaths():
@@ -23,11 +24,12 @@ class RequestsHandler(BaseHTTPRequestHandler):
                 page_request_handler.respond()
                 break
         
+        
         if self.path == "/assets":
             request_handler = GetAssets(self)
             request_handler.respond()
         
-        if self.path == "/indicators":
+        elif self.path == "/indicators":
             request_handler = GetIndicators(self)
             request_handler.respond()
         

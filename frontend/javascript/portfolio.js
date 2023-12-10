@@ -1,3 +1,5 @@
+import { checkAuthenticationKeyExists } from './authentication.js';
+
 function getAssets(){
     fetch('/assets', { method: 'GET' })
         .then((response) => response.json())
@@ -114,6 +116,7 @@ function gainLossIndicatorColor(){
 function main(){
     getAssets();
     getIndicators();
+    checkAuthenticationKeyExists();
 }
 
 main()

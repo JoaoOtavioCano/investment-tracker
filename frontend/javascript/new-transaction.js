@@ -44,4 +44,20 @@ function listenEventRecalculateTotal(){
     })
 }
 
+function openModal() {
+    let modal = document.getElementById("new-transaction")
+    let overlay = document.getElementById("overlay");
+
+    overlay.style.display = 'block';
+    modal.style.display = 'block';
+}
+
+function closeModal(){
+    let modal = document.getElementById("new-transaction")
+    let overlay = document.getElementById("overlay");
+
+    overlay.style.display = '';
+    modal.style.display = '';
+}
+
 listenEventRecalculateTotal()
