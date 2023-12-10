@@ -116,6 +116,7 @@ hr{
     top: 0.5rem;
     height: 1rem;
     width: 1rem;
+    transform: scale(0.7);
 }
 
 #close-button:active{
