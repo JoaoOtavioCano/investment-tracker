@@ -24,7 +24,9 @@ class GetIndicators():
         net_worth = 0
         price = 0
 
-        assets = db.getIndicators(2)
+        user_id = int(self.request_handler.headers["authentication_key"].split('#', 1)[0])
+
+        assets = db.getIndicators(user_id)
 
         for asset in assets:
 

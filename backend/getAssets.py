@@ -21,7 +21,9 @@ class GetAssets:
     def __getDataFromDB__(self):
         db = database.Database()
 
-        assets = db.getAssets(2)
+        user_id = int(self.request_handler.headers["authentication_key"].split('#', 1)[0])
+
+        assets = db.getAssets(user_id)
 
         data = []
 
