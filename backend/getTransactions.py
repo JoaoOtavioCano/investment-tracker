@@ -20,7 +20,9 @@ class GetTransactions:
     def __getDataFromDB__(self):
         db = database.Database()
 
-        transactions = db.getTransactions(1)
+        user_id = int(self.request_handler.headers["authentication_key"].split('#', 1)[0])
+
+        transactions = db.getTransactions(user_id)
 
         data = []
 

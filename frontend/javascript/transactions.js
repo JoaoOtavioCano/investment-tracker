@@ -2,7 +2,7 @@ import { checkAuthenticationKeyExists } from './authentication.js';
 
 
 function getTransactions(){
-    fetch('/gettransactions', { method: 'GET' })
+    fetch('/gettransactions', { method: 'GET', headers:{ "authentication_key": localStorage.authenticationKey}})
         .then((response) => response.json())
         .then((json) => {
             for(let i = 0; i < json.length; i++){
