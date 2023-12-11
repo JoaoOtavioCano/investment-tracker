@@ -9,10 +9,9 @@ from login import Login
 
 class RequestsHandler(BaseHTTPRequestHandler):
 
-    def __init__(self, *args, **kwargs):
-        self.authorization_list = {}
-        super().__init__(*args, **kwargs)
-
+    def __init__(self, request, client_address, server, authenticator):
+        self.authenticator = authenticator
+        super().__init__(request, client_address, server)
 
     def do_GET(self):
 
@@ -22,20 +21,26 @@ class RequestsHandler(BaseHTTPRequestHandler):
             if self.path in path:
                 page_request_handler = DefaultPageRequestHandler(self)
                 page_request_handler.respond()
-                break
+                return True
         
+        if self.path == "/favicon.ico":
+            return True
         
-        if self.path == "/assets":
-            request_handler = GetAssets(self)
-            request_handler.respond()
-        
-        elif self.path == "/indicators":
-            request_handler = GetIndicators(self)
-            request_handler.respond()
-        
-        elif self.path == "/gettransactions":
-            request_handler = GetTransactions(self)
-            request_handler.respond()
+        if validateAuthentication(self):
+            if self.path == "/assets":
+                request_handler = GetAssets(self)
+                request_handler.respond()
+            
+            elif self.path == "/indicators":
+                request_handler = GetIndicators(self)
+                request_handler.respond()
+            
+            elif self.path == "/gettransactions":
+                request_handler = GetTransactions(self)
+                request_handler.respond()
+        else:
+            self.send_error(500, "User not authenticated")
+            self.end_headers()
 
     def do_POST(self):
 
@@ -49,7 +54,8 @@ class RequestsHandler(BaseHTTPRequestHandler):
 
 def run(server_class=HTTPServer, handler_class=RequestsHandler):
     server_address = ('', 8000)
-    httpd = server_class(server_address, handler_class)
+    authenticator = Authenticator()
+    httpd = server_class(server_address, lambda request, client_address, server: handler_class(request, client_address, server, authenticator))
     httpd.serve_forever()
 
 def formatPayload(request):
@@ -62,7 +68,28 @@ def formatPayload(request):
         "password": payload_data[3]
     }
    
-    return dict
+    return dict   
+
+def validateAuthentication(server):
+    authentication_key = server.headers["authentication_key"]
+    
+    print(server.authenticator.authorization_list)
+    print(authentication_key )
+
+    user_id = authentication_key.split('#', 1)[0]
+
+    try:
+        if server.authenticator.authorization_list[user_id] == authentication_key:
+            return True
+        else:
+            return False
+    except KeyError:
+        return False 
+
+
+class Authenticator:
+    def __init__(self):
+        self.authorization_list = {}
 
 
 def main():

@@ -22,7 +22,9 @@ class Login():
 
             user_id = authentication_key.split('#', 1)[0]
 
-            self.request_handler.authorization_list[user_id] = authentication_key
+            self.request_handler.authenticator.authorization_list[user_id] = authentication_key
+
+            print(self.request_handler.authenticator.authorization_list)
 
             authentication_json = {
                 'authorized': 'true',
