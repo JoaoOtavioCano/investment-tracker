@@ -49,6 +49,14 @@ class RequestsHandler(BaseHTTPRequestHandler):
             request_handler  = Login(self, payload_data)
             request_handler.respond()
 
+        elif validateAuthentication(self):
+            if self.path == "/newtransaction":
+                payload_data = formatPayload(self)
+                request_handler = newTransaction(self)
+                request_handler.respond()
+            else:
+                self.send_error(500, "User not authenticated")
+                self.end_headers()
 
         
 
@@ -75,9 +83,6 @@ def formatPayload(request):
 
 def validateAuthentication(server):
     authentication_key = server.headers["authentication_key"]
-    
-    print(server.authenticator.authorization_list)
-    print(authentication_key )
 
     user_id = authentication_key.split('#', 1)[0]
 
