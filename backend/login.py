@@ -42,7 +42,10 @@ class Login():
 
         db = database.Database()
 
-        user = db.getUser(self.payload["email"], self.payload["password"])
+        email_hash =  hashlib.sha256(self.payload["email"].encode()).hexdigest()
+        password_hash =  hashlib.sha256(self.payload["password"].encode()).hexdigest()
+
+        user = db.getUser(email_hash, password_hash)
 
         if user == []:
             return False
