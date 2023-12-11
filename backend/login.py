@@ -24,8 +24,6 @@ class Login():
 
             self.request_handler.authenticator.authorization_list[user_id] = authentication_key
 
-            print(self.request_handler.authenticator.authorization_list)
-
             authentication_json = {
                 'authorized': 'true',
                 'authenticationKey': authentication_key
