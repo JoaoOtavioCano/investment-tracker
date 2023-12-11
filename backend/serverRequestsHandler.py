@@ -5,6 +5,7 @@ from getAssets import GetAssets
 from getTransactions import GetTransactions
 from getIndicators import GetIndicators
 from login import Login
+from authenticator import Authenticator
 
 
 class RequestsHandler(BaseHTTPRequestHandler):
@@ -26,7 +27,7 @@ class RequestsHandler(BaseHTTPRequestHandler):
         if self.path == "/favicon.ico":
             return True
         
-        if validateAuthentication(self):
+        if self.authenticator.validateAuthentication(self):
             if self.path == "/assets":
                 request_handler = GetAssets(self)
                 request_handler.respond()
@@ -49,7 +50,7 @@ class RequestsHandler(BaseHTTPRequestHandler):
             request_handler  = Login(self, payload_data)
             request_handler.respond()
 
-        elif validateAuthentication(self):
+        elif self.authenticator.validateAuthentication(self):
             if self.path == "/newtransaction":
                 payload_data = formatPayload(self)
                 request_handler = newTransaction(self)
@@ -80,24 +81,6 @@ def formatPayload(request):
         dict[payload_data[i * 1 + i]] = payload_data[i * 1 + i + 1]
            
     return dict   
-
-def validateAuthentication(server):
-    authentication_key = server.headers["authentication_key"]
-
-    user_id = authentication_key.split('#', 1)[0]
-
-    try:
-        if server.authenticator.authorization_list[user_id] == authentication_key:
-            return True
-        else:
-            return False
-    except KeyError:
-        return False 
-
-
-class Authenticator:
-    def __init__(self):
-        self.authorization_list = {}
 
 
 def main():
