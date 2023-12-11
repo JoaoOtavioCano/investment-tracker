@@ -48,6 +48,8 @@ class RequestsHandler(BaseHTTPRequestHandler):
             payload_data = formatPayload(self)
             request_handler  = Login(self, payload_data)
             request_handler.respond()
+
+
         
 
         
@@ -62,12 +64,13 @@ def formatPayload(request):
     content_length = int(request.headers['Content-Length'])
     payload_data = str(request.rfile.read(content_length)).replace("b'", "", 1).replace("'", '').replace('{', '').replace('}', '').replace(',',':').replace('"', '').split(':')
 
-    
-    dict = {
-        "email": payload_data[1],
-        "password": payload_data[3]
-    }
-   
+    payload_data = list(payload_data)
+
+    dict = {}
+
+    for i in range(int(int(len(payload_data))/2)):
+        dict[payload_data[i * 1 + i]] = payload_data[i * 1 + i + 1]
+           
     return dict   
 
 def validateAuthentication(server):
