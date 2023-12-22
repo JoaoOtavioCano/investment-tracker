@@ -34,7 +34,7 @@ class GetAssets:
             asset_name = asset[1]
             quantity = asset[2]
             avg_price = asset[3]
-            current_price = yf.Ticker(asset_name).info["currentPrice"]
+            current_price = yf.Ticker(asset_name).fast_info["lastPrice"]
             total = calculateTotal(quantity, current_price)
             gain_loss = calculateGainLoss(current_price, avg_price, quantity) 
             gain_loss_percent = calculateGainLossPercentage(current_price, avg_price)
@@ -55,6 +55,8 @@ class GetAssets:
             
             data.append(asset_json)
 
+        data.sort(key=sortByTotal, reverse=True)
+
         return data
     
 
@@ -66,3 +68,6 @@ def calculateGainLoss(current_price, avg_price, quantity):
 
 def calculateGainLossPercentage(current_price, avg_price):
     return (current_price/avg_price - 1) * 100
+
+def sortByTotal(e):
+  return float(e['total'].replace("$", ''))
