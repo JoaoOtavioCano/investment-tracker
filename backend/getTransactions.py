@@ -32,11 +32,13 @@ class GetTransactions:
             asset_name = transaction[1]
             quantity = transaction[2]
             price = transaction[3]
+            operation = transaction[4]
             total = calculateTotal(quantity, price)
 
             transaction_json = {
             "date_time": date_time,
             "asset": asset_name,
+            "operation": operation,
             "quantity": quantity,
             "price": price,
             "total": total
@@ -53,6 +55,5 @@ def formatDate(date):
     year =  date.split()[0].split("-")[0]
     month =  date.split()[0].split("-")[1]
     day =  date.split()[0].split("-")[2]
-    hour_minute = date.split()[1][0] + date.split()[1][1] + ":" + date.split()[1][3] + date.split()[1][4]
 
-    return day + "/" + month + "/" + year + " " + hour_minute
+    return f"{day}/{month}/{year}"

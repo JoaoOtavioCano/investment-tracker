@@ -14,10 +14,10 @@ class Database:
     
     def getAssets(self, user):
 
-        sql_querry = sql_querry = ("SELECT type, Stocks.name, quantity, cost FROM User JOIN "
-            "Assets ON User.userID = Assets.userID "
+        sql_querry = sql_querry = ("SELECT type, Stocks.name, quantity, cost FROM Users JOIN "
+            "Assets ON Users.userID = Assets.userID "
             "JOIN Stocks ON Assets.userID = Stocks.userID AND Assets.name = Stocks.name "
-            f"WHERE User.userID = {user}")
+            f"WHERE Users.userID = {user}")
         
         self.__mycursor__.execute(sql_querry)
 
@@ -29,10 +29,10 @@ class Database:
         return assets_list
 
     def getTransactions(self, user):
-        sql_querry = ("SELECT date_time, asset, quantity, cost FROM Transactions "
-            "JOIN User ON Transactions.userID = User.userID "
-            f"WHERE User.userID = {user} "
-            "ORDER BY date_time ASC")
+        sql_querry = ("SELECT date_time, asset, quantity, cost, operation FROM Transactions "
+            "JOIN Users ON Transactions.userID = Users.userID "
+            f"WHERE Users.userID = {user} "
+            "ORDER BY date_time DESC")
         
         self.__mycursor__.execute(sql_querry)
 
@@ -47,9 +47,9 @@ class Database:
         return self.getAssets(user)
     
     def getUser(self, email, password):
-        sql_querry = ("SELECT User.userID FROM User  "
-            f"WHERE User.email = '{email}' "
-            f"AND User.password = '{password}'")
+        sql_querry = ("SELECT Users.userID FROM Users  "
+            f"WHERE Users.email = '{email}' "
+            f"AND Users.password = '{password}'")
         
         self.__mycursor__.execute(sql_querry)
 
@@ -59,3 +59,19 @@ class Database:
             user.append(turple)
 
         return user
+    
+    def addNewTransaction(self, user, asset, quantity, price, date, operation, type):
+        sql_querry_insert_into_transactions_table = ("INSERT INTO Transactions(userID, date_time, asset, quantity, cost, operation) "
+                      f"VALUES ({user}, '{date}', '{asset}', {quantity}, {price}, '{operation}');")
+        
+        sql_querry_insert_into_assets_table = ("INSERT INTO Assets(userID, name, type) "
+                      f"VALUES ({user}, '{asset}', '{type}')")
+        
+        sql_querry_insert_into_stocks_table = ("INSERT INTO Stocks(userID, name, quantity, cost) "
+                      f"VALUES ({user}, '{asset}', {quantity}, {price})")
+        
+        self.__mycursor__.execute(sql_querry_insert_into_transactions_table)
+        self.__mycursor__.execute(sql_querry_insert_into_assets_table)
+        self.__mycursor__.execute(sql_querry_insert_into_stocks_table)
+
+        self.__db__.commit()

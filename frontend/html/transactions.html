@@ -19,7 +19,7 @@
     <div id="new-transaction">
         <h1 id="title">New transaction</h1>
         <button id="close-button" onclick="closeModal()"></button>
-        <form name="new-transaction" onsubmit="return validateFormInputs()" method="post">
+        <form name="newtransaction">
             <div class="inputs">
                 <label for="type">Type</label><br>
                 <input type="text" id="type" name="type" value="stock" disabled>
@@ -47,7 +47,7 @@
             </div>
             <hr>
             <p id="total">TOTAL: $0.00</p>
-            <input type="submit" value="confirm" id="confirm">
+            <input type="button" value="confirm" id="confirm" onclick="newTransaction()">
         </form>
     </div>
     <main>
@@ -63,6 +63,7 @@
                 <tr>
                     <th>Date</th>
                     <th>Asset</th>
+                    <th>Operation</th>
                     <th>Quantity</th>
                     <th>Price</th>
                     <th>Total</th>
