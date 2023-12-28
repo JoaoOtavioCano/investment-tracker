@@ -35,6 +35,9 @@ class GetTransactions:
             operation = transaction[4]
             total = calculateTotal(quantity, price)
 
+            price = "${:.2f}".format(price)
+            total = "${:.2f}".format(total)
+
             transaction_json = {
             "date_time": date_time,
             "asset": asset_name,
