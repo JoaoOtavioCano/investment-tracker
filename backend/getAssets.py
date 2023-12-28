@@ -42,6 +42,7 @@ class GetAssets:
             gain_loss = "${:.2f}".format(gain_loss)
             gain_loss_percent = "{:.2f}%".format(gain_loss_percent)
             total = "${:.2f}".format(total)
+            avg_price = "${:.2f}".format(avg_price)
 
             asset_json = {
             "type": asset_type,
