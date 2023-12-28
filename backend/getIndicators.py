@@ -31,7 +31,7 @@ class GetIndicators():
         for asset in assets:
 
             price = price + asset[2] * asset[3]
-            net_worth = net_worth +  yf.Ticker(asset[1]).info["currentPrice"] * asset[2]
+            net_worth = net_worth +  yf.Ticker(asset[1]).fast_info["lastPrice"] * asset[2]
 
         gain_loss = net_worth - price
 
