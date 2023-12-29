@@ -64,14 +64,54 @@ class Database:
         sql_querry_insert_into_transactions_table = ("INSERT INTO Transactions(userID, date_time, asset, quantity, cost, operation) "
                       f"VALUES ({user}, '{date}', '{asset}', {quantity}, {price}, '{operation}');")
         
-        sql_querry_insert_into_assets_table = ("INSERT INTO Assets(userID, name, type) "
+        self.__mycursor__.execute(sql_querry_insert_into_transactions_table)
+
+        
+        if not self.__userHasThisStock__(user, asset):
+            sql_querry_insert_into_assets_table = ("INSERT INTO Assets(userID, name, type) "
                       f"VALUES ({user}, '{asset}', '{type}')")
         
-        sql_querry_insert_into_stocks_table = ("INSERT INTO Stocks(userID, name, quantity, cost) "
+            sql_querry_insert_into_stocks_table = ("INSERT INTO Stocks(userID, name, quantity, cost) "
                       f"VALUES ({user}, '{asset}', {quantity}, {price})")
         
-        self.__mycursor__.execute(sql_querry_insert_into_transactions_table)
-        self.__mycursor__.execute(sql_querry_insert_into_assets_table)
-        self.__mycursor__.execute(sql_querry_insert_into_stocks_table)
+            self.__mycursor__.execute(sql_querry_insert_into_assets_table)
+            self.__mycursor__.execute(sql_querry_insert_into_stocks_table)
+
+        else:
+            stock_quantity, stock_avg_price = self.__getConsolidatedStockData__(user, asset)
+
+            new_quantity = stock_quantity + float(quantity)
+
+            new_avg_price = ((stock_quantity * stock_avg_price) + (float(quantity) * float(price))) / new_quantity
+
+            sql_querry_update_stocks_table = ("UPDATE Stocks SET "
+                                              f"`quantity` = {new_quantity}, "
+                                              f"`cost` = {new_avg_price} "
+                                              f"WHERE (`userID` = {user}) and (`name` = '{asset}');")
+            
+            self.__mycursor__.execute(sql_querry_update_stocks_table)
+        
 
         self.__db__.commit()
+
+    def __userHasThisStock__(self, user, stock):
+        sql = f"SELECT * FROM Assets WHERE userID = {user} AND name = '{stock}'"
+
+        self.__mycursor__.execute(sql)
+
+        respostas = self.__mycursor__
+
+        for resposta in respostas:
+            return True
+        
+        return False
+    
+    def __getConsolidatedStockData__(self, user, stock):
+        sql = f"SELECT quantity, cost FROM Stocks WHERE userID = {user} AND name = '{stock}'"
+
+        self.__mycursor__.execute(sql)
+
+        respostas = self.__mycursor__
+
+        for resposta in respostas:
+            return resposta[0], resposta[1]
