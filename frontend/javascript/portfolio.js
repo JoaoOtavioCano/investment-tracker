@@ -128,10 +128,15 @@ function createGraph(graph_data){
 
     // Set Data
     const data = google.visualization.arrayToDataTable(graph_data);
+
+    const options = {
+        chartArea:{left:0,top:0,width:"100%",height:"100%"}
+      };
+  
     
     // Draw
     const chart = new google.visualization.PieChart(document.getElementById('allocationChart'));
-    chart.draw(data);
+    chart.draw(data, options);
     
     }
 }

@@ -31,3 +31,10 @@
     margin: 0%;
     margin-bottom: 2rem;
 }
+
+#allocationChart{
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    height: 400px;
+}
