@@ -4,9 +4,14 @@ function getAssets(){
     fetch('/assets', { method: 'GET', headers:{ "authentication_key": localStorage.authenticationKey}})
         .then((response) => response.json())
         .then((json) => {
+            let graph_data = [["Asset", "Total"]];
+
             for(let i = 0; i < json.length; i++){
                 addRow(json[i]);
+                graph_data[i+1] = [json[i]["asset"], parseFloat(json[i]["total"].replace("$", ""))];
             }
+
+            createGraph(graph_data)
         })
 }
 
@@ -110,6 +115,24 @@ function gainLossIndicatorColor(){
         document.getElementById("gain_loss").style.color = "#00FD8F";
     }else{
         document.getElementById("gain_loss").style.color = "red";
+    }
+}
+
+function createGraph(graph_data){
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(function () {
+        drawChart(graph_data);
+    });
+    
+    function drawChart(graph_data) {
+
+    // Set Data
+    const data = google.visualization.arrayToDataTable(graph_data);
+    
+    // Draw
+    const chart = new google.visualization.PieChart(document.getElementById('allocationChart'));
+    chart.draw(data);
+    
     }
 }
 
