@@ -1,4 +1,5 @@
 import mysql.connector
+import possibleErrors
 
 class Database:
 
@@ -66,30 +67,57 @@ class Database:
         
         self.__mycursor__.execute(sql_querry_insert_into_transactions_table)
 
-        
-        if not self.__userHasThisStock__(user, asset):
-            sql_querry_insert_into_assets_table = ("INSERT INTO Assets(userID, name, type) "
-                      f"VALUES ({user}, '{asset}', '{type}')")
-        
-            sql_querry_insert_into_stocks_table = ("INSERT INTO Stocks(userID, name, quantity, cost) "
-                      f"VALUES ({user}, '{asset}', {quantity}, {price})")
-        
-            self.__mycursor__.execute(sql_querry_insert_into_assets_table)
-            self.__mycursor__.execute(sql_querry_insert_into_stocks_table)
-
-        else:
-            stock_quantity, stock_avg_price = self.__getConsolidatedStockData__(user, asset)
-
-            new_quantity = stock_quantity + float(quantity)
-
-            new_avg_price = ((stock_quantity * stock_avg_price) + (float(quantity) * float(price))) / new_quantity
-
-            sql_querry_update_stocks_table = ("UPDATE Stocks SET "
-                                              f"`quantity` = {new_quantity}, "
-                                              f"`cost` = {new_avg_price} "
-                                              f"WHERE (`userID` = {user}) and (`name` = '{asset}');")
+        if operation == "buy":
+            if not self.__userHasThisStock__(user, asset):
+                sql_querry_insert_into_assets_table = ("INSERT INTO Assets(userID, name, type) "
+                        f"VALUES ({user}, '{asset}', '{type}')")
             
-            self.__mycursor__.execute(sql_querry_update_stocks_table)
+                sql_querry_insert_into_stocks_table = ("INSERT INTO Stocks(userID, name, quantity, cost) "
+                        f"VALUES ({user}, '{asset}', {quantity}, {price})")
+            
+                self.__mycursor__.execute(sql_querry_insert_into_assets_table)
+                self.__mycursor__.execute(sql_querry_insert_into_stocks_table)
+
+            else:
+                stock_quantity, stock_avg_price = self.__getConsolidatedStockData__(user, asset)
+
+                new_quantity = stock_quantity + float(quantity)
+
+                new_avg_price = ((stock_quantity * stock_avg_price) + (float(quantity) * float(price))) / new_quantity
+
+                sql_querry_update_stocks_table = ("UPDATE Stocks SET "
+                                                f"`quantity` = {new_quantity}, "
+                                                f"`cost` = {new_avg_price} "
+                                                f"WHERE (`userID` = {user}) and (`name` = '{asset}');")
+                
+                self.__mycursor__.execute(sql_querry_update_stocks_table)
+
+        elif operation == "sell":
+            if self.__userHasThisStock__(user, asset):
+                stock_quantity, stock_avg_price = self.__getConsolidatedStockData__(user, asset)
+
+                new_quantity = stock_quantity - float(quantity)
+
+                if new_quantity < 0:
+                    raise possibleErrors.NegativeQuantity
+                
+                elif new_quantity == 0:
+                    sql_querry_delete_asset = ("DELETE FROM Assets "
+                                            f"WHERE userID = {user} AND "
+                                            f"name = '{asset}'")
+                    
+                    self.__mycursor__.execute(sql_querry_delete_asset)
+
+                else:
+                    sql_querry_update_stocks_table = ("UPDATE Stocks SET "
+                                                f"`quantity` = {new_quantity} "
+                                                f"WHERE (`userID` = {user}) AND "
+                                                f"(`name` = '{asset}');")      
+                    
+                    self.__mycursor__.execute(sql_querry_update_stocks_table)          
+
+            else:
+                raise possibleErrors.AssetNotInPortfolio
         
 
         self.__db__.commit()
