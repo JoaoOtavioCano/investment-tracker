@@ -35,18 +35,11 @@ function redirectUserToPortfolioWhenLoginConfirmed(){
         },
         body: jsonString,
     })
-    .then((response) => response.json())
-    .then((json) => {
+    .then((response) => {
 
-        console.log('Response:', json);
-
-        if (json.authorized === "true"){
-
-            console.log(json.authorized);
+        if (response.status === 200){
 
             const redirectPath = "/portfolio";
-
-            localStorage.setItem('authenticationKey', json['authenticationKey']);
 
             window.location.href = redirectPath;
         }else{

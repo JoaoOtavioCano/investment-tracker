@@ -80,8 +80,7 @@ function postTransaction(){
     const jsonString = JSON.stringify(transaction);
 
     fetch('/newtransaction', { 
-        method: 'POST', 
-        headers:{ "authentication_key": localStorage.authenticationKey},
+        method: 'POST',
         body: jsonString
     })
 }

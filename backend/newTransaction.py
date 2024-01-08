@@ -25,7 +25,7 @@ class newTransaction:
             self.__payload_with_empty_values_error_response__()
 
     def __insertIntoDB__(self):
-        user_id = int(self.request.headers["authentication_key"].split('#', 1)[0])
+        user_id = int(self.request.headers["Cookie"].replace("authenticationKey=", "").split('#', 1)[0])
 
         transaction = self.payload
 

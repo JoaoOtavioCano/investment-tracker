@@ -1,7 +1,7 @@
 import { checkAuthenticationKeyExists } from './authentication.js';
 
 function getAssets(){
-    fetch('/assets', { method: 'GET', headers:{ "authentication_key": localStorage.authenticationKey}})
+    fetch('/assets', { method: 'GET'})
         .then((response) => response.json())
         .then((json) => {
             let graph_data = [["Asset", "Total"]];
@@ -89,7 +89,7 @@ function addRow(assets){
 }
 
 function getIndicators(){
-    fetch('/indicators', { method: 'GET',  headers:{ "authentication_key": localStorage.authenticationKey}})
+    fetch('/indicators', { method: 'GET'})
         .then((response) => response.json())
         .then((json) => {
             addIndicators(json);

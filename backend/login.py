@@ -2,6 +2,7 @@ import json
 import database
 import random
 import hashlib
+import authCookie
 
 class Login():
 
@@ -24,17 +25,11 @@ class Login():
 
             self.request_handler.authenticator.authorization_list[user_id] = authentication_key
 
-            authentication_json = {
-                'authorized': 'true',
-                'authenticationKey': authentication_key
-            }
-
-            json_response = json.dumps(authentication_json)
+            cookie = authCookie.AuthCookie(authentication_key)
 
             self.request_handler.send_response(200, "OK")
-            self.request_handler.send_header('Content-type', 'application/json')
+            self.request_handler.send_header('Set-Cookie', cookie.generateHTTPheaders())
             self.request_handler.end_headers()
-            self.request_handler.wfile.write(json_response.encode('utf-8'))
 
     def __checkUserOnDB__(self):
 
