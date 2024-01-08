@@ -21,7 +21,7 @@ class GetAssets:
     def __getDataFromDB__(self):
         db = database.Database()
 
-        user_id = int(self.request_handler.headers["authentication_key"].split('#', 1)[0])
+        user_id = int(self.request_handler.headers["Cookie"].replace("authenticationKey=", "").split('#', 1)[0])
 
         assets = db.getAssets(user_id)
 

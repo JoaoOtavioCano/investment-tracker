@@ -1,5 +1,7 @@
-export function checkAuthenticationKeyExists(){
-    if (localStorage.authenticationKey == null){
-        window.location.href = "/login";
-    }
-}
+//xport function checkAuthenticationKeyExists(){
+//   console.log(document.cookie)
+//
+//   if (document.cookie.authenticationKey == null){
+//       window.location.href = "/login";
+//   }
+//
