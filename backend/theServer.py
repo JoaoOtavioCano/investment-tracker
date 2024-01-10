@@ -7,6 +7,7 @@ from getIndicators import GetIndicators
 from login import Login
 from authenticator import Authenticator
 from newTransaction import newTransaction
+from favicon import Favicon
 
 
 class RequestsHandler(BaseHTTPRequestHandler):
@@ -25,7 +26,9 @@ class RequestsHandler(BaseHTTPRequestHandler):
                 page_request_handler.respond()
                 return True
         
-        if self.path == "/favicon.ico":
+        if self.path == "/images/favicon.png":
+            request_handler = Favicon(self)
+            request_handler.respond()
             return True
         
         if self.authenticator.validateAuthentication(self):
