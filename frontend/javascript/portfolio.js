@@ -1,4 +1,5 @@
 import { checkAuthenticationKeyExists } from './authentication.js';
+import { setUserInitials } from './userInitials.js';
 
 function getAssets(){
     fetch('/assets', { method: 'GET'})
@@ -142,6 +143,7 @@ function createGraph(graph_data){
 }
 
 function main(){
+    setUserInitials()
     getAssets();
     getIndicators();
     checkAuthenticationKeyExists();

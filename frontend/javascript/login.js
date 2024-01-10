@@ -39,17 +39,21 @@ function redirectUserToPortfolioWhenLoginConfirmed(){
 
         if (response.status === 200){
 
+            response.json().then((json) => {
+                localStorage.setItem('user', json.user);
+            })
+
             const redirectPath = "/portfolio";
 
             window.location.href = redirectPath;
         }else{
-            return false
+            return false;
         }
     })
 }
 
 function main(){
     if(validateFormInputs() == true){
-        redirectUserToPortfolioWhenLoginConfirmed()
+        redirectUserToPortfolioWhenLoginConfirmed();
     }
 }

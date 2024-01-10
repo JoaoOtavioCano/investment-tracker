@@ -27,9 +27,15 @@ class Login():
 
             cookie = authCookie.AuthCookie(authentication_key)
 
+            response = {'user': user['user_name']}
+
+            json_response = json.dumps(response)
+
             self.request_handler.send_response(200, "OK")
             self.request_handler.send_header('Set-Cookie', cookie.generateHTTPheaders())
+            self.request_handler.send_header('Content-type', 'application/json')
             self.request_handler.end_headers()
+            self.request_handler.wfile.write(json_response.encode('utf-8'))
 
     def __checkUserOnDB__(self):
 
@@ -46,6 +52,7 @@ class Login():
             for info in user:
                 data = {
                     "userID": info[0],
+                    "user_name": info[1],
                 }
 
             return data

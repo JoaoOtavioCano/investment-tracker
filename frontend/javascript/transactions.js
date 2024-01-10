@@ -1,5 +1,5 @@
 import { checkAuthenticationKeyExists } from './authentication.js';
-
+import { setUserInitials } from './userInitials.js';
 
 function getTransactions(){
     fetch('/gettransactions', { method: 'GET'})
@@ -55,6 +55,7 @@ function addRow(transaction){
 }
 
 function main(){
+    setUserInitials();
     getTransactions();
     checkAuthenticationKeyExists();
 }

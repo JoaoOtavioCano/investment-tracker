@@ -48,7 +48,7 @@ class Database:
         return self.getAssets(user)
     
     def getUser(self, email, password):
-        sql_querry = ("SELECT Users.userID FROM Users  "
+        sql_querry = ("SELECT Users.userID, Users.name FROM Users  "
             f"WHERE Users.email = '{email}' "
             f"AND Users.password = '{password}'")
         
