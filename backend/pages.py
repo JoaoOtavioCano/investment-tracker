@@ -7,11 +7,11 @@ class Pages:
             "/portfolio": {
                 "html": "../frontend/html/portfolio.html",
                 "css": ["../frontend/css/portfolio.css", "../frontend/css/base.css"],
-                "javascript": ["../frontend/javascript/portfolio.js", "../frontend/javascript/authentication.js", "../frontend/javascript/userInitials.js"]},
+                "javascript": ["../frontend/javascript/portfolio.js", "../frontend/javascript/authentication.js", "../frontend/javascript/userInitials.js",  "../frontend/javascript/menu.js",  "../frontend/javascript/logout.js"]},
             "/transactions": {
                 "html": "../frontend/html/transactions.html",
                 "css": ["../frontend/css/transactions.css", "../frontend/css/base.css"],
-                "javascript": ["../frontend/javascript/transactions.js", "../frontend/javascript/authentication.js", "../frontend/javascript/userInitials.js"]},
+                "javascript": ["../frontend/javascript/transactions.js", "../frontend/javascript/authentication.js", "../frontend/javascript/userInitials.js",  "../frontend/javascript/menu.js",  "../frontend/javascript/logout.js"]},
             "/new-transaction": {
                 "html": "../frontend/html/new-transaction.html",
                 "css": "../frontend/css/new-transaction.css",

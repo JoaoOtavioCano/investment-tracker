@@ -8,6 +8,7 @@ from login import Login
 from authenticator import Authenticator
 from newTransaction import newTransaction
 from favicon import Favicon
+from logout import Logout
 
 
 class RequestsHandler(BaseHTTPRequestHandler):
@@ -17,6 +18,7 @@ class RequestsHandler(BaseHTTPRequestHandler):
         super().__init__(request, client_address, server)
 
     def do_GET(self):
+        print(self.authenticator.authorization_list)
 
         pages = Pages()
         
@@ -48,20 +50,27 @@ class RequestsHandler(BaseHTTPRequestHandler):
             self.end_headers()
 
     def do_POST(self):
+        print(self.authenticator.authorization_list)
 
         if self.path == "/login":
             payload_data = formatPayload(self)
             request_handler  = Login(self, payload_data)
             request_handler.respond()
+            return True
 
-        elif self.authenticator.validateAuthentication(self):
+        if self.authenticator.validateAuthentication(self):
             if self.path == "/newtransaction":
                 payload_data = formatPayload(self)
                 request_handler = newTransaction(self, payload_data)
                 request_handler.respond()
-            else:
-                self.send_error(500, "User not authenticated")
-                self.end_headers()
+
+            elif self.path == "/logout":
+                request_handler = Logout(self)
+                request_handler.respond()
+                
+        else:
+            self.send_error(500, "User not authenticated")
+            self.end_headers()
 
         
 

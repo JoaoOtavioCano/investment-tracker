@@ -13,7 +13,15 @@
         <ul>
             <li><a href="http://localhost:8000/portfolio">Portfolio</a></li>
             <li id="current-page"><a href="">Transactions</a></li>
-            <li ><div id="user"><p id="user-initials"></p></div></li>
+            <li >
+                <div id="user" onclick="openAndCloseMenu()">
+                    <p id="user-initials">Jo</p>
+                    <span id="menu-span">menu</span>
+                </div>
+                <ul id="menu">
+                    <li><button onclick="logOut()">Log out</button></li>
+                </ul>
+            </li>
         </ul>
     </header>
     <div id="overlay" class="overlay"></div>
@@ -79,3 +87,5 @@
 <script src="../javascript/new-transaction.js"></script>
 <script type="module" src="../javascript/authentication.js"></script>
 <script type="module" src="../javascript/userInitials.js"></script>
+<script src="../javascript/menu.js"></script>
+<script src="../javascript/logout.js"></script>

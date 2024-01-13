@@ -12,7 +12,15 @@
         <ul>
             <li id="current-page"><a href="">Portfolio</a></li>
             <li><a href="http://localhost:8000/transactions">Transactions</a></li>
-            <li ><div id="user"><p id="user-initials"></p></div></li>
+            <li >
+                <div id="user" onclick="openAndCloseMenu()">
+                    <p id="user-initials">Jo</p>
+                    <span id="menu-span">menu</span>
+                </div>
+                <ul id="menu">
+                    <li><button onclick="logOut()">Log out</button></li>
+                </ul>
+            </li>
         </ul>
     </header>
     <main>
@@ -64,4 +72,6 @@
 <script type="module" src="../javascript/portfolio.js"></script>
 <script type="module" src="../javascript/authentication.js"></script>
 <script type="module" src="../javascript/userInitials.js"></script>
+<script src="../javascript/menu.js"></script>
+<script src="../javascript/logout.js"></script>
 <script src="https://www.gstatic.com/charts/loader.js"></script>
