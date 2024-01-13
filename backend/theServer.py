@@ -18,8 +18,6 @@ class RequestsHandler(BaseHTTPRequestHandler):
         super().__init__(request, client_address, server)
 
     def do_GET(self):
-        print(self.authenticator.authorization_list)
-
         pages = Pages()
         
         for path in pages.listPaths():
@@ -50,7 +48,6 @@ class RequestsHandler(BaseHTTPRequestHandler):
             self.end_headers()
 
     def do_POST(self):
-        print(self.authenticator.authorization_list)
 
         if self.path == "/login":
             payload_data = formatPayload(self)

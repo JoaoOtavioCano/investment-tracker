@@ -3,7 +3,11 @@ import { setUserInitials } from './userInitials.js';
 
 function getTransactions(){
     fetch('/gettransactions', { method: 'GET'})
-        .then((response) => response.json())
+        .then((response) => {
+            checkAuthenticationKeyExists(response);
+
+            return response.json();
+        })
         .then((json) => {
             for(let i = 0; i < json.length; i++){
                 addRow(json[i]);
@@ -57,7 +61,6 @@ function addRow(transaction){
 function main(){
     setUserInitials();
     getTransactions();
-    checkAuthenticationKeyExists();
 }
 
 main()

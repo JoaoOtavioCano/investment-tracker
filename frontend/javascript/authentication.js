@@ -1,7 +1,7 @@
-export function checkAuthenticationKeyExists(){
-   //console.log(document.cookie)
+export function checkAuthenticationKeyExists(response){
+   if(response.statusText == 'User not authenticated'){
+      let redirectPath = '/login';
 
-   //if (document.cookie.authenticationKey == null){
-   //    window.location.href = "/login";
-   //}
+      window.location.href = redirectPath;
+   }
 }

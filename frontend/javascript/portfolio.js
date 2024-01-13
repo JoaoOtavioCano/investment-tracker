@@ -3,7 +3,11 @@ import { setUserInitials } from './userInitials.js';
 
 function getAssets(){
     fetch('/assets', { method: 'GET'})
-        .then((response) => response.json())
+        .then((response) => {
+            checkAuthenticationKeyExists(response);
+
+            return response.json()
+        })
         .then((json) => {
             let graph_data = [["Asset", "Total"]];
 
@@ -91,7 +95,11 @@ function addRow(assets){
 
 function getIndicators(){
     fetch('/indicators', { method: 'GET'})
-        .then((response) => response.json())
+        .then((response) => {
+            checkAuthenticationKeyExists(response);
+
+            return response.json()
+        })
         .then((json) => {
             addIndicators(json);
             gainLossIndicatorColor();
@@ -146,7 +154,6 @@ function main(){
     setUserInitials()
     getAssets();
     getIndicators();
-    checkAuthenticationKeyExists();
 }
 
 main()
