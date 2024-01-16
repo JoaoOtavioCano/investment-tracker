@@ -21,8 +21,6 @@ class CreateAccount():
 
         password_hash = bcrypt.hashpw(password.encode(), salt).decode()
 
-        print(password_hash)
-
         db = database.Database()
 
         db.createUser(name, email, password_hash)
