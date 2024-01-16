@@ -1,8 +1,11 @@
 import json
 import database
 import random
+import bcrypt
 import hashlib
 import authCookie
+
+
 
 class Login():
 
@@ -12,7 +15,7 @@ class Login():
         
     def respond(self):
 
-        user = self.__checkUserOnDB__()
+        user = self.__checkUserCredentials__()
 
         if user == False:
             self.request_handler.send_error(500, "USER NOT FOUND")
@@ -37,18 +40,17 @@ class Login():
             self.request_handler.end_headers()
             self.request_handler.wfile.write(json_response.encode('utf-8'))
 
-    def __checkUserOnDB__(self):
+    def __checkUserCredentials__(self):
 
         db = database.Database()
 
-        email_hash =  hashlib.sha256(self.payload["email"].encode()).hexdigest()
-        password_hash =  hashlib.sha256(self.payload["password"].encode()).hexdigest()
+        email = self.payload["email"]
+        password = self.payload["password"].encode()
 
-        user = db.getUser(email_hash, password_hash)
+        user = db.getUser(email)
 
-        if user == []:
-            return False
-        else:
+        if bcrypt.checkpw(password, user[0][2].encode()):
+
             for info in user:
                 data = {
                     "userID": info[0],
@@ -56,6 +58,10 @@ class Login():
                 }
 
             return data
+        
+        else:
+            return False
+
          
 def __createAuthenticationKey__(user_id):
     part01 = str(user_id).zfill(10)
