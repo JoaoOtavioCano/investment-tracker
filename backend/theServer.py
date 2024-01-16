@@ -55,7 +55,7 @@ class RequestsHandler(BaseHTTPRequestHandler):
             request_handler.respond()
             return True
 
-        if self.path == "/createAccount":
+        if self.path == "/createaccount":
             payload_data = formatPayload(self)
             request_handler  = CreateAccount(self, payload_data)
             request_handler.respond()

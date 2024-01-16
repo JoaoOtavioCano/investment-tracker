@@ -16,6 +16,10 @@ class Pages:
                 "html": "../frontend/html/new-transaction.html",
                 "css": "../frontend/css/new-transaction.css",
                 "javascript": "../frontend/javascript/new-transaction.js"},
+            "/create-account": {
+                "html": "../frontend/html/create-account.html",
+                "css": "../frontend/css/create-account.css",
+                "javascript": "../frontend/javascript/create-account.js"},
     }
 
     def listPaths(self):
