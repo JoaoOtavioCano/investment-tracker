@@ -47,10 +47,9 @@ class Database:
     def getIndicators(self, user):
         return self.getAssets(user)
     
-    def getUser(self, email, password):
-        sql_querry = ("SELECT Users.userID, Users.name FROM Users  "
-            f"WHERE Users.email = '{email}' "
-            f"AND Users.password = '{password}'")
+    def getUser(self, email):
+        sql_querry = ("SELECT Users.userID, Users.name, Users.password FROM Users  "
+            f"WHERE Users.email = '{email}'")
         
         self.__mycursor__.execute(sql_querry)
 
@@ -143,3 +142,13 @@ class Database:
 
         for resposta in respostas:
             return resposta[0], resposta[1]
+
+    def createUser(self, name, email, password_hash):
+        sql = ("INSERT INTO Users(email, password, name) "
+            f"VALUES('{email}', '{password_hash}', '{name}')")
+        
+        self.__mycursor__.execute(sql)
+
+        self.__db__.commit()
+
+        

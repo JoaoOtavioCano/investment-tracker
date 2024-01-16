@@ -9,7 +9,7 @@ from authenticator import Authenticator
 from newTransaction import newTransaction
 from favicon import Favicon
 from logout import Logout
-
+from createAccount import CreateAccount
 
 class RequestsHandler(BaseHTTPRequestHandler):
 
@@ -54,6 +54,13 @@ class RequestsHandler(BaseHTTPRequestHandler):
             request_handler  = Login(self, payload_data)
             request_handler.respond()
             return True
+
+        if self.path == "/createAccount":
+            payload_data = formatPayload(self)
+            request_handler  = CreateAccount(self, payload_data)
+            request_handler.respond()
+            return True
+                
 
         if self.authenticator.validateAuthentication(self):
             if self.path == "/newtransaction":
