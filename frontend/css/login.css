@@ -52,3 +52,7 @@ body {
     margin-left: 63px;
     cursor: pointer;
 }
+
+#create-new-account-button:hover {
+    background-color: #dadada;
+}

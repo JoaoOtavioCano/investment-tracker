@@ -88,6 +88,8 @@ function postTransaction(){
 function newTransaction(){
     if (validateFormInputs()){
         postTransaction();
+        closeModal();
+        
     }
 }
 
