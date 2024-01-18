@@ -151,4 +151,30 @@ class Database:
 
         self.__db__.commit()
 
+    def addNewPasswordRequest(self, code, user):
+        sql = ("INSERT INTO NewPasswordsRequests(code, userID) "
+            f"VALUES('{code}', {user})")
         
+        self.__mycursor__.execute(sql)
+
+        self.__db__.commit()
+
+    def getUserId(self, email):
+        sql = ("SELECT userID FROM Users "
+            f"WHERE email = '{email}'")
+        
+        self.__mycursor__.execute(sql)
+
+        user_id = self.__mycursor__
+
+        for result in user_id:
+            return result[0]
+
+
+    def deletePasswordRequest(self, user):
+        sql = ("DELETE FROM NewPasswordsRequests "
+            f"WHERE userID = {user}")
+        
+        self.__mycursor__.execute(sql)
+
+        self.__db__.commit()

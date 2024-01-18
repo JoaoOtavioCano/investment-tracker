@@ -20,6 +20,14 @@ class Pages:
                 "html": "../frontend/html/create-account.html",
                 "css": "../frontend/css/create-account.css",
                 "javascript": "../frontend/javascript/create-account.js"},
+            "/forgot-password": {
+                "html": "../frontend/html/forgot-password.html",
+                "css": "../frontend/css/forgot-password.css",
+                "javascript": "../frontend/javascript/forgot-password.js"},
+            "/new-password": {
+                "html": "../frontend/html/new-password.html",
+                "css": "../frontend/css/new-password.css",
+                "javascript": "../frontend/javascript/new-password.js"},
     }
 
     def listPaths(self):

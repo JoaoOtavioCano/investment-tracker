@@ -10,6 +10,7 @@ from newTransaction import newTransaction
 from favicon import Favicon
 from logout import Logout
 from createAccount import CreateAccount
+from forgotPassword import ForgotPassword
 
 class RequestsHandler(BaseHTTPRequestHandler):
 
@@ -58,6 +59,12 @@ class RequestsHandler(BaseHTTPRequestHandler):
         if self.path == "/createaccount":
             payload_data = formatPayload(self)
             request_handler  = CreateAccount(self, payload_data)
+            request_handler.respond()
+            return True
+
+        if self.path == "/forgotpassword":
+            payload_data = formatPayload(self)
+            request_handler  = ForgotPassword(self, payload_data)
             request_handler.respond()
             return True
                 
