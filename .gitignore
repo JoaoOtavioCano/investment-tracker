@@ -1,3 +1,4 @@
 backend/teste.py
 backend/__pycache__
+backend/.env
 .DS_Store

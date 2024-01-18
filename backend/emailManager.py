@@ -1,5 +1,9 @@
 import smtplib
 from email.message import EmailMessage
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class EmailManager:
 
@@ -26,7 +30,7 @@ class EmailManager:
 
         # Login to your email account
         username = origin
-        password = "ocee atvr ikvi kjlt"
+        password = os.getenv('EMAIL_ACCOUNT_PASSWORD')
         s.login(username, password)
 
         # Send the message
