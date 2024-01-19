@@ -178,3 +178,23 @@ class Database:
         self.__mycursor__.execute(sql)
 
         self.__db__.commit()
+
+    def getUserIdUsingCode(self, code):
+        sql = ("SELECT userID FROM NewPasswordsRequests "
+            f"WHERE code = '{code}'")
+        
+        self.__mycursor__.execute(sql)
+
+        user_id = self.__mycursor__
+
+        for result in user_id:
+            return result[0]
+        
+    def updateUserPassword(self, user, new_password):
+        sql = ("UPDATE Users "
+               f"SET password = '{new_password}' "
+               f"WHERE userID = {user}")
+        
+        self.__mycursor__.execute(sql)
+
+        self.__db__.commit()
