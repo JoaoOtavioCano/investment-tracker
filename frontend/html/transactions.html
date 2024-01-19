@@ -66,17 +66,19 @@
             <button onclick="return openModal()">new transaction</button>
             <div></div>
         </div>
-        <div id="table-grid">
+        <table id="table-headers">
+            <tr>
+                <th class="date">Date</th>
+                <th class="asset">Asset</th>
+                <th class="operation">Operation</th>
+                <th class="quantity">Quantity</th>
+                <th class="price">Price</th>
+                <th>Total</th>
+            </tr>
+        </table>
+        <div id="transactions-table-grid">
             <div></div>
             <table id="transactions-table">
-                <tr>
-                    <th>Date</th>
-                    <th>Asset</th>
-                    <th>Operation</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Total</th>
-                </tr>
             </table>
             <div></div>
         </div>

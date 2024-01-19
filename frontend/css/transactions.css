@@ -26,5 +26,32 @@ button:hover{
     display: grid;
     grid-template-columns: 12rem auto 12rem 1rem;
     grid-template-rows: 4rem;
+    margin-bottom: 2rem;
+}
+
+#transactions-table-grid{
+    padding: 0%;
+    overflow-y: auto;
+    height: 32rem;
+}
+
+.date{
+    width: 10rem;
+}
+
+.asset {
+    width: 10.5rem;
+}
+
+.operation{
+    width: 8.5rem;
+}
+
+.quantity {
+    width: 8rem;
+}
+
+.price {
+    width: 8rem;
 }
 

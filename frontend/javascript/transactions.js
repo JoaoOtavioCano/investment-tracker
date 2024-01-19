@@ -40,6 +40,13 @@ function addRow(transaction){
     quantity = document.createTextNode(transaction["quantity"]);
     price = document.createTextNode(transaction["price"]);
     total = document.createTextNode(transaction["total"]);
+
+    td_date.className = "date";
+    td_asset.className = "asset";
+    td_operation.className = "operation";
+    td_quantity.className = "quantity";
+    td_price.className = "price";
+    td_total.className = "total";
     
     td_date.appendChild(date);
     td_asset.appendChild(asset);
