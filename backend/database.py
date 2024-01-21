@@ -15,10 +15,9 @@ class Database:
     
     def getAssets(self, user):
 
-        sql_querry = sql_querry = ("SELECT type, Stocks.name, quantity, cost FROM Users JOIN "
-            "Assets ON Users.userID = Assets.userID "
-            "JOIN Stocks ON Assets.userID = Stocks.userID AND Assets.name = Stocks.name "
-            f"WHERE Users.userID = {user}")
+        sql_querry = sql_querry = ("SELECT type, Stocks.name, quantity, cost FROM Assets "
+                                   "JOIN Stocks ON Assets.userID = Stocks.userID AND Assets.name = Stocks.name "
+                                   f"WHERE Assets.userID = {user}")
         
         self.__mycursor__.execute(sql_querry)
 
@@ -31,8 +30,7 @@ class Database:
 
     def getTransactions(self, user, frame):
         sql_querry = ("SELECT date_time, asset, quantity, cost, operation FROM Transactions "
-                      "JOIN Users ON Transactions.userID = Users.userID "
-                      f"WHERE Users.userID = {user} "
+                      f"WHERE Transactions.userID = {user} "
                       "ORDER BY date_time DESC "
                       f"LIMIT 20 OFFSET {int(frame) * 20}")
         
