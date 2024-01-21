@@ -14,4 +14,3 @@
         menuIsOpen = false;
     }
 }
-

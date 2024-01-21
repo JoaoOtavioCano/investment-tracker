@@ -4,11 +4,12 @@ import database
 class GetTransactions:
 
     def __init__(self, request_handler):
-        self.request_handler =  request_handler
+        self.request_handler = request_handler
+        self.frame_requested = request_handler.path.split('frame=')[1]
 
     def respond(self):
 
-        response = self.__getDataFromDB__()
+        response = self.__getDataFromDB__(self.frame_requested)
 
         json_response = json.dumps(response)
 
@@ -17,12 +18,12 @@ class GetTransactions:
         self.request_handler.end_headers()
         self.request_handler.wfile.write(json_response.encode('utf-8'))
 
-    def __getDataFromDB__(self):
+    def __getDataFromDB__(self, frame):
         db = database.Database()
 
         user_id = int(self.request_handler.headers["Cookie"].replace("authenticationKey=", "").split('#', 1)[0])
 
-        transactions = db.getTransactions(user_id)
+        transactions = db.getTransactions(user_id, frame)
 
         data = []
 

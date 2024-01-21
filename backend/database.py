@@ -29,11 +29,12 @@ class Database:
 
         return assets_list
 
-    def getTransactions(self, user):
+    def getTransactions(self, user, frame):
         sql_querry = ("SELECT date_time, asset, quantity, cost, operation FROM Transactions "
-            "JOIN Users ON Transactions.userID = Users.userID "
-            f"WHERE Users.userID = {user} "
-            "ORDER BY date_time DESC")
+                      "JOIN Users ON Transactions.userID = Users.userID "
+                      f"WHERE Users.userID = {user} "
+                      "ORDER BY date_time DESC "
+                      f"LIMIT 20 OFFSET {int(frame) * 20}")
         
         self.__mycursor__.execute(sql_querry)
 

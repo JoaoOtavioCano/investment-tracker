@@ -1,8 +1,13 @@
 import { checkAuthenticationKeyExists } from './authentication.js';
 import { setUserInitials } from './userInitials.js';
+import { gotToTheEndOfTheScroll } from './transaction-pagination.js';
 
-function getTransactions(){
-    fetch('/gettransactions', { method: 'GET'})
+let frameNumber = 0;
+
+export function getTransactions(){
+    console.log(frameNumber);
+
+    fetch(`/gettransactions?frame=${frameNumber}`, { method: 'GET'})
         .then((response) => {
             checkAuthenticationKeyExists(response);
 
@@ -13,6 +18,8 @@ function getTransactions(){
                 addRow(json[i]);
             }
         })
+
+        frameNumber++;
 }
 
 function addRow(transaction){
@@ -68,6 +75,7 @@ function addRow(transaction){
 function main(){
     setUserInitials();
     getTransactions();
+    gotToTheEndOfTheScroll();
 }
 
-main()
+main();

@@ -42,7 +42,7 @@ class RequestsHandler(BaseHTTPRequestHandler):
                 request_handler = GetIndicators(self)
                 request_handler.respond()
             
-            elif self.path == "/gettransactions":
+            elif "/gettransactions" in self.path:
                 request_handler = GetTransactions(self)
                 request_handler.respond()
         else:

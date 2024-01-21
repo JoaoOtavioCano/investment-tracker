@@ -11,7 +11,7 @@ class Pages:
             "/transactions": {
                 "html": "../frontend/html/transactions.html",
                 "css": ["../frontend/css/transactions.css", "../frontend/css/base.css"],
-                "javascript": ["../frontend/javascript/transactions.js", "../frontend/javascript/authentication.js", "../frontend/javascript/userInitials.js",  "../frontend/javascript/menu.js",  "../frontend/javascript/logout.js"]},
+                "javascript": ["../frontend/javascript/transactions.js", "../frontend/javascript/authentication.js", "../frontend/javascript/userInitials.js",  "../frontend/javascript/menu.js",  "../frontend/javascript/logout.js",  "../frontend/javascript/transaction-pagination.js"]},
             "/new-transaction": {
                 "html": "../frontend/html/new-transaction.html",
                 "css": "../frontend/css/new-transaction.css",
