@@ -6,7 +6,6 @@ let frameNumber = 0;
 let allTransactionsGot = false;
 
 export function getTransactions(){
-    console.log(frameNumber);
 
     if (!allTransactionsGot){
         fetch(`/gettransactions?frame=${frameNumber}`, { method: 'GET'})

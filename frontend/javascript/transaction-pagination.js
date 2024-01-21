@@ -6,7 +6,6 @@ export function gotToTheEndOfTheScroll(){
     table.addEventListener("scroll", () => {
 
         if (table.scrollTop + table.clientHeight >= table.scrollHeight) {
-            console.log("scroll");
             getTransactions();
         }
     });
