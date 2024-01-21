@@ -3,23 +3,30 @@ import { setUserInitials } from './userInitials.js';
 import { gotToTheEndOfTheScroll } from './transaction-pagination.js';
 
 let frameNumber = 0;
+let allTransactionsGot = false;
 
 export function getTransactions(){
     console.log(frameNumber);
 
-    fetch(`/gettransactions?frame=${frameNumber}`, { method: 'GET'})
-        .then((response) => {
-            checkAuthenticationKeyExists(response);
+    if (!allTransactionsGot){
+        fetch(`/gettransactions?frame=${frameNumber}`, { method: 'GET'})
+            .then((response) => {
+                checkAuthenticationKeyExists(response);
 
-            return response.json();
-        })
-        .then((json) => {
-            for(let i = 0; i < json.length; i++){
-                addRow(json[i]);
-            }
-        })
+                return response.json();
+            })
+            .then((json) => {
+                for(let i = 0; i < json.length; i++){
+                    addRow(json[i]);
+                }
+
+                if (json.length < 20){
+                    allTransactionsGot = true;
+                }
+            })
 
         frameNumber++;
+    }
 }
 
 function addRow(transaction){
