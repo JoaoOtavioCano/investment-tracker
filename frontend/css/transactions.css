@@ -4,7 +4,7 @@
     --white: #ffffff;
   }
 
-button {
+#new-transaction-button {
     font-size: 1.33rem;
     background-color: var(--light_green);
     color: var(--dark_green);
@@ -16,7 +16,7 @@ button {
     cursor: pointer;
 }
 
-button:hover{
+#new-transaction-button:hover{
     background-color: rgb(134, 255, 203);
 }
 
