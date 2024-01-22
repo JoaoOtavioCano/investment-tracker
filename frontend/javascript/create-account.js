@@ -15,6 +15,11 @@ function createAccount(){
         method: 'POST',
         body: jsonString
     })
+    .then((response) => {
+        if (response.status == 200){
+            accountCreatedAlert();
+        }
+    })
 }
 
 function errorMessage(field, message){
@@ -25,7 +30,7 @@ function errorMessage(field, message){
 
     inputField.style.border = "2px solid red";
 
-    errorMessageDiv.style.border = "2px solid red"
+    errorMessageDiv.style.border = "2px solid red";
 
     errorMessageSpan.innerText = message;
 }
@@ -68,8 +73,21 @@ function validateFormInputs(){
     return !errorOccurred;
 }
 
+function accountCreatedAlert(){
+    alert = document.getElementById("account-created-alert");
+
+    alert.style.display = "flex";
+}
+
+function removeAccountCreatedAlert(){
+    alert = document.getElementById("account-created-alert");
+
+    alert.style.display = "none";
+}
+
 function main(){
     removeErrorMessages();
+    removeAccountCreatedAlert();
 
     if(validateFormInputs()){
         createAccount();
