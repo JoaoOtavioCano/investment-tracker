@@ -19,6 +19,9 @@ class NewPassword:
 
             self.request.send_response(200, "OK")
             self.request.end_headers()
+        else:
+            self.request.send_error(500, "INVALID CODE")
+            self.request.end_headers()
 
     def __checkCode__(self, code):
         db = database.Database()
