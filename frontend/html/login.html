@@ -6,10 +6,16 @@
         <link rel="icon" type="image/x-png" href="../images/favicon.png">
     </head>
     <body>
-        <div style="background-color: #02231c; width: 386px; height: 449px; position: absolute;top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 10px;" >
-            <form name="login" style="margin-top: 23px;">
+        <div style="background-color: #02231c; width: 386px; position: absolute;top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 10px; padding-top: 23px; padding-bottom: 23px;" >
+            <form name="login">
                 <input id="email" type="text" placeholder="Email" name="email">
+                <div class="error email">
+                    <span></span>
+                </div>
                 <input id="password" type="password" placeholder="Password" name="password">
+                <div class="error password">
+                    <span></span>
+                </div>
                 <input id="log-in-button" type="button" value="Log In"  onclick="main()">
             </form>
             <div style="margin-top: 29px; margin-left: 133px;">

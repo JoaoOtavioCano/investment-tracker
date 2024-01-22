@@ -38,6 +38,16 @@ body {
     background-color: rgb(134, 255, 203);
 }
 
+.error{
+    border-radius: 6px;
+    background-color: red;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 23px;
+    width: 328px;
+    padding-left: 10px;
+}
+
 #create-new-account-button {
     font-weight: bold; 
     text-decoration: none; 

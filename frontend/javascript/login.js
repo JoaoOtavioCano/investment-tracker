@@ -2,17 +2,22 @@ function validateFormInputs(){
     const email = document.forms["login"]["email"].value;
     const password = document.forms["login"]["password"].value;
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    let errorOccurred = false;
 
-    if(email == "" || password == "")
-    {
-        alert("Both fields must be filled");
-        return false;
-    }else if(!emailRegex.test(email)){
-        alert("Type a valid email");
-        return false;
-    }else{
-        return true;
+    if (email == ""){
+        errorMessage("email", "Must be field!");
+        errorOccurred = true;
+    }else if (!emailRegex.test(email)){
+        errorMessage("email", "Type a valid email");
+        errorOccurred = true;
     }
+
+    if (password == ""){
+        errorMessage("password", "Must be field!");
+        errorOccurred = true;
+    }
+
+    return !errorOccurred;
 }
 
 function redirectUserToPortfolioWhenLoginConfirmed(){
@@ -52,8 +57,15 @@ function redirectUserToPortfolioWhenLoginConfirmed(){
     })
 }
 
+function errorMessage(field, message){
+
+    errorMessageDiv = document.getElementsByClassName(field)[0];
+
+    errorMessageDiv.children[0].innerText = message;
+}
+
 function main(){
-    if(validateFormInputs() == true){
+    if(validateFormInputs()){
         redirectUserToPortfolioWhenLoginConfirmed();
     }
 }
