@@ -49,6 +49,7 @@ body {
 }
 
 .fail-login{
+    margin: 0%;
     display: none;
     border: 2px solid red;
     position: absolute; 
