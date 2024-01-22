@@ -20,7 +20,7 @@ function validateFormInputs(){
     return !errorOccurred;
 }
 
-function redirectUserToPortfolioWhenLoginConfirmed(){
+function tryToLogin(){
 
     email =document.forms.login.email.value
     password =document.forms.login.password.value
@@ -52,17 +52,20 @@ function redirectUserToPortfolioWhenLoginConfirmed(){
 
             window.location.href = redirectPath;
         }else{
-            return false;
+            errorInvalidCredentials();
         }
     })
 }
 
 function errorMessage(field, message){
 
+    errorMessageDiv = document.getElementsByClassName(field)[0];
     errorMessageSpan = document.getElementsByClassName(field)[0].children[0];
     inputField = document.getElementById(field);
 
     inputField.style.border = "2px solid red";
+
+    errorMessageDiv.style.border = "2px solid red"
 
     errorMessageSpan.innerText = message;
 }
@@ -72,15 +75,26 @@ function removeErrorMessages(){
 
     for (field in fields){
         document.getElementsByClassName(fields[field])[0].children[0].innerText = "";
+        document.getElementsByClassName(fields[field])[0].style.border = "0px";
         document.getElementById(fields[field]).style.border = "0px";
     }
 
+    errorMessageDiv = document.getElementsByClassName("fail-login")[0];
+
+    errorMessageDiv.style.display = "none";
+
+}
+
+function errorInvalidCredentials(){
+    errorMessageDiv = document.getElementsByClassName("fail-login")[0];
+
+    errorMessageDiv.style.display = "flex";
 }
 
 function main(){
     removeErrorMessages();
 
     if(validateFormInputs()){
-        redirectUserToPortfolioWhenLoginConfirmed();
+        tryToLogin();
     }
 }

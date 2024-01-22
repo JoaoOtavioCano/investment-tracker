@@ -18,7 +18,7 @@ class Login():
         user = self.__checkUserCredentials__()
 
         if user == False:
-            self.request_handler.send_error(500, "USER NOT FOUND")
+            self.request_handler.send_error(500, "INVALID CREDENTIALS")
             self.request_handler.end_headers()
         else:
 
@@ -49,7 +49,7 @@ class Login():
 
         user = db.getUser(email)
 
-        if bcrypt.checkpw(password, user[0][2].encode()):
+        if user != [] and bcrypt.checkpw(password, user[0][2].encode()):
 
             for info in user:
                 data = {
