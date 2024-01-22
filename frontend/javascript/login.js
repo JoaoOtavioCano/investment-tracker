@@ -8,7 +8,7 @@ function validateFormInputs(){
         errorMessage("email", "Must be field!");
         errorOccurred = true;
     }else if (!emailRegex.test(email)){
-        errorMessage("email", "Type a valid email");
+        errorMessage("email", "Type a valid email!");
         errorOccurred = true;
     }
 
@@ -59,12 +59,27 @@ function redirectUserToPortfolioWhenLoginConfirmed(){
 
 function errorMessage(field, message){
 
-    errorMessageDiv = document.getElementsByClassName(field)[0];
+    errorMessageSpan = document.getElementsByClassName(field)[0].children[0];
+    inputField = document.getElementById(field);
 
-    errorMessageDiv.children[0].innerText = message;
+    inputField.style.border = "2px solid red";
+
+    errorMessageSpan.innerText = message;
+}
+
+function removeErrorMessages(){
+    fields = ["email", "password"];
+
+    for (field in fields){
+        document.getElementsByClassName(fields[field])[0].children[0].innerText = "";
+        document.getElementById(fields[field]).style.border = "0px";
+    }
+
 }
 
 function main(){
+    removeErrorMessages();
+
     if(validateFormInputs()){
         redirectUserToPortfolioWhenLoginConfirmed();
     }
