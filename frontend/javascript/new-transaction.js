@@ -108,11 +108,24 @@ function openModal() {
 }
 
 function closeModal(){
-    let modal = document.getElementById("new-transaction")
+    let modal = document.getElementById("new-transaction");
     let overlay = document.getElementById("overlay");
+
+    resetModal();
 
     overlay.style.display = '';
     modal.style.display = '';
+}
+
+function resetModal(){
+    const inputFields = ["buy/sell", "asset", "date", "quantity", "price"];
+
+    for (field in inputFields){
+        cleanInputField(inputFields[field]);
+    }
+
+    document.getElementById("buy").style.backgroundColor = "";
+    document.getElementById("sell").style.backgroundColor = "";
 }
 
 function postTransaction(){
@@ -138,6 +151,12 @@ function postTransaction(){
         method: 'POST',
         body: jsonString
     })
+}
+
+function cleanInputField(inputId){
+    inputField = document.getElementById(inputId);
+
+    inputField.value = "";
 }
 
 function newTransaction(){
