@@ -16,6 +16,8 @@ function confirmNewPassword(){
     .then((response) => {
         if (response.status == 500){
             errorInvalidCode();
+        }else if (response.status == 200){
+            successAlert();
         }
     })
 }
@@ -70,6 +72,14 @@ function errorInvalidCode(){
     errorMessageDiv = document.getElementsByClassName("invalid-code")[0];
 
     errorMessageDiv.style.display = "flex";
+}
+
+function successAlert(){
+    alert = document.getElementById("success-alert");
+
+    alert.style.display = "flex";
+
+    setTimeout(() => { alert.style.display = "none"; }, 3000);
 }
 
 function main(){
