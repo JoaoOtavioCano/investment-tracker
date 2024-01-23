@@ -74,10 +74,17 @@ function successAlert(){
     setTimeout(() => { alert.style.display = "none"; }, 3000);
 }
 
+function cleanInputField(inputId){
+    inputField = document.getElementById(inputId);
+
+    inputField.value = "";
+}
+
 function main(){
     removeErrorMessages();
 
     if(validateFormInputs()){
         confirmEmailAddress();
+        cleanInputField("email");
     }
 }
