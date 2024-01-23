@@ -14,6 +14,8 @@ function confirmEmailAddress(){
     .then((response) => {
         if (response.status == 500){
             errorUserNotFound()
+        }else if (response.status != 200){
+            successAlert();
         }
     })
 }
@@ -62,6 +64,14 @@ function errorUserNotFound(){
     errorMessageDiv = document.getElementsByClassName("invalid-user")[0];
 
     errorMessageDiv.style.display = "flex";
+}
+
+function successAlert(){
+    alert = document.getElementById("email-sent-alert");
+
+    alert.style.display = "flex";
+
+    setTimeout(() => { alert.style.display = "none"; }, 3000);
 }
 
 function main(){
