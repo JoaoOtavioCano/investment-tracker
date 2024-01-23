@@ -13,16 +13,71 @@ function clickSell(){
 }
 
 function validateFormInputs(){
-    inputs = document.getElementsByTagName("input");
+    const buyOrSell = document.forms.newtransaction["buy/sell"].value;
+    const asset = document.forms.newtransaction.asset.value;
+    const date = document.forms.newtransaction.date.value;
+    const price = document.forms.newtransaction.price.value;
+    const quantity = document.forms.newtransaction.quantity.value;
 
-    for(let i = 0; i < inputs.length; i++){
-        if(inputs[i].value == ""){
-            alert(`${inputs[i].name} field must be filled`)
-            return false;
-        }
+    let errorOccurred = false;
+
+    if (buyOrSell == ""){
+        errorMessage("buy-sell", "Must be field!");
+        errorOccurred = true;
+    }
+    if (asset == ""){
+        errorMessage("asset", "Must be field!");
+        errorOccurred = true;
+    }
+    if (date == ""){
+        errorMessage("date", "Must be field!");
+        errorOccurred = true;
+    }
+    if (price == ""){
+        errorMessage("price", "Must be field!");
+        errorOccurred = true;
+    } 
+    if (quantity == ""){
+        errorMessage("quantity", "Must be field!");
+        errorOccurred = true;
     }
 
-    return true
+    return !errorOccurred;
+}
+
+function errorMessage(field, message){
+
+    errorMessageDiv = document.getElementsByClassName(field)[0];
+    errorMessageSpan = document.getElementsByClassName(field)[0].children[0];
+
+    if(field != "buy-sell"){
+        inputField = document.getElementById(field);
+    }else{
+        inputField = document.getElementById("buy");
+        inputField.style.border = "2px solid red";
+        inputField = document.getElementById("sell");
+    }
+
+    inputField.style.border = "2px solid red";
+
+    errorMessageSpan.innerText = message;
+
+    errorMessageDiv.style.display = "flex";
+}
+
+function removeErrorMessages(){
+    fields = ["asset", "date", "price", "quantity"];
+
+    for (field in fields){
+        document.getElementsByClassName(fields[field])[0].children[0].innerText = "";
+        document.getElementsByClassName(fields[field])[0].style.display = "none";
+        document.getElementById(fields[field]).style.border = "0px";
+    }
+
+    document.getElementsByClassName("buy-sell")[0].children[0].innerText = "";
+    document.getElementsByClassName("buy-sell")[0].style.display = "none";
+    document.getElementById("buy").style.border = "0px";    
+    document.getElementById("sell").style.border = "0px";    
 }
 
 function calculateTotal(){
@@ -86,6 +141,8 @@ function postTransaction(){
 }
 
 function newTransaction(){
+    removeErrorMessages();
+
     if (validateFormInputs()){
         postTransaction();
         closeModal();
