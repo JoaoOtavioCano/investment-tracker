@@ -151,6 +151,11 @@ function postTransaction(){
         method: 'POST',
         body: jsonString
     })
+    .then((response) => {
+        if (response.status == 200){
+            transactionCreatedAlert();
+        }
+    })
 }
 
 function cleanInputField(inputId){
@@ -167,6 +172,14 @@ function newTransaction(){
         closeModal();
         
     }
+}
+
+function transactionCreatedAlert(){
+    const alert = document.getElementById("new-transaction-created-alert");
+
+    alert.style.display = "flex";
+
+    setTimeout(() => { alert.style.display = "none"; }, 3000);
 }
 
 listenEventRecalculateTotal()

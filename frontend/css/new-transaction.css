@@ -139,7 +139,7 @@ hr{
     width: calc(9.48rem - 10px);
 }
 
-#account-created-alert{
+#new-transaction-created-alert{
     border-radius: 6px;
     font-family: Arial, Helvetica, sans-serif;
     color: white;
