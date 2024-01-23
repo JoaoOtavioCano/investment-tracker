@@ -82,10 +82,20 @@ function successAlert(){
     setTimeout(() => { alert.style.display = "none"; }, 3000);
 }
 
+function cleanInputField(inputId_list){
+
+    for ( input in inputId_list){
+        inputField = document.getElementById(inputId_list[input]);
+        inputField.value = "";
+    }
+    
+}
+
 function main(){
     removeErrorMessages();
 
     if(validateFormInputs()){
         confirmNewPassword();
+        cleanInputField(["code", "new_password"]);
     }
 }
