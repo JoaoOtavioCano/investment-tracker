@@ -1,13 +1,17 @@
 import mysql.connector
 import possibleErrors
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class Database:
 
     def __init__(self):
         self.__db__ = mysql.connector.connect(
             host="localhost",
-            user="root",
-            password="91246810",
+            user=os.getenv('DB_USER'),
+            password=os.getenv("DB_PASSWORD"),
             database="testdatabase"
         )
 
