@@ -1,5 +1,6 @@
 import database
 import bcrypt
+from payloadValidator import PayloadValidator
 
 class NewPassword:
     def __init__(self, request, payload):
@@ -7,21 +8,29 @@ class NewPassword:
         self.payload = payload
 
     def respond(self):
-        code = self.payload["code"]
-        new_password = self.payload["new_password"]
+        expected_payload_keys = ["code", "new_password"]
 
-        user_id = self.__checkCode__(code)
-
-        if user_id != -1:
-            self.__chageUserPassword__(user_id, new_password)
-
-            self.__deleteRequestToChangePassword__(user_id)
-
-            self.request.send_response(200, "OK")
+        payload_validator = PayloadValidator()
+        
+        if not payload_validator.validate(self.payload, expected_payload_keys):
+            self.request.send_error(500, "INVALID PAYLOAD")
             self.request.end_headers()
         else:
-            self.request.send_error(500, "INVALID CODE")
-            self.request.end_headers()
+            code = self.payload["code"]
+            new_password = self.payload["new_password"]
+
+            user_id = self.__checkCode__(code)
+
+            if user_id != -1:
+                self.__chageUserPassword__(user_id, new_password)
+
+                self.__deleteRequestToChangePassword__(user_id)
+
+                self.request.send_response(200, "OK")
+                self.request.end_headers()
+            else:
+                self.request.send_error(500, "INVALID CODE")
+                self.request.end_headers()
 
     def __checkCode__(self, code):
         db = database.Database()

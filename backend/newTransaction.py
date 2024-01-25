@@ -1,6 +1,7 @@
 import database
 import yfinance as yf
 import possibleErrors
+from payloadValidator import PayloadValidator
 
 class newTransaction:
     def __init__(self, request, payload):
@@ -8,9 +9,13 @@ class newTransaction:
         self.payload = payload
 
     def respond(self):
+        expected_payload_keys = ["asset", "quantity", "price", "date", "operation", "type"]
 
-        if checkIfPayloadIsNotEmpty(self.payload):
-
+        payload_validator = PayloadValidator()
+        
+        if not payload_validator.validate(self.payload, expected_payload_keys):
+            self.__invalid_payload__()
+        else:
             if checkStockExistance(self.payload["asset"]):
                 try:
                     self.__insertIntoDB__()
@@ -21,8 +26,6 @@ class newTransaction:
                     self.__negative_quantity_error_response__()
             else:
                 self.__stock_does_not_exist_error_response__()
-        else:
-            self.__payload_with_empty_values_error_response__()
 
     def __insertIntoDB__(self):
         user_id = int(self.request.headers["Cookie"].replace("authenticationKey=", "").split('#', 1)[0])
@@ -55,9 +58,8 @@ class newTransaction:
         self.request.send_header('Content-type', 'plain/text')
         self.request.end_headers()
 
-    def __payload_with_empty_values_error_response__(self):
-        self.request.send_error(500, "Empty values received by the server")
-        self.request.send_header('Content-type', 'plain/text')
+    def __invalid_payload__(self):
+        self.request.send_error(500, "INVALID PAYLOAD")
         self.request.end_headers()
     
     def __negative_quantity_error_response__(self):
@@ -76,9 +78,3 @@ def checkStockExistance(asset):
         return True
     except KeyError:
         return False
-
-def checkIfPayloadIsNotEmpty(payload):
-    for key in payload:
-        if payload[key] == "":
-            return False
-    return True 

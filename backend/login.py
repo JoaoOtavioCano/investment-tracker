@@ -4,7 +4,7 @@ import random
 import bcrypt
 import hashlib
 import authCookie
-
+from payloadValidator import PayloadValidator
 
 
 class Login():
@@ -14,31 +14,38 @@ class Login():
         self.payload = payload
         
     def respond(self):
+        expected_payload_keys = ["email", "password"]
 
-        user = self.__checkUserCredentials__()
-
-        if user == False:
-            self.request_handler.send_error(500, "INVALID CREDENTIALS")
+        payload_validator = PayloadValidator()
+        
+        if not payload_validator.validate(self.payload, expected_payload_keys):
+            self.request_handler.send_error(500, "INVALID PAYLOAD")
             self.request_handler.end_headers()
         else:
+            user = self.__checkUserCredentials__()
 
-            authentication_key = __createAuthenticationKey__(user["userID"])
+            if user == False:
+                self.request_handler.send_error(500, "INVALID CREDENTIALS")
+                self.request_handler.end_headers()
+            else:
 
-            user_id = authentication_key.split('#', 1)[0]
+                authentication_key = __createAuthenticationKey__(user["userID"])
 
-            self.request_handler.authenticator.authorization_list[user_id] = authentication_key
+                user_id = authentication_key.split('#', 1)[0]
 
-            cookie = authCookie.AuthCookie(authentication_key)
+                self.request_handler.authenticator.authorization_list[user_id] = authentication_key
 
-            response = {'user': user['user_name']}
+                cookie = authCookie.AuthCookie(authentication_key)
 
-            json_response = json.dumps(response)
+                response = {'user': user['user_name']}
 
-            self.request_handler.send_response(200, "OK")
-            self.request_handler.send_header('Set-Cookie', cookie.generateHTTPheaders())
-            self.request_handler.send_header('Content-type', 'application/json')
-            self.request_handler.end_headers()
-            self.request_handler.wfile.write(json_response.encode('utf-8'))
+                json_response = json.dumps(response)
+
+                self.request_handler.send_response(200, "OK")
+                self.request_handler.send_header('Set-Cookie', cookie.generateHTTPheaders())
+                self.request_handler.send_header('Content-type', 'application/json')
+                self.request_handler.end_headers()
+                self.request_handler.wfile.write(json_response.encode('utf-8'))
 
     def __checkUserCredentials__(self):
 
