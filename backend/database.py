@@ -1,4 +1,4 @@
-import mysql.connector
+import psycopg2
 import possibleErrors
 import os
 from dotenv import load_dotenv
@@ -8,11 +8,12 @@ load_dotenv()
 class Database:
 
     def __init__(self):
-        self.__db__ = mysql.connector.connect(
-            host="localhost",
+        self.__db__ = psycopg2.connect(
+            host=os.getenv('DB_HOST'),
             user=os.getenv('DB_USER'),
             password=os.getenv("DB_PASSWORD"),
-            database="testdatabase"
+            port=os.getenv("DB_PORT"),
+            dbname=os.getenv("DB_NAME"),
         )
 
         self.__mycursor__ = self.__db__.cursor()
