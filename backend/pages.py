@@ -5,29 +5,29 @@ class Pages:
                 "css": "frontend/css/login.css",
                 "javascript": "frontend/javascript/login.js"},
             "/portfolio": {
-                "html": "../frontend/html/portfolio.html",
-                "css": ["../frontend/css/portfolio.css", "../frontend/css/base.css"],
-                "javascript": ["../frontend/javascript/portfolio.js", "../frontend/javascript/authentication.js", "../frontend/javascript/userInitials.js",  "../frontend/javascript/menu.js",  "../frontend/javascript/logout.js"]},
+                "html": "frontend/html/portfolio.html",
+                "css": ["frontend/css/portfolio.css", "frontend/css/base.css"],
+                "javascript": ["frontend/javascript/portfolio.js", "frontend/javascript/authentication.js", "frontend/javascript/userInitials.js",  "frontend/javascript/menu.js",  "frontend/javascript/logout.js"]},
             "/transactions": {
-                "html": "../frontend/html/transactions.html",
-                "css": ["../frontend/css/transactions.css", "../frontend/css/base.css"],
-                "javascript": ["../frontend/javascript/transactions.js", "../frontend/javascript/authentication.js", "../frontend/javascript/userInitials.js",  "../frontend/javascript/menu.js",  "../frontend/javascript/logout.js",  "../frontend/javascript/transaction-pagination.js"]},
+                "html": "frontend/html/transactions.html",
+                "css": ["frontend/css/transactions.css", "frontend/css/base.css"],
+                "javascript": ["frontend/javascript/transactions.js", "frontend/javascript/authentication.js", "frontend/javascript/userInitials.js",  "frontend/javascript/menu.js",  "frontend/javascript/logout.js",  "frontend/javascript/transaction-pagination.js"]},
             "/new-transaction": {
-                "html": "../frontend/html/new-transaction.html",
-                "css": "../frontend/css/new-transaction.css",
-                "javascript": "../frontend/javascript/new-transaction.js"},
+                "html": "frontend/html/new-transaction.html",
+                "css": "frontend/css/new-transaction.css",
+                "javascript": "frontend/javascript/new-transaction.js"},
             "/create-account": {
-                "html": "../frontend/html/create-account.html",
-                "css": "../frontend/css/create-account.css",
-                "javascript": "../frontend/javascript/create-account.js"},
+                "html": "frontend/html/create-account.html",
+                "css": "frontend/css/create-account.css",
+                "javascript": "frontend/javascript/create-account.js"},
             "/forgot-password": {
-                "html": "../frontend/html/forgot-password.html",
-                "css": "../frontend/css/forgot-password.css",
-                "javascript": "../frontend/javascript/forgot-password.js"},
+                "html": "frontend/html/forgot-password.html",
+                "css": "frontend/css/forgot-password.css",
+                "javascript": "frontend/javascript/forgot-password.js"},
             "/new-password": {
-                "html": "../frontend/html/new-password.html",
-                "css": "../frontend/css/new-password.css",
-                "javascript": "../frontend/javascript/new-password.js"},
+                "html": "frontend/html/new-password.html",
+                "css": "frontend/css/new-password.css",
+                "javascript": "frontend/javascript/new-password.js"},
     }
 
     def listPaths(self):
