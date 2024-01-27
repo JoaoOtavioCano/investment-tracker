@@ -12,6 +12,7 @@ class Authenticator:
 
         print(user_id)
         print(self.authorization_list)
+        print(self.authorization_list[user_id] == authentication_key)
 
         try:
             if self.authorization_list[user_id] == authentication_key:
