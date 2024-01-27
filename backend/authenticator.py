@@ -6,7 +6,7 @@ class Authenticator:
         print(request.headers["Cookie"])
         print(request.headers["Cookie"][2])
 
-        authentication_key = request.headers["Cookie"][2].replace("authenticationKey=", "")
+        authentication_key = request.headers["Cookie"].split(";")[2].replace("authenticationKey=", "")
 
         user_id = authentication_key.split('#', 1)[0]
 
