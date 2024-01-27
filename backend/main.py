@@ -12,6 +12,10 @@ from logout import Logout
 from createAccount import CreateAccount
 from forgotPassword import ForgotPassword
 from newPassword import NewPassword
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class RequestsHandler(BaseHTTPRequestHandler):
 
@@ -95,7 +99,7 @@ class RequestsHandler(BaseHTTPRequestHandler):
         
 
 def run(server_class=HTTPServer, handler_class=RequestsHandler):
-    server_address = ('investment-tracker-production.up.railway.app')
+    server_address = ('0.0.0.0' os.getenv("PORT"))
     authenticator = Authenticator()
     httpd = server_class(server_address, lambda request, client_address, server: handler_class(request, client_address, server, authenticator))
     httpd.serve_forever()
