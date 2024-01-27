@@ -1,5 +1,5 @@
 import json
-#import database
+import database
 import yfinance as yf
 
 class GetAssets:
