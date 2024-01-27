@@ -24,6 +24,8 @@ class RequestsHandler(BaseHTTPRequestHandler):
         super().__init__(request, client_address, server)
 
     def do_GET(self):
+        print(self.path)
+
         pages = Pages()
         
         for path in pages.listPaths():
