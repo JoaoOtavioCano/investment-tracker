@@ -95,7 +95,7 @@ class RequestsHandler(BaseHTTPRequestHandler):
         
 
 def run(server_class=HTTPServer, handler_class=RequestsHandler):
-    server_address = ('investment-tracker-production.up.railway.app', 8000)
+    server_address = ('', 8000)
     authenticator = Authenticator()
     httpd = server_class(server_address, lambda request, client_address, server: handler_class(request, client_address, server, authenticator))
     httpd.serve_forever()
