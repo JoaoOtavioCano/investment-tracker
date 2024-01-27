@@ -99,7 +99,7 @@ class RequestsHandler(BaseHTTPRequestHandler):
         
 
 def run(server_class=HTTPServer, handler_class=RequestsHandler):
-    server_address = ('0.0.0.0', os.getenv("PORT"))
+    server_address = (os.getenv("PORT"))
     authenticator = Authenticator()
     httpd = server_class(server_address, lambda request, client_address, server: handler_class(request, client_address, server, authenticator))
     httpd.serve_forever()
