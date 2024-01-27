@@ -1,9 +1,9 @@
 class Pages:
     pages = { 
             "/login": {
-                "html": "../frontend/html/login.html",
-                "css": "../frontend/css/login.css",
-                "javascript": "../frontend/javascript/login.js"},
+                "html": "frontend/html/login.html",
+                "css": "frontend/css/login.css",
+                "javascript": "frontend/javascript/login.js"},
             "/portfolio": {
                 "html": "../frontend/html/portfolio.html",
                 "css": ["../frontend/css/portfolio.css", "../frontend/css/base.css"],
