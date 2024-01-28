@@ -14,7 +14,7 @@ function confirmEmailAddress(){
     .then((response) => {
         if (response.status == 500){
             errorUserNotFound()
-        }else if (response.status != 200){
+        }else if (response.status == 200){
             successAlert();
         }
     })

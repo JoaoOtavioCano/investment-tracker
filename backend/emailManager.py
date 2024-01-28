@@ -18,7 +18,7 @@ class EmailManager:
         msg['From'] = origin
         msg['To'] = destination_email
 
-        msg.set_content(f"Go to http://localhost:8000/new-password and use the code below.\n\n{code}")
+        msg.set_content(f"Go to https://investment-tracker.up.railway.app/new-password and use the code below.\n\n{code}")
 
         # Use an external SMTP server (e.g., Gmail)
         smtp_server = "smtp.gmail.com"

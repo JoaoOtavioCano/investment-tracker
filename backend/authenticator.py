@@ -8,7 +8,6 @@ class Authenticator:
 
         try:
             if self.authorization_list[user_id] == authentication_key:
-                print("Entrou no True")
                 return True
             else:
                 return False
