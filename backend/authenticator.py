@@ -4,15 +4,15 @@ class Authenticator:
 
     def validateAuthentication(self, request):
 
-        authentication_key = request.headers["Cookie"].split(";")[2].replace("authenticationKey=", "")
+        authentication_key = str(request.headers["Cookie"].split(";")[2].replace("authenticationKey=", ""))
 
         print(authentication_key)
 
-        user_id = authentication_key.split('#', 1)[0].strip()
+        user_id =str( authentication_key.split('#', 1)[0].strip())
 
         print(user_id)
         print(self.authorization_list)
-        print(self.authorization_list[str(user_id)])
+        print(self.authorization_list[user_id])
 
         print(self.authorization_list[user_id] == authentication_key)
 
