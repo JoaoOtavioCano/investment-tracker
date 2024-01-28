@@ -6,19 +6,10 @@ class Authenticator:
 
         authentication_key = str(request.headers["Cookie"].split(";")[2].replace("authenticationKey=", "")).strip()
 
-        print(authentication_key)
-
         user_id =str( authentication_key.split('#', 1)[0].strip())
 
-        print(user_id)
-        print(self.authorization_list)
-        print(self.authorization_list[user_id])
-
-        print(str(self.authorization_list[user_id]) == authentication_key)
-
         try:
-            print("entrou no try")
-            if str(self.authorization_list[user_id]) == authentication_key:
+            if self.authorization_list[user_id] == authentication_key:
                 print("Entrou no True")
                 return True
             else:

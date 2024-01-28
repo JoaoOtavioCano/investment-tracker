@@ -5,7 +5,7 @@ class Logout:
         self.authenticator = request.authenticator
 
     def respond(self):
-        user_id = self.request.headers["Cookie"].replace("authenticationKey=", "").split('#', 1)[0]
+        user_id = str(self.request_handler.headers["Cookie"].split(";")[2].replace("authenticationKey=", "")).strip().split('#', 1)[0].strip()
 
         self.authenticator.authorization_list.pop(user_id)
 

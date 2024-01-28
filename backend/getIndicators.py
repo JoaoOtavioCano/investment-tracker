@@ -24,7 +24,7 @@ class GetIndicators():
         net_worth = 0
         price = 0
 
-        user_id = int(self.request_handler.headers["Cookie"].replace("authenticationKey=", "").split('#', 1)[0])
+        user_id = int( str(self.request_handler.headers["Cookie"].split(";")[2].replace("authenticationKey=", "")).strip().split('#', 1)[0].strip())
 
         assets = db.getIndicators(user_id)
 
