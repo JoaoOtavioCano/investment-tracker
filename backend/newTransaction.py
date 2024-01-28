@@ -29,6 +29,7 @@ class newTransaction:
 
     def __insertIntoDB__(self):
         user_id = int( str(self.request_handler.headers["Cookie"].split(";")[2].replace("authenticationKey=", "")).strip().split('#', 1)[0].strip())
+        
 
         transaction = self.payload
 
