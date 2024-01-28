@@ -4,9 +4,7 @@ class Authenticator:
 
     def validateAuthentication(self, request):
 
-        authentication_key = str(request.headers["Cookie"].split(";")[2].replace("authenticationKey=", "")).strip()
-
-        user_id =str( authentication_key.split('#', 1)[0].strip())
+        user_id, authentication_key = self.getUserIdAndAuthKeyFromCookies(request)
 
         try:
             if self.authorization_list[user_id] == authentication_key:
@@ -16,3 +14,12 @@ class Authenticator:
                 return False
         except KeyError:
             return False 
+        
+    def getUserIdAndAuthKeyFromCookies(self, request):
+        cookies = request.headers["Cookie"].split(";")
+
+        authentication_key = str([cookie for cookie in cookies if "authenticationKey=" in cookie][0]).replace("authenticationKey=", "").strip()
+
+        user_id =str( authentication_key.split('#', 1)[0].strip())
+
+        return user_id, authentication_key

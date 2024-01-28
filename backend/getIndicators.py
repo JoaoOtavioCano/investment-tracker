@@ -24,9 +24,9 @@ class GetIndicators():
         net_worth = 0
         price = 0
 
-        user_id = int( str(self.request_handler.headers["Cookie"].split(";")[2].replace("authenticationKey=", "")).strip().split('#', 1)[0].strip())
+        user_id, _ = self.request_handler.authenticator.getUserIdAndAuthKeyFromCookies(self.request_handler)
 
-        assets = db.getIndicators(user_id)
+        assets = db.getIndicators(int(user_id))
 
         for asset in assets:
 

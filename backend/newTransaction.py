@@ -28,7 +28,7 @@ class newTransaction:
                 self.__stock_does_not_exist_error_response__()
 
     def __insertIntoDB__(self):
-        user_id = int( str(self.request_handler.headers["Cookie"].split(";")[2].replace("authenticationKey=", "")).strip().split('#', 1)[0].strip())
+        user_id, _ = self.request.authenticator.getUserIdAndAuthKeyFromCookies(self.request)
         
 
         transaction = self.payload
@@ -36,7 +36,7 @@ class newTransaction:
         db = database.Database()
 
         try:
-            db.addNewTransaction(user_id, 
+            db.addNewTransaction(int(user_id), 
                                 asset=transaction["asset"], 
                                 quantity=transaction["quantity"],
                                 price=transaction["price"],

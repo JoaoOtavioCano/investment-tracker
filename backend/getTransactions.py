@@ -21,9 +21,9 @@ class GetTransactions:
     def __getDataFromDB__(self, frame):
         db = database.Database()
 
-        user_id = int( str(self.request_handler.headers["Cookie"].split(";")[2].replace("authenticationKey=", "")).strip().split('#', 1)[0].strip())
+        user_id, _ = self.request_handler.authenticator.getUserIdAndAuthKeyFromCookies(self.request_handler)
 
-        transactions = db.getTransactions(user_id, frame)
+        transactions = db.getTransactions(int(user_id), frame)
 
         data = []
 
