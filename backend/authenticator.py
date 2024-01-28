@@ -14,7 +14,10 @@ class Authenticator:
         print(self.authorization_list)
         print(self.authorization_list[str(user_id)])
 
+        print(self.authorization_list[user_id] == authentication_key)
+
         try:
+            print("entrou no try")
             if self.authorization_list[user_id] == authentication_key:
                 print("Entrou no True")
                 return True
