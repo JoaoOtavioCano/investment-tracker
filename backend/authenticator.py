@@ -4,7 +4,7 @@ class Authenticator:
 
     def validateAuthentication(self, request):
 
-        authentication_key = str(request.headers["Cookie"].split(";")[2].replace("authenticationKey=", ""))
+        authentication_key = str(request.headers["Cookie"].split(";")[2].replace("authenticationKey=", "")).strip()
 
         print(authentication_key)
 
