@@ -89,9 +89,9 @@ class Database:
                 new_avg_price = ((stock_quantity * stock_avg_price) + (float(quantity) * float(price))) / new_quantity
 
                 sql_querry_update_stocks_table = ("UPDATE Stocks SET "
-                                                f"`quantity` = {new_quantity}, "
-                                                f"`cost` = {new_avg_price} "
-                                                f"WHERE (`userID` = {user}) and (`name` = '{asset}');")
+                                                f"quantity = {new_quantity}, "
+                                                f"cost = {new_avg_price} "
+                                                f"WHERE (userID = {user}) and (name = '{asset}');")
                 
                 self.__mycursor__.execute(sql_querry_update_stocks_table)
 
@@ -113,9 +113,9 @@ class Database:
 
                 else:
                     sql_querry_update_stocks_table = ("UPDATE Stocks SET "
-                                                f"`quantity` = {new_quantity} "
-                                                f"WHERE (`userID` = {user}) AND "
-                                                f"(`name` = '{asset}');")      
+                                                f"quantity = {new_quantity} "
+                                                f"WHERE (userID = {user}) AND "
+                                                f"(name = '{asset}');")      
                     
                     self.__mycursor__.execute(sql_querry_update_stocks_table)          
 
