@@ -8,14 +8,14 @@ class Authenticator:
 
         print(authentication_key)
 
-        user_id = authentication_key.split('#', 1)[0]
+        user_id = authentication_key.split('#', 1)[0].strip()
 
         print(user_id)
         print(self.authorization_list)
         print(self.authorization_list[str(user_id)])
 
         try:
-            if self.authorization_list[str(user_id)] == authentication_key:
+            if self.authorization_list[user_id] == authentication_key:
                 return True
             else:
                 return False
