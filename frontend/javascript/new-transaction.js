@@ -154,6 +154,8 @@ function postTransaction(){
     .then((response) => {
         if (response.status == 200){
             transactionCreatedAlert();
+        }else if (response.status == 500){
+            requestErrorAlert(response.statusText);
         }
     })
 }
@@ -176,6 +178,16 @@ function newTransaction(){
 
 function transactionCreatedAlert(){
     const alert = document.getElementById("new-transaction-created-alert");
+
+    alert.style.display = "flex";
+
+    setTimeout(() => { alert.style.display = "none"; }, 3000);
+}
+
+function requestErrorAlert(message){
+    const alert = document.getElementById("request-error-alert");
+
+    alert.children[0].innerText = message;
 
     alert.style.display = "flex";
 
