@@ -75,7 +75,9 @@ class newTransaction:
         
 def checkStockExistance(asset):
     try:
-        yf.Ticker(asset).fast_info["lastPrice"]
-        return True
+        if yf.Ticker(asset).fast_info["lastPrice"] != None:
+            return True
+        else:
+            return False
     except KeyError:
-        return False
+        return False, 0
