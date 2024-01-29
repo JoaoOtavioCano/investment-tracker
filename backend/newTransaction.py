@@ -80,4 +80,4 @@ def checkStockExistance(asset):
         else:
             return False
     except KeyError:
-        return False, 0
+        return False
