@@ -16,6 +16,7 @@ class newTransaction:
         if not payload_validator.validate(self.payload, expected_payload_keys):
             self.__invalid_payload__()
         else:
+            self.payload["asset"] = self.payload["asset"].upper()
             if checkStockExistance(self.payload["asset"]):
                 try:
                     self.__insertIntoDB__()
