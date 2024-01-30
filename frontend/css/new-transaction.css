@@ -177,3 +177,7 @@ hr{
     padding-left: 1rem;
     padding-right: 1rem;
 }
+
+#asset{
+    text-transform: uppercase;
+}
