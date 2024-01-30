@@ -36,7 +36,7 @@ class Database:
     def getTransactions(self, user, frame):
         sql_querry = ("SELECT date_time, asset, quantity, cost, operation FROM Transactions "
                       f"WHERE Transactions.userID = {user} "
-                      "ORDER BY date_time DESC "
+                      "ORDER BY date_time DESC, id DESC "
                       f"LIMIT 20 OFFSET {int(frame) * 20}")
         
         self.__mycursor__.execute(sql_querry)
