@@ -11,7 +11,6 @@ class AuthCookie():
 
         self.cookie["authenticationKey"]["httponly"] = True 
         self.cookie["authenticationKey"]["samesite"] = 'Lax' 
-        self.cookie["authenticationKey"]["max-age"] =  2 * hours
     
     def generateHTTPheaders(self):
         return str(self.cookie).replace("Set-Cookie: ", "")
