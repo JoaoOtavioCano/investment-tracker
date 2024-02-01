@@ -1,5 +1,5 @@
 export function checkAuthenticationKeyExists(response){
-   if (reponse.status === 500){
+   if (response.status === 500){
       response.text().then((text) => {
          if(text == 'User not authenticated'){
             let redirectPath = '/login';
