@@ -93,7 +93,7 @@ class RequestsHandler(BaseHTTPRequestHandler):
                 
         else:
             self.send_error(500, "User not authenticated")
-            self.send_header('Location', '/login')
+            self.send_header('Location', 'https://investment-tracker.up.railway.app//login')
             self.end_headers()
 
         
