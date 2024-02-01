@@ -9,6 +9,6 @@ class Logout:
 
         self.authenticator.authorization_list.pop(str(user_id))
 
-        self.send_response(301, "OK")
-        self.send_header('Location', 'https://investment-tracker.up.railway.app/login')
-        self.end_headers()
+        self.request.send_response(301, "OK")
+        self.request.send_header('Location', 'https://investment-tracker.up.railway.app/login')
+        self.request.end_headers()
