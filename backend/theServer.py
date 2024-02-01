@@ -50,8 +50,13 @@ class RequestsHandler(BaseHTTPRequestHandler):
                 request_handler = GetTransactions(self)
                 request_handler.respond()
         else:
-            self.send_error(500, "User not authenticated")
-            self.send_header('Location', '/login')
+            self.send_response(500, "User not authenticated")
+            self.send_header('Content-type', 'text/plain')  # Set the content type
+            self.end_headers()
+            self.wfile.write(b'User not authenticated')
+
+            self.send_response(301, "User not authenticated")
+            self.send_header('Location', 'https://investment-tracker.up.railway.app//login')
             self.end_headers()
 
     def do_POST(self):
@@ -94,11 +99,13 @@ class RequestsHandler(BaseHTTPRequestHandler):
         else:
             self.send_response(500, "User not authenticated")
             self.send_header('Content-type', 'text/plain')  # Set the content type
-            self.send_header('Location', 'https://investment-tracker.up.railway.app//login')
             self.end_headers()
             self.wfile.write(b'User not authenticated')
 
-        
+            self.send_response(301, "User not authenticated")
+            self.send_header('Location', 'https://investment-tracker.up.railway.app//login')
+            self.end_headers()
+
 
         
 
