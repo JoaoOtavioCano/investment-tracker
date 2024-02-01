@@ -155,8 +155,9 @@ function postTransaction(){
         if (response.status == 200){
             transactionCreatedAlert();
         }else if (response.status == 500){
-            console.log(response.text());
-            requestErrorAlert(response.text());
+            response.text().then((text) => {
+                requestErrorAlert(text);
+            })
         }
     })
 }
