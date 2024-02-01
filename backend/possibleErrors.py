@@ -3,3 +3,6 @@ class AssetNotInPortfolio(Exception):
 
 class NegativeQuantity(Exception):
     pass
+
+class AuthCookieNotFound(Exception):
+    pass
