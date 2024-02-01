@@ -92,9 +92,11 @@ class RequestsHandler(BaseHTTPRequestHandler):
                 request_handler.respond()
                 
         else:
-            self.send_error(500, "User not authenticated")
+            self.send_response(500, "User not authenticated")
+            self.send_header('Content-type', 'text/plain')  # Set the content type
             self.send_header('Location', 'https://investment-tracker.up.railway.app//login')
             self.end_headers()
+            self.wfile.write(b'User not authenticated')
 
         
 
