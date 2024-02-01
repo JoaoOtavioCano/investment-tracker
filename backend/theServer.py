@@ -50,7 +50,7 @@ class RequestsHandler(BaseHTTPRequestHandler):
                 request_handler = GetTransactions(self)
                 request_handler.respond()
         else:
-            self.send_response(301, "User not authenticated")
+            self.send_response(302, "User not authenticated")
             self.send_header('Location', 'https://investment-tracker.up.railway.app/login')
             self.end_headers()
 
@@ -93,7 +93,7 @@ class RequestsHandler(BaseHTTPRequestHandler):
                 request_handler.respond()
                 
         else:
-            self.send_response(301, "User not authenticated")
+            self.send_response(302, "User not authenticated")
             self.send_header('Location', 'https://investment-tracker.up.railway.app/login')
             self.end_headers()
 
