@@ -51,6 +51,7 @@ class RequestsHandler(BaseHTTPRequestHandler):
                 request_handler.respond()
         else:
             self.send_error(500, "User not authenticated")
+            self.send_header('Content-type', 'plain/text')
             self.end_headers()
 
     def do_POST(self):
@@ -92,6 +93,7 @@ class RequestsHandler(BaseHTTPRequestHandler):
                 
         else:
             self.send_error(500, "User not authenticated")
+            self.send_header('Content-type', 'plain/text')
             self.end_headers()
 
         
