@@ -4,7 +4,7 @@ import { setUserInitials } from './userInitials.js';
 function getAssets(){
     fetch('/assets', { method: 'GET'})
         .then((response) => {
-            console.log("getAssets" + response);
+            console.log(response);
             checkAuthenticationKeyExists(response);
 
             return response.json()
