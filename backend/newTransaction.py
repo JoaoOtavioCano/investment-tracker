@@ -56,25 +56,25 @@ class newTransaction:
         self.request.end_headers()
         
     def __stock_does_not_exist_error_response__(self):
-        self.request.send_error(500, "Stock doesn't exist")
+        self.request.send_response(500, "Stock doesn't exist")
         self.request.send_header('Content-type', 'text/plain')  
         self.request.end_headers()
         self.request.wfile.write(b"Stock doesn't exist")
 
     def __invalid_payload__(self):
-        self.request.send_error(500, "INVALID PAYLOAD")
+        self.request.send_response(500, "INVALID PAYLOAD")
         self.request.send_header('Content-type', 'text/plain')
         self.request.end_headers()
         self.request.wfile.write(b"Invalid payload")
     
     def __negative_quantity_error_response__(self):
-        self.request.send_error(500, "Impossible sell more than it is possessed")
+        self.request.send_response(500, "Impossible sell more than it is possessed")
         self.request.send_header('Content-type', 'text/plain')
         self.request.end_headers()
         self.request.wfile.write(b"Impossible sell more than it is possessed")
         
     def __asset_not_in_portfolio_error_response__(self):
-        self.request.send_error(500, "Asset doesn't exist in the portfolio")
+        self.request.send_response(500, "Asset doesn't exist in the portfolio")
         self.request.send_header('Content-type', 'text/plain')
         self.request.end_headers()
         self.request.wfile.write(b"Asset doesn't exist in the portfolio")
