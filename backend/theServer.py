@@ -26,13 +26,23 @@ class RequestsHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         pages = Pages()
         
+        if self.path == "/":
+            with open("frontend/html/index.html", 'rb') as html_file:
+                        html_content = html_file.read()
+            self.send_response(200, "OK")
+            self.send_header('Content-type', 'text/html')
+            self.end_headers()
+                    
+            self.wfile.write(html_content) 
+            return True
+        
         for path in pages.listPaths():
             if self.path in path:
                 page_request_handler = DefaultPageRequestHandler(self)
                 page_request_handler.respond()
                 return True
         
-        if self.path == "/images/favicon.png":
+        if self.path in ["/images/favicon.png", "/favicon.ico"]:
             request_handler = Favicon(self)
             request_handler.respond()
             return True
