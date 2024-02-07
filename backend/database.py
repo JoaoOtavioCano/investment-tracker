@@ -202,3 +202,11 @@ class Database:
         self.__mycursor__.execute(sql)
 
         self.__db__.commit()
+    
+    def deleteUser(self, user):
+        sql = ("DELETE FROM Users "
+            f"WHERE userID = {user}")
+        
+        self.__mycursor__.execute(sql)
+
+        self.__db__.commit()

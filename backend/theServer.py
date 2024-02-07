@@ -12,6 +12,7 @@ from logout import Logout
 from createAccount import CreateAccount
 from forgotPassword import ForgotPassword
 from newPassword import NewPassword
+from deleteAccount import DeleteAccount
 import os
 from dotenv import load_dotenv
 
@@ -101,6 +102,10 @@ class RequestsHandler(BaseHTTPRequestHandler):
 
             elif self.path == "/logout":
                 request_handler = Logout(self)
+                request_handler.respond()
+            
+            elif self.path == "/deleteaccount":
+                request_handler = DeleteAccount(self)
                 request_handler.respond()
                 
         else:
