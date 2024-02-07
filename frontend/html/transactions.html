@@ -18,13 +18,19 @@
                     <p id="user-initials">Jo</p>
                     <span id="menu-span">menu</span>
                 </div>
-                <ul id="menu">
-                    <li><button onclick="logOut()">Log out</button></li>
-                </ul>
             </li>
         </ul>
     </header>
+    <ul id="menu">
+        <li><button onclick="logOut()">Log out</button></li>
+        <li><button onclick="areUSureModal()">Delete account</button></li>
+    </ul>
     <div id="overlay" class="overlay"></div>
+    <div id="delete-account-modal">
+        <h2>Do you relly want to delete your account?</h2>
+        <button id="delete-confirm" onclick="confirmDeletion()">confirm</button>
+        <button id="delete-cancel" onclick="cancelDeletion()">cancel</button>
+    </div>
     <div id="new-transaction">
         <h1 id="title">New transaction</h1>
         <button id="close-button" onclick="closeModal()"></button>
@@ -112,4 +118,5 @@
 <script type="module" src="../javascript/userInitials.js"></script>
 <script src="../javascript/menu.js"></script>
 <script src="../javascript/logout.js"></script>
+<script src="../javascript/delete-account.js"></script>
 <script type="module" src="../javascript/transaction-pagination.js"></script>
