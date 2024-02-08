@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/transactions.css">
     <link rel="stylesheet" href="../css/new-transaction.css">
     <link rel="icon" type="image/x-png" href="../images/favicon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
     <header>
@@ -106,6 +107,22 @@
         <div id="transactions-table-grid">
             <div></div>
             <table id="transactions-table">
+                <tr onmouseenter="showImage(this)" onmouseleave="removeImage(this)">
+                    <td class="date">07/02/2024</td>
+                    <td class="asset">MNST</td>
+                    <td class="operation">buy</td>
+                    <td class="quantity">11</td>
+                    <td class="price">$55.00</td>
+                    <td class="transaction-total">$605.00</td>               
+                </tr>
+                <tr onmouseenter="showImage(this)" onmouseleave="removeImage(this)">
+                    <td class="date">08/02/2024</td>
+                    <td class="asset">AMZN</td>
+                    <td class="operation">buy</td>
+                    <td class="quantity">7</td>
+                    <td class="price">$120.00</td>
+                    <td class="transaction-total">$840.00</td>               
+                </tr>
             </table>
             <div></div>
         </div>
@@ -119,4 +136,5 @@
 <script src="../javascript/menu.js"></script>
 <script src="../javascript/logout.js"></script>
 <script src="../javascript/delete-account.js"></script>
+<script src="../javascript/delete-transaction.js"></script>
 <script type="module" src="../javascript/transaction-pagination.js"></script>
