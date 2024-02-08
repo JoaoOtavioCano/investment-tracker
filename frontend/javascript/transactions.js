@@ -59,7 +59,7 @@ function addRow(transaction){
     td_operation.className = "operation";
     td_quantity.className = "quantity";
     td_price.className = "price";
-    td_total.className = "total";
+    td_total.className = "transaction-total";
     
     td_date.appendChild(date);
     td_asset.appendChild(asset);
