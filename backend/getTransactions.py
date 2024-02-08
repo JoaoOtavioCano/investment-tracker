@@ -35,6 +35,7 @@ class GetTransactions:
             price = transaction[3]
             operation = transaction[4]
             total = calculateTotal(quantity, price)
+            id = transaction[5]
 
             price = "${:.2f}".format(price)
             total = "${:.2f}".format(total)
@@ -45,7 +46,8 @@ class GetTransactions:
             "operation": operation,
             "quantity": quantity,
             "price": price,
-            "total": total
+            "total": total,
+            "id": id,
             }
             
             data.append(transaction_json)

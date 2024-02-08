@@ -35,6 +35,7 @@ function addRow(transaction){
     let quantity;
     let price;
     let total;
+    const id = transaction["id"];
 
     let td_date = document.createElement("td");
     let td_asset = document.createElement("td");
@@ -54,6 +55,7 @@ function addRow(transaction){
     price = document.createTextNode(transaction["price"]);
     total = document.createTextNode(transaction["total"]);
 
+    tr.className = `id${id}`;
     td_date.className = "date";
     td_asset.className = "asset";
     td_operation.className = "operation";
@@ -74,6 +76,9 @@ function addRow(transaction){
     tr.appendChild(td_quantity);
     tr.appendChild(td_price);
     tr.appendChild(td_total);
+
+    tr.onmouseenter = () => {showImage(tr);};
+    tr.onmouseleave = () => {removeImage(tr);};
 
     table.appendChild(tr);
 }
