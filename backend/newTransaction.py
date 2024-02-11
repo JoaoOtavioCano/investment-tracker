@@ -15,7 +15,7 @@ class newTransaction:
 
         if float(self.payload["price"]) < 0 or float(self.payload["quantity"]) <= 0:
             self.__quantity_or_price_negative_value_error()
-        elif if not payload_validator.validate(self.payload, expected_payload_keys):
+        elif not payload_validator.validate(self.payload, expected_payload_keys):
             self.__invalid_payload__()
         else:
             self.payload["asset"] = self.payload["asset"].upper()
