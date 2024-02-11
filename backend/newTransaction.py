@@ -12,8 +12,10 @@ class newTransaction:
         expected_payload_keys = ["asset", "quantity", "price", "date", "operation", "type"]
 
         payload_validator = PayloadValidator()
-        
-        if not payload_validator.validate(self.payload, expected_payload_keys):
+
+        if float(self.payload["price"]) < 0 or float(self.payload["quantity"]) <= 0:
+            self.__quantity_or_price_negative_value_error()
+        elif not payload_validator.validate(self.payload, expected_payload_keys):
             self.__invalid_payload__()
         else:
             self.payload["asset"] = self.payload["asset"].upper()
@@ -78,6 +80,12 @@ class newTransaction:
         self.request.send_header('Content-type', 'text/plain')
         self.request.end_headers()
         self.request.wfile.write(b"Asset doesn't exist in the portfolio")
+    
+    def __quantity_or_price_negative_value_error(self):
+        self.request.send_response(500, "Quantity and price must be positive!")
+        self.request.send_header('Content-type', 'text/plain')
+        self.request.end_headers()
+        self.request.wfile.write(b"Quantity and price must be positive!")
         
 def checkStockExistance(asset):
     try:

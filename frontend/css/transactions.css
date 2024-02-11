@@ -35,6 +35,10 @@
     height: 32rem;
 }
 
+#transactions-table-grid tr td{
+    height: 1.6rem;
+}
+
 .date{
     width: 10rem;
 }
@@ -55,3 +59,46 @@
     width: 8rem;
 }
 
+.transaction-total {
+    border-right: none
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 600,
+    'GRAD' 0,
+    'opsz' 20;
+    color: red;
+    padding: 0%;
+    margin: 0%;
+    cursor: pointer;
+}
+
+.delete-transaction{
+    width: 0rem;
+    justify-content: center;
+    align-items: center;
+    border-left: none
+}
+
+#table-headers tr th{
+    height: 1.7rem;
+}
+
+#table-headers tr:hover{
+    > :last-child{
+        border-radius: 0rem 0.6rem 0.6rem 0rem;
+    }
+    > :first-child{
+        border-radius: 0.6rem 0rem 0rem 0.6rem;
+    }
+}
+
+#table-headers{
+    border-radius: 0.6rem;
+}
+
+#table-headers:hover{
+    background-color: #00FD8F;
+}

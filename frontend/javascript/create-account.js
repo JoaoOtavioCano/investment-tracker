@@ -18,6 +18,11 @@ function createAccount(){
     .then((response) => {
         if (response.status == 200){
             accountCreatedAlert();
+            setTimeout(() => { 
+                const redirectPath = "/login";
+
+                window.location.href = redirectPath; 
+            }, 2000);
         }
     })
 }

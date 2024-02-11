@@ -35,6 +35,7 @@ function addRow(transaction){
     let quantity;
     let price;
     let total;
+    const id = transaction["id"];
 
     let td_date = document.createElement("td");
     let td_asset = document.createElement("td");
@@ -42,6 +43,7 @@ function addRow(transaction){
     let td_quantity = document.createElement("td");
     let td_price = document.createElement("td");
     let td_total = document.createElement("td");
+    let td_extra = document.createElement("td");
 
     let tr = document.createElement("tr");
 
@@ -54,12 +56,14 @@ function addRow(transaction){
     price = document.createTextNode(transaction["price"]);
     total = document.createTextNode(transaction["total"]);
 
+    tr.className = `id${id}`;
     td_date.className = "date";
     td_asset.className = "asset";
     td_operation.className = "operation";
     td_quantity.className = "quantity";
     td_price.className = "price";
-    td_total.className = "total";
+    td_total.className = "transaction-total";
+    td_extra.className = "delete-transaction";
     
     td_date.appendChild(date);
     td_asset.appendChild(asset);
@@ -74,6 +78,10 @@ function addRow(transaction){
     tr.appendChild(td_quantity);
     tr.appendChild(td_price);
     tr.appendChild(td_total);
+    tr.appendChild(td_extra);
+
+    tr.onmouseenter = () => {showImage(tr);};
+    tr.onmouseleave = () => {removeImage(tr);};
 
     table.appendChild(tr);
 }

@@ -18,6 +18,11 @@ function confirmNewPassword(){
             errorInvalidCode();
         }else if (response.status == 200){
             successAlert();
+            setTimeout(() => { 
+                const redirectPath = "/login";
+
+                window.location.href = redirectPath; 
+            }, 2000);
         }
     })
 }

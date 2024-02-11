@@ -34,7 +34,7 @@ class Database:
         return assets_list
 
     def getTransactions(self, user, frame):
-        sql_querry = ("SELECT date_time, asset, quantity, cost, operation FROM Transactions "
+        sql_querry = ("SELECT date_time, asset, quantity, cost, operation, id FROM Transactions "
                       f"WHERE Transactions.userID = {user} "
                       "ORDER BY date_time DESC, id DESC "
                       f"LIMIT 20 OFFSET {int(frame) * 20}")
@@ -65,10 +65,8 @@ class Database:
         return user
     
     def addNewTransaction(self, user, asset, quantity, price, date, operation, type):
-        sql_querry_insert_into_transactions_table = ("INSERT INTO Transactions(userID, date_time, asset, quantity, cost, operation) "
-                      f"VALUES ({user}, '{date}', '{asset}', {quantity}, {price}, '{operation}');")
-        
-        self.__mycursor__.execute(sql_querry_insert_into_transactions_table)
+
+        stock_avg_price = -1
 
         if operation == "buy":
             if not self.__userHasThisStock__(user, asset):
@@ -121,6 +119,11 @@ class Database:
 
             else:
                 raise possibleErrors.AssetNotInPortfolio
+            
+        sql_querry_insert_into_transactions_table = ("INSERT INTO Transactions(userID, date_time, asset, quantity, cost, operation, current_avg_cost, type) "
+                                                        f"VALUES ({user}, '{date}', '{asset}', {quantity}, {price}, '{operation}', {stock_avg_price}, '{type}');")
+        
+        self.__mycursor__.execute(sql_querry_insert_into_transactions_table)
         
 
         self.__db__.commit()
@@ -200,5 +203,79 @@ class Database:
                f"WHERE userID = {user}")
         
         self.__mycursor__.execute(sql)
+
+        self.__db__.commit()
+    
+    def deleteUser(self, user):
+        sql = ("DELETE FROM Users "
+            f"WHERE userID = {user}")
+        
+        self.__mycursor__.execute(sql)
+
+        self.__db__.commit()
+
+    def delete_transaction(self, transaction_id):
+        sql_get_transaction_data = ("SELECT userid, asset, quantity, cost, operation, current_avg_cost, type FROM Transactions "
+                                    f"WHERE id = {transaction_id}")
+        
+        self.__mycursor__.execute(sql_get_transaction_data)
+
+        for result in self.__mycursor__:
+            user_id = result[0]
+            transaction_asset = result[1]
+            transaction_quantity = result[2]
+            transaction_cost = result[3]
+            transaction_operation = result[4]
+            transaction_prior_avg_cost = result[5]
+            transaction_asste_type = result[6]
+
+        if self.__userHasThisStock__(user_id, transaction_asset):
+
+            current_asset_quantity, current_asset_cost = self.__getConsolidatedStockData__(user_id, transaction_asset)
+
+            if transaction_operation == "buy":
+                new_quantity =  current_asset_quantity - float(transaction_quantity)
+                
+                if new_quantity == 0 :
+                    sql_querry_delete_asset = ("DELETE FROM Assets "
+                                            f"WHERE userID = {user_id} AND "
+                                            f"name = '{transaction_asset}'")
+                            
+                    self.__mycursor__.execute(sql_querry_delete_asset)
+                else:
+                    sql_querry_update_stocks_table = ("UPDATE Stocks SET "
+                                                    f"quantity = {new_quantity}, "
+                                                    f"cost = {transaction_prior_avg_cost} "
+                                                    f"WHERE (userID = {user_id}) AND "
+                                                    f"(name = '{transaction_asset}');")      
+                            
+                    self.__mycursor__.execute(sql_querry_update_stocks_table)
+            else:
+                new_quantity = current_asset_quantity + transaction_quantity
+
+                sql_querry_update_stocks_table = ("UPDATE Stocks SET "
+                                                    f"quantity = {new_quantity}, "
+                                                    f"cost = {transaction_prior_avg_cost} "
+                                                    f"WHERE (userID = {user_id}) AND "
+                                                    f"(name = '{transaction_asset}');")      
+                            
+                self.__mycursor__.execute(sql_querry_update_stocks_table)
+        else:
+            new_quantity = transaction_quantity
+
+            sql_querry_insert_into_assets_table = ("INSERT INTO Assets(userID, name, type) "
+                                                  f"VALUES ({user_id}, '{transaction_asset}', '{transaction_asste_type}')")
+            
+            sql_querry_insert_into_stocks_table = ("INSERT INTO Stocks(userID, name, quantity, cost) "
+                                                  f"VALUES ({user_id}, '{transaction_asset}', {new_quantity}, {transaction_prior_avg_cost})")
+            
+            self.__mycursor__.execute(sql_querry_insert_into_assets_table)
+            self.__mycursor__.execute(sql_querry_insert_into_stocks_table)
+
+
+        sql_delete_transaction = ("DELETE FROM Transactions "
+                                 f"WHERE id = {transaction_id}")
+        
+        self.__mycursor__.execute(sql_delete_transaction)
 
         self.__db__.commit()

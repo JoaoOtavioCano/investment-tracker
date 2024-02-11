@@ -12,6 +12,8 @@ from logout import Logout
 from createAccount import CreateAccount
 from forgotPassword import ForgotPassword
 from newPassword import NewPassword
+from deleteAccount import DeleteAccount
+from deleteTransaction import DeleteTransaction
 import os
 from dotenv import load_dotenv
 
@@ -26,13 +28,23 @@ class RequestsHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         pages = Pages()
         
+        if self.path == "/":
+            with open("frontend/html/index.html", 'rb') as html_file:
+                        html_content = html_file.read()
+            self.send_response(200, "OK")
+            self.send_header('Content-type', 'text/html')
+            self.end_headers()
+                    
+            self.wfile.write(html_content) 
+            return True
+        
         for path in pages.listPaths():
             if self.path in path:
                 page_request_handler = DefaultPageRequestHandler(self)
                 page_request_handler.respond()
                 return True
         
-        if self.path == "/images/favicon.png":
+        if self.path in ["/images/favicon.png", "/favicon.ico"]:
             request_handler = Favicon(self)
             request_handler.respond()
             return True
@@ -91,6 +103,15 @@ class RequestsHandler(BaseHTTPRequestHandler):
 
             elif self.path == "/logout":
                 request_handler = Logout(self)
+                request_handler.respond()
+           
+            elif self.path == "/deletetransaction":
+                payload_data = formatPayload(self)
+                request_handler = DeleteTransaction(self, payload_data)
+                request_handler.respond()
+            
+            elif self.path == "/deleteaccount":
+                request_handler = DeleteAccount(self)
                 request_handler.respond()
                 
         else:
