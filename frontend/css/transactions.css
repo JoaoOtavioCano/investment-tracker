@@ -81,3 +81,20 @@
     align-items: center;
     border-left: none
 }
+
+#table-headers tr th{
+    height: 1.7rem;
+}
+
+#table-headers tr:hover{
+    > :last-child{
+        border-radius: 0rem 0.6rem 0.6rem 0rem;
+    }
+    > :first-child{
+        border-radius: 0.6rem 0rem 0rem 0.6rem;
+    }
+}
+
+#table-headers{
+    border-radius: 0.6rem;
+}
