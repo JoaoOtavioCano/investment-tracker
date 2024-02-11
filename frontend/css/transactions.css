@@ -35,6 +35,10 @@
     height: 32rem;
 }
 
+#transactions-table-grid tr td{
+    height: 1.6rem;
+}
+
 .date{
     width: 10rem;
 }
@@ -71,8 +75,8 @@
     cursor: pointer;
 }
 
-#delete-transaction{
-    width: 1rem;
+.delete-transaction{
+    width: 0rem;
     justify-content: center;
     align-items: center;
     border-left: none

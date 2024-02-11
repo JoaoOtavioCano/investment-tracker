@@ -153,7 +153,7 @@ function postTransaction(){
     })
     .then((response) => {
         if (response.status == 200){
-            transactionCreatedAlert();
+            location.reload();
         }else if (response.status == 500){
             response.text().then((text) => {
                 requestErrorAlert(text);

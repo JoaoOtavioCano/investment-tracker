@@ -1,7 +1,6 @@
 function showImage(row){
     // Create a new <td> element
-    let newTd = document.createElement('td');
-    newTd.id = 'delete-transaction';
+    let extraTd = row.lastElementChild;
     
     // Create a <span> element for the icon
     let span = document.createElement('span');
@@ -14,18 +13,17 @@ function showImage(row){
         }
     
     // Append the <span> to the <td>
-    newTd.appendChild(span);
-    
-    // Append the new <td> to the row
-    row.appendChild(newTd);
+    extraTd.appendChild(span);
 }
 
 function removeImage(row) {
     // Get the last child of the row, which is the <td> with the icon
     let lastChild = row.lastElementChild;
+
+    let lastChildSpan = lastChild.lastElementChild;
     
     // Remove the last child from the row
-    row.removeChild(lastChild);
+    lastChild.removeChild(lastChildSpan);
 }
 
 function deleteTransaction(transactionId){
