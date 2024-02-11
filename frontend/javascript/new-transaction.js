@@ -36,9 +36,15 @@ function validateFormInputs(){
     if (price == ""){
         errorMessage("price", "Must be field!");
         errorOccurred = true;
-    } 
+    } else if (parseFloat(price) < 0){
+        errorMessage("price", "Must be positive!");
+        errorOccurred = true;
+    }
     if (quantity == ""){
         errorMessage("quantity", "Must be field!");
+        errorOccurred = true;
+    } else if (parseFloat(quantity) <= 0){
+        errorMessage("quantity", "Must be grater than 0!");
         errorOccurred = true;
     }
 
@@ -153,7 +159,8 @@ function postTransaction(){
     })
     .then((response) => {
         if (response.status == 200){
-            location.reload();
+            transactionCreatedAlert();
+            setTimeout(() => { location.reload(); }, 2000);
         }else if (response.status == 500){
             response.text().then((text) => {
                 requestErrorAlert(text);
@@ -183,7 +190,7 @@ function transactionCreatedAlert(){
 
     alert.style.display = "flex";
 
-    setTimeout(() => { alert.style.display = "none"; }, 3000);
+    setTimeout(() => { alert.style.display = "none"; }, 2000);
 }
 
 function requestErrorAlert(message){
