@@ -98,3 +98,7 @@
 #table-headers{
     border-radius: 0.6rem;
 }
+
+#table-headers:hover{
+    background-color: #00FD8F;
+}
