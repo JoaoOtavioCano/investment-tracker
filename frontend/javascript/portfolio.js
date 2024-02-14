@@ -4,7 +4,6 @@ import { setUserInitials } from './userInitials.js';
 function getAssets(){
     fetch('/assets', { method: 'GET'})
         .then((response) => {
-            console.log(response);
             checkAuthenticationKeyExists(response);
 
             return response.json()
@@ -112,9 +111,11 @@ function addIndicators(indicators){
     let net_worth = indicators["net_worth"];
     let gain_loss = indicators["gain_loss"];
     let price = indicators["price"];
+    let gain_loss_percent = `(${(Number(gain_loss.replace('$', '')) / Number(price.replace('$', '')) * 100).toFixed(2)}%)`;
 
     document.getElementById("net_worth").textContent = net_worth;
     document.getElementById("gain_loss").textContent = gain_loss;
+    document.getElementById("gain_loss_percent").textContent = gain_loss_percent;
     document.getElementById("price").textContent = price;
 }
 
@@ -123,8 +124,11 @@ function gainLossIndicatorColor(){
     
     if (Number(gain_loss_value.replace('$', '')) >= 0){
         document.getElementById("gain_loss").style.color = "#00FD8F";
+        document.getElementById("gain_loss_percent").style.color = "#00FD8F";
+        
     }else{
         document.getElementById("gain_loss").style.color = "red";
+        document.getElementById("gain_loss_percent").style.color = "red";
     }
 }
 
