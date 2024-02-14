@@ -1,6 +1,8 @@
 import { checkAuthenticationKeyExists } from './authentication.js';
 import { setUserInitials } from './userInitials.js';
 
+let graph_data = [["Asset", "Total"]];
+
 function getAssets(){
     fetch('/assets', { method: 'GET'})
         .then((response) => {
@@ -9,7 +11,6 @@ function getAssets(){
             return response.json()
         })
         .then((json) => {
-            let graph_data = [["Asset", "Total"]];
 
             for(let i = 0; i < json.length; i++){
                 addRow(json[i]);
@@ -139,26 +140,34 @@ function createGraph(graph_data){
     });
     
     function drawChart(graph_data) {
-
-    // Set Data
-    const data = google.visualization.arrayToDataTable(graph_data);
-
-    const options = {
-        chartArea:{left:0,top:0,width:"100%",height:"100%"}
-      };
-  
+        const dataTable = google.visualization.arrayToDataTable(graph_data);
+        const options = {
+            chartArea: { left: 0, top: 0, width: '100%', height: '100%' }
+        };
     
-    // Draw
-    const chart = new google.visualization.PieChart(document.getElementById('allocationChart'));
-    chart.draw(data, options);
+        const chartContainer = document.getElementById('allocationChart');
+        // Clear the chart container before drawing the new chart
+        chartContainer.innerHTML = '';
     
+        const chart = new google.visualization.PieChart(chartContainer);
+        chart.draw(dataTable, options);
     }
+    
+}
+
+function reloadGraph(){
+    window.addEventListener("resize", () => {
+        console.log("resize")
+        console.log(graph_data)
+        createGraph(graph_data);
+    })
 }
 
 function main(){
     setUserInitials()
     getAssets();
     getIndicators();
+    reloadGraph();
 }
 
 main()
