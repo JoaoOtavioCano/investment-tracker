@@ -102,3 +102,7 @@
 #table-headers:hover{
     background-color: #00FD8F;
 }
+
+footer{
+    position: absolute;
+}
