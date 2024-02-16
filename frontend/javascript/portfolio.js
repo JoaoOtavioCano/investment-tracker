@@ -112,8 +112,10 @@ function addIndicators(indicators){
     let net_worth = indicators["net_worth"];
     let gain_loss = indicators["gain_loss"];
     let price = indicators["price"];
-    let gain_loss_percent = `(${(Number(gain_loss.replace('$', '')) / Number(price.replace('$', '')) * 100).toFixed(2)}%)`;
-
+    let gain_loss_percent = "(0.00%)";
+    if (!(Number(gain_loss.replace('$', '')) == 0)){
+        gain_loss_percent = `(${(Number(gain_loss.replace('$', '')) / Number(price.replace('$', '')) * 100).toFixed(2)}%)`;
+    }
     document.getElementById("net_worth").textContent = net_worth;
     document.getElementById("gain_loss").textContent = gain_loss;
     document.getElementById("gain_loss_percent").textContent = gain_loss_percent;
