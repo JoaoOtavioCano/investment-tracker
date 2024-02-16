@@ -1,4 +1,5 @@
 import database
+from payloadValidator import PayloadValidator
 
 class DeleteTransaction:
     
@@ -7,12 +8,21 @@ class DeleteTransaction:
         self.payload = payload
 
     def respond(self):
-        transaction_id = self.payload["transactionId"]
+        expected_payload_keys = ["transactionId"]
 
-        self.__delete_transaction_from_db__(transaction_id)
+        payload_validator = PayloadValidator()
+        
+        if not payload_validator.validate(self.payload, expected_payload_keys):
+            self.request.send_error(500, "INVALID PAYLOAD")
+            self.request.end_headers()
 
-        self.request.send_response(200, 'OK')
-        self.request.end_headers()
+        else:
+            transaction_id = self.payload["transactionId"]
+
+            self.__delete_transaction_from_db__(transaction_id)
+
+            self.request.send_response(200, 'OK')
+            self.request.end_headers()
 
     def __delete_transaction_from_db__(self, transaction_id):
         db = database.Database()

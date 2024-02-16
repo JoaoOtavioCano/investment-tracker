@@ -214,3 +214,19 @@ tr:hover{
     height: 100%;
     background-color: rgba(255, 255, 255, 0.5);
 }
+
+main{
+    margin-bottom: 2rem;
+}
+
+footer{
+    margin: 0%;
+    position: relative;
+    bottom: 0%;
+    background-color: #00FD8F;
+    width: 100%;
+    left: 0%;
+    padding-left: 1rem;
+    font-size: small;
+    font-family: Arial, Helvetica, sans-serif;
+}

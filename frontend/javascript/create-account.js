@@ -11,6 +11,8 @@ function createAccount(){
 
     const jsonString = JSON.stringify(account);
 
+    cleanInputFields();
+
     fetch('/createaccount', { 
         method: 'POST',
         body: jsonString
@@ -23,6 +25,10 @@ function createAccount(){
 
                 window.location.href = redirectPath; 
             }, 2000);
+        } else {
+            if (response.statusText == "Email already exists"){
+                errorMessage("email", response.statusText);
+            }
         }
     })
 }
@@ -88,6 +94,16 @@ function removeAccountCreatedAlert(){
     alert = document.getElementById("account-created-alert");
 
     alert.style.display = "none";
+}
+
+function cleanInputFields(){
+    const name = document.forms.createaccount.name
+    const email = document.forms.createaccount.email
+    const password = document.forms.createaccount.password
+
+    name.value = ""
+    email.value = ""
+    password.value = ""
 }
 
 function main(){

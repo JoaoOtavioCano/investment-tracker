@@ -29,7 +29,26 @@
     font-size: 1.5rem;
     font-weight: normal;
     margin: 0%;
+}
+
+#overview-indicators li div .indicator-title {
     margin-bottom: 2rem;
+}
+
+#overview-indicators li div{
+    #price{
+        margin-bottom: 2rem;
+    }
+    #net_worth{
+        margin-bottom: 2rem;
+    }
+}
+
+#overview-indicators li div h3 {
+    font-size: 1rem;
+    font-weight: normal;
+    margin: 0%;
+    margin-bottom: 1rem;
 }
 
 #allocationChart{

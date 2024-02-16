@@ -1,16 +1,16 @@
 import { checkAuthenticationKeyExists } from './authentication.js';
 import { setUserInitials } from './userInitials.js';
 
+let graph_data = [["Asset", "Total"]];
+
 function getAssets(){
     fetch('/assets', { method: 'GET'})
         .then((response) => {
-            console.log(response);
             checkAuthenticationKeyExists(response);
 
             return response.json()
         })
         .then((json) => {
-            let graph_data = [["Asset", "Total"]];
 
             for(let i = 0; i < json.length; i++){
                 addRow(json[i]);
@@ -112,9 +112,13 @@ function addIndicators(indicators){
     let net_worth = indicators["net_worth"];
     let gain_loss = indicators["gain_loss"];
     let price = indicators["price"];
-
+    let gain_loss_percent = "(0.00%)";
+    if (!(Number(gain_loss.replace('$', '')) == 0)){
+        gain_loss_percent = `(${(Number(gain_loss.replace('$', '')) / Number(price.replace('$', '')) * 100).toFixed(2)}%)`;
+    }
     document.getElementById("net_worth").textContent = net_worth;
     document.getElementById("gain_loss").textContent = gain_loss;
+    document.getElementById("gain_loss_percent").textContent = gain_loss_percent;
     document.getElementById("price").textContent = price;
 }
 
@@ -123,8 +127,11 @@ function gainLossIndicatorColor(){
     
     if (Number(gain_loss_value.replace('$', '')) >= 0){
         document.getElementById("gain_loss").style.color = "#00FD8F";
+        document.getElementById("gain_loss_percent").style.color = "#00FD8F";
+        
     }else{
         document.getElementById("gain_loss").style.color = "red";
+        document.getElementById("gain_loss_percent").style.color = "red";
     }
 }
 
@@ -135,26 +142,34 @@ function createGraph(graph_data){
     });
     
     function drawChart(graph_data) {
-
-    // Set Data
-    const data = google.visualization.arrayToDataTable(graph_data);
-
-    const options = {
-        chartArea:{left:0,top:0,width:"100%",height:"100%"}
-      };
-  
+        const dataTable = google.visualization.arrayToDataTable(graph_data);
+        const options = {
+            chartArea: { left: 0, top: 0, width: '100%', height: '100%' }
+        };
     
-    // Draw
-    const chart = new google.visualization.PieChart(document.getElementById('allocationChart'));
-    chart.draw(data, options);
+        const chartContainer = document.getElementById('allocationChart');
+        // Clear the chart container before drawing the new chart
+        chartContainer.innerHTML = '';
     
+        const chart = new google.visualization.PieChart(chartContainer);
+        chart.draw(dataTable, options);
     }
+    
+}
+
+function reloadGraph(){
+    window.addEventListener("resize", () => {
+        console.log("resize")
+        console.log(graph_data)
+        createGraph(graph_data);
+    })
 }
 
 function main(){
     setUserInitials()
     getAssets();
     getIndicators();
+    reloadGraph();
 }
 
 main()

@@ -154,7 +154,10 @@ class Database:
         sql = ("INSERT INTO Users(email, password, name) "
             f"VALUES('{email}', '{password_hash}', '{name}')")
         
-        self.__mycursor__.execute(sql)
+        try:
+            self.__mycursor__.execute(sql)
+        except psycopg2.errors.UniqueViolation:
+            raise possibleErrors.UserAlreadyExists
 
         self.__db__.commit()
 

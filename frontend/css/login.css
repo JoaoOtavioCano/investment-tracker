@@ -83,3 +83,15 @@ body {
 #create-new-account-button:hover {
     background-color: #dadada;
 }
+
+footer{
+    margin: 0%;
+    position: absolute;
+    bottom: 0%;
+    background-color: #00FD8F;
+    width: 100%;
+    left: 0%;
+    padding-left: 1rem;
+    font-size: small;
+    font-family: Arial, Helvetica, sans-serif;
+}
