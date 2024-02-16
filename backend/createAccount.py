@@ -27,6 +27,7 @@ class CreateAccount():
             except possibleErrors.UserAlreadyExists:
                 self.request.send_response(500, "Email already exists")
                 self.request.end_headers()
+                self.request.wfile.write(b"Email already exists")
 
     def __createUserOnDB__(self, name, email, password):
 
