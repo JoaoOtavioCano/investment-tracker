@@ -1,6 +1,7 @@
 import database
 import bcrypt
 from payloadValidator import PayloadValidator
+import possibleErrors
 
 class CreateAccount():
     def __init__(self, request, payload):
@@ -16,12 +17,16 @@ class CreateAccount():
             self.request.send_error(500, "INVALID PAYLOAD")
             self.request.end_headers()
         else:
-            self.__createUserOnDB__(self.user_data["name"],
-                                    self.user_data["email"],
-                                    self.user_data["password"])
-            
-            self.request.send_response(200, "Account created successfully")
-            self.request.end_headers()
+            try:
+                self.__createUserOnDB__(self.user_data["name"],
+                                        self.user_data["email"],
+                                        self.user_data["password"])
+                
+                self.request.send_response(200, "Account created successfully")
+                self.request.end_headers()
+            except possibleErrors.UserAlreadyExists:
+                self.request.send_response(500, "Email already exists")
+                self.request.end_headers()
 
     def __createUserOnDB__(self, name, email, password):
 
@@ -31,7 +36,9 @@ class CreateAccount():
 
         db = database.Database()
 
-        db.createUser(name, email, password_hash)
-
+        try:
+            db.createUser(name, email, password_hash)
+        except possibleErrors.UserAlreadyExists:
+            raise possibleErrors.UserAlreadyExists
 
 

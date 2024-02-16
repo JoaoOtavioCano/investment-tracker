@@ -6,3 +6,6 @@ class NegativeQuantity(Exception):
 
 class AuthCookieNotFound(Exception):
     pass
+
+class UserAlreadyExists(Exception):
+    pass
