@@ -26,9 +26,10 @@ function createAccount(){
                 window.location.href = redirectPath; 
             }, 2000);
         } else {
-            if (response.statusText == "Email already exists"){
-                errorMessage("email", response.statusText);
-            }
+            response.text().then((text) => {
+                if (text == "Email already exists")
+                    errorMessage("email", text);
+            })
         }
     })
 }
