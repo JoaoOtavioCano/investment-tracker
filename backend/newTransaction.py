@@ -19,7 +19,7 @@ class newTransaction:
             self.__invalid_payload__()
         else:
             self.payload["asset"] = self.payload["asset"].upper()
-            if checkStockExistance(self.payload["asset"]):
+            if checkStockExistance(self.payload):
                 try:
                     self.__insertIntoDB__()
                     self.__success_response__()
@@ -87,7 +87,10 @@ class newTransaction:
         self.request.end_headers()
         self.request.wfile.write(b"Quantity and price must be positive!")
         
-def checkStockExistance(asset):
+def checkStockExistance(transaction):
+    if "stock(BR)" in transaction["type"]:
+        asset = f"{transaction["asset"]}.SA"
+
     try:
         if yf.Ticker(asset).fast_info["lastPrice"] != None:
             return True

@@ -68,13 +68,16 @@ class Database:
 
         stock_avg_price = -1
 
+        if "stock" in type:
+            country = type.replace("stock", "").replace("(", "").replace(")", "")
+
         if operation == "buy":
             if not self.__userHasThisStock__(user, asset):
                 sql_querry_insert_into_assets_table = ("INSERT INTO Assets(userID, name, type) "
                         f"VALUES ({user}, '{asset}', '{type}')")
             
-                sql_querry_insert_into_stocks_table = ("INSERT INTO Stocks(userID, name, quantity, cost) "
-                        f"VALUES ({user}, '{asset}', {quantity}, {price})")
+                sql_querry_insert_into_stocks_table = ("INSERT INTO Stocks(userID, name, quantity, cost, country) "
+                        f"VALUES ({user}, '{asset}', {quantity}, {price}, {country})")
             
                 self.__mycursor__.execute(sql_querry_insert_into_assets_table)
                 self.__mycursor__.execute(sql_querry_insert_into_stocks_table)
