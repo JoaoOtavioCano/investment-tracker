@@ -14,7 +14,10 @@
         <form name="newtransaction" onsubmit="return validateFormInputs()" method="post">
             <div class="inputs">
                 <label for="type">Type</label><br>
-                <input type="text" id="type" name="type" value="stock" disabled>
+                <select id="type" name="type" >
+                    <option value="stockus" selected>stock(US)</option>
+                    <option value="stockbr" selected>stock(BR)</option>
+                </select>
             </div>
             <div class="inputs">
                 <input type="button" value="buy" id="buy" onclick="clickBuy()">
