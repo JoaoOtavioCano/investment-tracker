@@ -1,5 +1,6 @@
 import json
 import database
+import dolar
 
 class GetTransactions:
 
@@ -30,9 +31,9 @@ class GetTransactions:
         for transaction in transactions:
 
             date_time = formatDate(str(transaction[0]))
-            asset_name = transaction[1]
+            asset_name = transaction[1].replace(".SA", "")
             quantity = transaction[2]
-            price = transaction[3]
+            price = dolar.real_to_dolar(transaction[3])
             operation = transaction[4]
             total = calculateTotal(quantity, price)
             id = transaction[5]
