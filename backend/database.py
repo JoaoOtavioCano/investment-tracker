@@ -34,7 +34,7 @@ class Database:
         return assets_list
 
     def getTransactions(self, user, frame):
-        sql_querry = ("SELECT date_time, asset, quantity, cost, operation, id FROM Transactions "
+        sql_querry = ("SELECT date_time, asset, quantity, cost, operation, id, type FROM Transactions "
                       f"WHERE Transactions.userID = {user} "
                       "ORDER BY date_time DESC, id DESC "
                       f"LIMIT 20 OFFSET {int(frame) * 20}")
