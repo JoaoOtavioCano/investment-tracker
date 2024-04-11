@@ -77,7 +77,7 @@ class Database:
                         f"VALUES ({user}, '{asset}', '{type}')")
             
                 sql_querry_insert_into_stocks_table = ("INSERT INTO Stocks(userID, name, quantity, cost, country) "
-                        f"VALUES ({user}, '{asset}', {quantity}, {price}, {country})")
+                        f"VALUES ({user}, '{asset}', {quantity}, {price}, '{country}')")
             
                 self.__mycursor__.execute(sql_querry_insert_into_assets_table)
                 self.__mycursor__.execute(sql_querry_insert_into_stocks_table)

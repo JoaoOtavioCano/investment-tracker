@@ -36,6 +36,12 @@ class newTransaction:
 
         transaction = self.payload
 
+        asset = transaction["asset"]
+
+        if "stock(BR)" in transaction["type"]:
+            asset = f"{asset}.SA"
+            transaction["asset"] = asset
+
         db = database.Database()
 
         try:
@@ -88,8 +94,10 @@ class newTransaction:
         self.request.wfile.write(b"Quantity and price must be positive!")
         
 def checkStockExistance(transaction):
+    asset = transaction["asset"]
+
     if "stock(BR)" in transaction["type"]:
-        asset = f"{transaction["asset"]}.SA"
+        asset = f"{asset}.SA"
 
     try:
         if yf.Ticker(asset).fast_info["lastPrice"] != None:
