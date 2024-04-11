@@ -1,7 +1,8 @@
 import { checkAuthenticationKeyExists } from './authentication.js';
 import { setUserInitials } from './userInitials.js';
 
-let graph_data = [["Asset", "Total"]];
+let allocationChartData = [["Asset", "Total"]];
+let assetTypeChartData = [["Type", "Total"]];
 
 function getAssets(){
     fetch('/assets', { method: 'GET'})
@@ -11,13 +12,27 @@ function getAssets(){
             return response.json()
         })
         .then((json) => {
+            let types = new Map();
 
             for(let i = 0; i < json.length; i++){
+                let total;
                 addRow(json[i]);
-                graph_data[i+1] = [json[i]["asset"], parseFloat(json[i]["total"].replace("$", ""))];
+                allocationChartData[i+1] = [json[i]["asset"], parseFloat(json[i]["total"].replace("$", ""))];
+                if (!types.has(json[i]["type"])) {
+                    total = parseFloat(json[i]["total"].replace("$", ""));
+                } else {
+                    total = parseFloat(types.get(json[i]["type"])) + parseFloat(json[i]["total"].replace("$", ""));
+                }
+                types.set(json[i]["type"], total);
             }
+            let i = 1
+            types.forEach (function(total, type) {
+                assetTypeChartData[i] = [type, total];
+                i++;
+              })
 
-            createGraph(graph_data)
+            createGraph(allocationChartData, "allocationChart")
+            createGraph(assetTypeChartData, "assetTypeChart")
         })
 }
 
@@ -135,19 +150,19 @@ function gainLossIndicatorColor(){
     }
 }
 
-function createGraph(graph_data){
+function createGraph(graph_data, graph_div_id){
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(function () {
-        drawChart(graph_data);
+        drawChart(graph_data, graph_div_id);
     });
     
-    function drawChart(graph_data) {
+    function drawChart(graph_data, graph_div_id) {
         const dataTable = google.visualization.arrayToDataTable(graph_data);
         const options = {
             chartArea: { left: 0, top: 0, width: '100%', height: '100%' }
         };
     
-        const chartContainer = document.getElementById('allocationChart');
+        const chartContainer = document.getElementById(graph_div_id);
         // Clear the chart container before drawing the new chart
         chartContainer.innerHTML = '';
     
@@ -159,9 +174,8 @@ function createGraph(graph_data){
 
 function reloadGraph(){
     window.addEventListener("resize", () => {
-        console.log("resize")
-        console.log(graph_data)
-        createGraph(graph_data);
+        createGraph(allocationChartData, "allocationChart");
+        createGraph(assetTypeChartData, "assetTypeChart");
     })
 }
 
