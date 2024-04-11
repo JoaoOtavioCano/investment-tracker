@@ -29,7 +29,7 @@
     z-index: 1;
 }
 
-input{
+input, select{
     width: 10.5rem;
     height: 2rem;
     border-radius: 0.6rem;
@@ -48,10 +48,7 @@ input{
     margin-bottom: 1rem;
 }
 
-#type{
-    background-color: rgb(116, 116, 116);
-    color: black;
-}
+
 
 #buy, #sell{
     padding: 0%;

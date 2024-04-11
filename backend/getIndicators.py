@@ -1,6 +1,7 @@
 import json
 import database
 import yfinance as yf
+import dolar
 
 class GetIndicators():
 
@@ -30,8 +31,12 @@ class GetIndicators():
 
         for asset in assets:
 
-            price = price + asset[2] * asset[3]
-            net_worth = net_worth +  yf.Ticker(asset[1]).fast_info["lastPrice"] * asset[2]
+            if "stock(BR)" in asset[0]:
+                price = price + asset[2] * dolar.real_to_dolar(asset[3])
+                net_worth = net_worth +  dolar.real_to_dolar(yf.Ticker(asset[1]).fast_info["lastPrice"]) * asset[2]
+            else:
+                price = price + asset[2] * asset[3]
+                net_worth = net_worth +  yf.Ticker(asset[1]).fast_info["lastPrice"] * asset[2]
 
         gain_loss = net_worth - price
 

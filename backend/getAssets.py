@@ -1,6 +1,7 @@
 import json
 import database
 import yfinance as yf
+import dolar
 
 class GetAssets:
 
@@ -33,8 +34,15 @@ class GetAssets:
             asset_type = asset[0]
             asset_name = asset[1]
             quantity = asset[2]
-            avg_price = asset[3]
-            current_price = yf.Ticker(asset_name).fast_info["lastPrice"]
+
+            if "stock(BR)" in asset_type:
+                avg_price = dolar.real_to_dolar(float(asset[3]))
+                current_price = dolar.real_to_dolar(float(yf.Ticker(asset_name).fast_info["lastPrice"]))
+                asset_name = asset_name.replace(".SA", "")
+            else:
+                avg_price = asset[3]
+                current_price = yf.Ticker(asset_name).fast_info["lastPrice"]
+                    
             total = calculateTotal(quantity, current_price)
             gain_loss = calculateGainLoss(current_price, avg_price, quantity) 
             gain_loss_percent = calculateGainLossPercentage(current_price, avg_price)
