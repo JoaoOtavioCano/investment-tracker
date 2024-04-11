@@ -1,5 +1,9 @@
 # investment-tracker
 
+## Important
+
+**This is a personal project made to study and prectice web development. This software should not be used as a reliable source of information for investing.**
+
 ## 1 - Software Description
 
 This is an investment portfolio management system. This software allows the user to create investment wallets, register trades, and track the progress of the portfolio. It provides some graphs and indicators with important information about the assets.
