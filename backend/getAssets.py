@@ -36,6 +36,7 @@ class GetAssets:
             quantity = asset[2]
 
             if "stock(BR)" in asset_type:
+                asset_name = asset_name.replace(".SA", "")
                 avg_price = dolar.real_to_dolar(float(asset[3]))
                 current_price = dolar.real_to_dolar(float(yf.Ticker(asset_name).fast_info["lastPrice"]))
             else:
