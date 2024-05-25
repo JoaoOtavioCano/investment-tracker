@@ -7,8 +7,8 @@ class AuthCookie():
 
         self.cookie["authenticationKey"] = authentication_key
 
-        self.cookie["authenticationKey"]["httponly"] = True 
-        self.cookie["authenticationKey"]["samesite"] = 'Lax' 
+        #self.cookie["authenticationKey"]["httponly"] = True 
+        #self.cookie["authenticationKey"]["samesite"] = 'Lax' 
     
     def generateHTTPheaders(self):
         return str(self.cookie).replace("Set-Cookie: ", "")

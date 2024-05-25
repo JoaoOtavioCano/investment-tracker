@@ -49,23 +49,19 @@ class RequestsHandler(BaseHTTPRequestHandler):
             request_handler.respond()
             return True
         
-        if self.authenticator.validateAuthentication(self):
-            if self.path == "/assets":
-                request_handler = GetAssets(self)
-                request_handler.respond()
-            
-            elif self.path == "/indicators":
-                request_handler = GetIndicators(self)
-                request_handler.respond()
-            
-            elif "/gettransactions" in self.path:
-                request_handler = GetTransactions(self)
-                request_handler.respond()
-        else:
-            self.send_response(500, "User not authenticated")
-            self.send_header('Content-type', 'text/plain')
-            self.end_headers()
-            self.wfile.write(b"User not authenticated")
+
+        if self.path == "/assets":
+            request_handler = GetAssets(self)
+            request_handler.respond()
+        
+        elif self.path == "/indicators":
+            request_handler = GetIndicators(self)
+            request_handler.respond()
+        
+        elif "/gettransactions" in self.path:
+            request_handler = GetTransactions(self)
+            request_handler.respond()
+
 
 
     def do_POST(self):

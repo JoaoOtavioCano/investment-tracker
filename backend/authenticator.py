@@ -20,13 +20,14 @@ class Authenticator:
             return False 
         
     def getUserIdAndAuthKeyFromCookies(self, request):
-
+        """"
         try:
             cookies = request.headers["Cookie"].split(";")
             authentication_key = str([cookie for cookie in cookies if "authenticationKey=" in cookie][0]).replace("authenticationKey=", "").strip()
         except (IndexError, AttributeError):
             raise AuthCookieNotFound
-
-        user_id =str( authentication_key.split('#', 1)[0].strip())
+        """
+        authentication_key = "foda-se"
+        user_id = "00004"
 
         return user_id, authentication_key

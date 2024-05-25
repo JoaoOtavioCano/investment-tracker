@@ -14,8 +14,12 @@ class GetIndicators():
 
         json_response = json.dumps(response)
 
+
         self.request_handler.send_response(200, "OK")
-        self.request_handler.send_header('Content-type', 'application/json')
+        self.request_handler.send_header('Content-Type', 'application/json')
+        self.request_handler.send_header('Access-Control-Allow-Origin', '*')
+        self.request_handler.send_header('Access-Control-Allow-Methods', 'GET')
+        self.request_handler.send_header('Access-Control-Allow-Headers', 'Content-Type')
         self.request_handler.end_headers()
         self.request_handler.wfile.write(json_response.encode('utf-8'))
     
