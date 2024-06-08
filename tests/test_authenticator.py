@@ -1,11 +1,6 @@
-import sys
-import os
 import pytest
 
-# Add the parent directory to sys.path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-from backend.authenticator import Authenticator
+from backend.authenticator import *
 
 class FakeRequest:
     def __init__(self):
