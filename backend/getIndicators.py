@@ -1,7 +1,8 @@
+from .database import *
+from .dolar import *
+
 import json
-import database
 import yfinance as yf
-import dolar
 
 class GetIndicators():
 
@@ -20,7 +21,7 @@ class GetIndicators():
         self.request_handler.wfile.write(json_response.encode('utf-8'))
     
     def __getDataFromDB__(self):
-        db = database.Database()
+        db = Database()
 
         net_worth = 0
         price = 0
@@ -32,8 +33,8 @@ class GetIndicators():
         for asset in assets:
 
             if "stock(BR)" in asset[0]:
-                price = price + asset[2] * dolar.real_to_dolar(asset[3])
-                net_worth = net_worth +  dolar.real_to_dolar(yf.Ticker(asset[1]).fast_info["lastPrice"]) * asset[2]
+                price = price + asset[2] * real_to_dolar(asset[3])
+                net_worth = net_worth +  real_to_dolar(yf.Ticker(asset[1]).fast_info["lastPrice"]) * asset[2]
             else:
                 price = price + asset[2] * asset[3]
                 net_worth = net_worth +  yf.Ticker(asset[1]).fast_info["lastPrice"] * asset[2]

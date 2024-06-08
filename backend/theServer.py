@@ -1,21 +1,26 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
-from pages import Pages
-from defaultPageRequestHandler import DefaultPageRequestHandler
-from getAssets import GetAssets
-from getTransactions import GetTransactions
-from getIndicators import GetIndicators
-from login import Login
-from authenticator import Authenticator
-from newTransaction import newTransaction
-from favicon import Favicon
-from logout import Logout
-from createAccount import CreateAccount
-from forgotPassword import ForgotPassword
-from newPassword import NewPassword
-from deleteAccount import DeleteAccount
-from deleteTransaction import DeleteTransaction
+from .pages import Pages
+from .defaultPageRequestHandler import DefaultPageRequestHandler
+from .getAssets import GetAssets
+from .getTransactions import GetTransactions
+from .getIndicators import GetIndicators
+from .login import Login
+from .authenticator import Authenticator
+from .newTransaction import newTransaction
+from .favicon import Favicon
+from .logout import Logout
+from .createAccount import CreateAccount
+from .forgotPassword import ForgotPassword
+from .newPassword import NewPassword
+from .deleteAccount import DeleteAccount
+from .deleteTransaction import DeleteTransaction
+
 import os
+import sys
 from dotenv import load_dotenv
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 
 load_dotenv()
 

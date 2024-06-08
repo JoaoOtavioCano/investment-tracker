@@ -1,6 +1,7 @@
+from .database import *
+from .dolar import *
+
 import json
-import database
-import dolar
 
 class GetTransactions:
 
@@ -20,7 +21,7 @@ class GetTransactions:
         self.request_handler.wfile.write(json_response.encode('utf-8'))
 
     def __getDataFromDB__(self, frame):
-        db = database.Database()
+        db = Database()
 
         user_id, _ = self.request_handler.authenticator.getUserIdAndAuthKeyFromCookies(self.request_handler)
 
@@ -35,7 +36,7 @@ class GetTransactions:
             quantity = transaction[2]
             type = transaction[6]
             if type == "stock(BR)":
-                price = dolar.real_to_dolar(transaction[3])
+                price = real_to_dolar(transaction[3])
             else:
                 price = transaction[3]
             operation = transaction[4]

@@ -1,5 +1,5 @@
-import database
-from payloadValidator import PayloadValidator
+from .database import *
+from .payloadValidator import PayloadValidator
 
 class DeleteTransaction:
     
@@ -25,6 +25,6 @@ class DeleteTransaction:
             self.request.end_headers()
 
     def __delete_transaction_from_db__(self, transaction_id):
-        db = database.Database()
+        db = Database()
 
         db.delete_transaction(transaction_id)

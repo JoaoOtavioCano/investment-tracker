@@ -1,5 +1,6 @@
+from .possibleErrors import *
+
 import psycopg2
-import possibleErrors
 import os
 from dotenv import load_dotenv
 
@@ -103,7 +104,7 @@ class Database:
                 new_quantity = stock_quantity - float(quantity)
 
                 if new_quantity < 0:
-                    raise possibleErrors.NegativeQuantity
+                    raise NegativeQuantity
                 
                 elif new_quantity == 0:
                     sql_querry_delete_asset = ("DELETE FROM Assets "
@@ -121,7 +122,7 @@ class Database:
                     self.__mycursor__.execute(sql_querry_update_stocks_table)          
 
             else:
-                raise possibleErrors.AssetNotInPortfolio
+                raise AssetNotInPortfolio
             
         sql_querry_insert_into_transactions_table = ("INSERT INTO Transactions(userID, date_time, asset, quantity, cost, operation, current_avg_cost, type) "
                                                         f"VALUES ({user}, '{date}', '{asset}', {quantity}, {price}, '{operation}', {stock_avg_price}, '{type}');")
@@ -160,7 +161,7 @@ class Database:
         try:
             self.__mycursor__.execute(sql)
         except psycopg2.errors.UniqueViolation:
-            raise possibleErrors.UserAlreadyExists
+            raise UserAlreadyExists
 
         self.__db__.commit()
 

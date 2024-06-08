@@ -1,4 +1,5 @@
-from pages import Pages
+from .pages import Pages
+
 import re
 
 def checkMultipleFiles(path, list_of_files_path):
