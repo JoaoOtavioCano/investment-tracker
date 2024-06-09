@@ -2,6 +2,7 @@ import pytest
 
 from backend.authenticator import *
 
+
 class FakeRequest:
     def __init__(self):
         self.headers = {}
