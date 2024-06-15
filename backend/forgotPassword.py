@@ -1,4 +1,4 @@
-from .database import *
+from .database import Database
 from .emailManager import EmailManager
 from .payloadValidator import PayloadValidator
 
