@@ -1,4 +1,4 @@
-from .database import *
+from .database import Database
 
 class DeleteAccount():
     def __init__(self, request):
