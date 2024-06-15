@@ -8,7 +8,7 @@ load_dotenv()
 class EmailManager:
 
     def __init__(self):
-        pass
+        pass # Essa classe não precisa que seu construtor faça nada 
 
     def sendEmailToCreateNewPassword(self, destination_email, code):
         msg = EmailMessage()
