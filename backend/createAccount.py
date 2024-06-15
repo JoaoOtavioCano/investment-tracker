@@ -1,6 +1,6 @@
-from .database import *
+from .database import Database
 from .payloadValidator import PayloadValidator
-from .possibleErrors import *
+from .possibleErrors import UserAlreadyExists
 
 import bcrypt
 
