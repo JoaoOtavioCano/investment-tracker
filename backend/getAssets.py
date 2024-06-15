@@ -1,5 +1,5 @@
 from .database import Database
-from .dolar import *
+from .dolar import real_to_dolar
 
 import json
 import yfinance as yf
@@ -48,10 +48,12 @@ class GetAssets:
             gain_loss = calculateGainLoss(current_price, avg_price, quantity) 
             gain_loss_percent = calculateGainLossPercentage(current_price, avg_price)
 
-            gain_loss = "${:.2f}".format(gain_loss)
+            money_format = "${:.2f}"
+
+            gain_loss = money_format.format(gain_loss)
             gain_loss_percent = "{:.2f}%".format(gain_loss_percent)
-            total = "${:.2f}".format(total)
-            avg_price = "${:.2f}".format(avg_price)
+            total = money_format.format(total)
+            avg_price = money_format.format(avg_price)
 
             asset_json = {
             "type": asset_type,
