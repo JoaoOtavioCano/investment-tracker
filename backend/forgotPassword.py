@@ -1,8 +1,9 @@
+from .database import *
+from .emailManager import EmailManager
+from .payloadValidator import PayloadValidator
+
 import random
 import hashlib
-import database
-from emailManager import EmailManager
-from payloadValidator import PayloadValidator
 
 class ForgotPassword:
     def __init__(self, request, payload):
@@ -42,7 +43,7 @@ class ForgotPassword:
         return code
 
     def __saveCodeInDb__(self, code):
-        db = database.Database()
+        db = Database()
 
         email = self.payload["email"]
 

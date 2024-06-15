@@ -1,7 +1,8 @@
-import database
+from .database import Database
+from .payloadValidator import PayloadValidator
+from .possibleErrors import UserAlreadyExists
+
 import bcrypt
-from payloadValidator import PayloadValidator
-import possibleErrors
 
 class CreateAccount():
     def __init__(self, request, payload):
@@ -24,7 +25,7 @@ class CreateAccount():
                 
                 self.request.send_response(200, "Account created successfully")
                 self.request.end_headers()
-            except possibleErrors.UserAlreadyExists:
+            except UserAlreadyExists:
                 self.request.send_response(500, "Email already exists")
                 self.request.end_headers()
                 self.request.wfile.write(b"Email already exists")
@@ -35,11 +36,11 @@ class CreateAccount():
 
         password_hash = bcrypt.hashpw(password.encode(), salt).decode()
 
-        db = database.Database()
+        db = Database()
 
         try:
             db.createUser(name, email, password_hash)
-        except possibleErrors.UserAlreadyExists:
-            raise possibleErrors.UserAlreadyExists
+        except UserAlreadyExists:
+            raise UserAlreadyExists
 
 

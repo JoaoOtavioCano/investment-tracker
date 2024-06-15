@@ -1,4 +1,4 @@
-import database
+from .database import *
 
 class DeleteAccount():
     def __init__(self, request):
@@ -15,6 +15,6 @@ class DeleteAccount():
         self.request.end_headers()
 
     def __delete_from_db___(self, user_id):
-        db = database.Database()
+        db = Database()
 
         db.deleteUser(user_id)

@@ -1,7 +1,8 @@
+from .database import *
+from .dolar import *
+
 import json
-import database
 import yfinance as yf
-import dolar
 
 class GetAssets:
 
@@ -20,7 +21,7 @@ class GetAssets:
         self.request_handler.wfile.write(json_response.encode('utf-8'))
     
     def __getDataFromDB__(self):
-        db = database.Database()
+        db = Database()
 
         user_id, _ = self.request_handler.authenticator.getUserIdAndAuthKeyFromCookies(self.request_handler)
 
@@ -36,8 +37,8 @@ class GetAssets:
             quantity = asset[2]
 
             if "stock(BR)" in asset_type:
-                avg_price = dolar.real_to_dolar(float(asset[3]))
-                current_price = dolar.real_to_dolar(float(yf.Ticker(asset_name).fast_info["lastPrice"]))
+                avg_price = real_to_dolar(float(asset[3]))
+                current_price = real_to_dolar(float(yf.Ticker(asset_name).fast_info["lastPrice"]))
                 asset_name = asset_name.replace(".SA", "")
             else:
                 avg_price = asset[3]

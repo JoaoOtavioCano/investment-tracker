@@ -1,6 +1,7 @@
-import database
+from .database import *
+from .payloadValidator import PayloadValidator
+
 import bcrypt
-from payloadValidator import PayloadValidator
 
 class NewPassword:
     def __init__(self, request, payload):
@@ -33,7 +34,7 @@ class NewPassword:
                 self.request.end_headers()
 
     def __checkCode__(self, code):
-        db = database.Database()
+        db = Database()
 
         user_id = db.getUserIdUsingCode(code)
 
@@ -47,11 +48,11 @@ class NewPassword:
 
         new_password_hash = bcrypt.hashpw(new_password.encode(), salt).decode()
         
-        db = database.Database()
+        db = Database()
 
         db.updateUserPassword(user_id, new_password_hash)
 
     def __deleteRequestToChangePassword__(self, user_id):
-        db = database.Database()
+        db = Database()
 
         db.deletePasswordRequest(user_id)

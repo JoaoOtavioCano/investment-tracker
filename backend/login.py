@@ -1,10 +1,11 @@
+from .database import *
+from .authCookie import *
+from .payloadValidator import PayloadValidator
+
 import json
-import database
 import random
 import bcrypt
 import hashlib
-import authCookie
-from payloadValidator import PayloadValidator
 
 
 class Login():
@@ -35,7 +36,7 @@ class Login():
 
                 self.request_handler.authenticator.authorization_list[user_id] = authentication_key
 
-                cookie = authCookie.AuthCookie(authentication_key)
+                cookie = AuthCookie(authentication_key)
 
                 response = {'user': user['user_name']}
 
@@ -49,7 +50,7 @@ class Login():
 
     def __checkUserCredentials__(self):
 
-        db = database.Database()
+        db = Database()
 
         email = self.payload["email"]
         password = self.payload["password"].encode()

@@ -1,7 +1,8 @@
-import database
+from .database import *
+from .payloadValidator import PayloadValidator
+from .possibleErrors import *
+
 import yfinance as yf
-import possibleErrors
-from payloadValidator import PayloadValidator
 
 class newTransaction:
     def __init__(self, request, payload):
@@ -23,9 +24,9 @@ class newTransaction:
                 try:
                     self.__insertIntoDB__()
                     self.__success_response__()
-                except possibleErrors.AssetNotInPortfolio:
+                except AssetNotInPortfolio:
                     self.__asset_not_in_portfolio_error_response__()
-                except possibleErrors.NegativeQuantity:
+                except NegativeQuantity:
                     self.__negative_quantity_error_response__()
             else:
                 self.__stock_does_not_exist_error_response__()
@@ -42,7 +43,7 @@ class newTransaction:
             asset = f"{asset}.SA"
             transaction["asset"] = asset
 
-        db = database.Database()
+        db = Database()
 
         try:
             db.addNewTransaction(int(user_id), 
@@ -53,10 +54,10 @@ class newTransaction:
                                 operation=transaction["operation"],
                                 type=transaction["type"])
         
-        except possibleErrors.AssetNotInPortfolio:
-            raise possibleErrors.AssetNotInPortfolio
-        except possibleErrors.NegativeQuantity:
-            raise possibleErrors.NegativeQuantity
+        except AssetNotInPortfolio:
+            raise AssetNotInPortfolio
+        except NegativeQuantity:
+            raise NegativeQuantity
         
     def __success_response__(self):
         self.request.send_response(200, "OK")

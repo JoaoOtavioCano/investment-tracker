@@ -1,4 +1,4 @@
-from possibleErrors import AuthCookieNotFound
+from .possibleErrors import AuthCookieNotFound
 
 class Authenticator:
     def __init__(self):
@@ -24,7 +24,7 @@ class Authenticator:
         try:
             cookies = request.headers["Cookie"].split(";")
             authentication_key = str([cookie for cookie in cookies if "authenticationKey=" in cookie][0]).replace("authenticationKey=", "").strip()
-        except (IndexError, AttributeError):
+        except (IndexError, AttributeError, KeyError):
             raise AuthCookieNotFound
 
         user_id =str( authentication_key.split('#', 1)[0].strip())
