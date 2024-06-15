@@ -1,4 +1,4 @@
-from .possibleErrors import *
+from .possibleErrors import NegativeQuantity, AssetNotInPortfolio, UserAlreadyExists
 
 import psycopg2
 import os
