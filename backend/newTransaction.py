@@ -101,7 +101,7 @@ def checkStockExistance(transaction):
         asset = f"{asset}.SA"
 
     try:
-        if yf.Ticker(asset).fast_info["lastPrice"] != None:
+        if yf.Ticker(asset).get_fast_info()["lastPrice"] != None:
             return True
         else:
             return False

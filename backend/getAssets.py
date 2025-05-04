@@ -33,21 +33,24 @@ class GetAssets:
         for asset in assets:
 
             asset_type = asset[0]
-            asset_name = asset[1]
+            asset_name = str(asset[1])
             quantity = asset[2]
+            
+            print(yf.Ticker(asset_name).get_fast_info()["lastPrice"])
 
             if "stock(BR)" in asset_type:
 
                 try:
                     avg_price = real_to_dolar(float(asset[3]))
-                    current_price = real_to_dolar(float(yf.Ticker(asset_name).fast_info["lastPrice"]))
+                    current_price = real_to_dolar(float(yf.Ticker(asset_name).get_fast_info()["lastPrice"]))
                 except:
                     current_price = avg_price = 1 
                 asset_name = asset_name.replace(".SA", "")
             else:
                 avg_price = asset[3]
                 try:
-                    current_price = yf.Ticker(asset_name).fast_info["lastPrice"]
+                    current_price = yf.Ticker(asset_name).get_fast_info()["lastPrice"]
+                    print(current_price)
                 except:
                     current_price = avg_price
                     
@@ -75,6 +78,8 @@ class GetAssets:
             data.append(asset_json)
 
         data.sort(key=sortByTotal, reverse=True)
+        
+        print(data)
 
         return data
     
