@@ -17,6 +17,7 @@ from .deleteTransaction import DeleteTransaction
 
 import os
 import sys
+import json
 from dotenv import load_dotenv
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -137,25 +138,8 @@ def run(server_class=HTTPServer, handler_class=RequestsHandler):
 
 def formatPayload(request):
     content_length = int(request.headers["Content-Length"])
-    payload_data = (
-        str(request.rfile.read(content_length))
-        .replace("b'", "", 1)
-        .replace("'", "")
-        .replace("{", "")
-        .replace("}", "")
-        .replace(",", ":")
-        .replace('"', "")
-        .split(":")
-    )
-
-    payload_data = list(payload_data)
-
-    dict = {}
-
-    for i in range(int(int(len(payload_data)) / 2)):
-        dict[payload_data[i * 1 + i]] = payload_data[i * 1 + i + 1]
-
-    return dict
+    payload_data = json.loads(request.rfile.read(content_length))
+    return payload_data
 
 
 def main():
@@ -163,4 +147,3 @@ def main():
 
 
 main()
-
