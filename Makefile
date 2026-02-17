@@ -3,12 +3,12 @@ test:
 
 run: build 
 	echo starting
-	docker compose up
+	docker compose -f ./docker-compose.yml up
 
 build:
 	echo building
 	docker build -t investment-tracker .
-	docker compose build
+	docker compose -f ./docker-compose.yml build 
 	echo building finished
 
 
