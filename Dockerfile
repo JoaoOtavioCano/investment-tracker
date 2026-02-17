@@ -6,4 +6,4 @@ COPY . .
 RUN pip install psycopg2-binary && pip install -r backend/requirements.txt
 
 
-ENTRYPOINT [ "python", "main.py" ]
+ENTRYPOINT [ "python", "-u", "main.py" ]

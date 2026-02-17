@@ -33,13 +33,11 @@ class GetAssets:
         assets = db.getAssets(int(user_id))
 
         data = []
-        tasks = []
+        results = []
 
         for asset in assets:
-            task = asyncio.create_task(self.organize_asset_data(asset))
-            tasks.append(task)
-
-        results = await asyncio.gather(*tasks)
+            result = self.organize_asset_data(asset)
+            results.append(result)
 
         data = results
 
@@ -47,7 +45,7 @@ class GetAssets:
 
         return data
 
-    async def organize_asset_data(self, asset):
+    def organize_asset_data(self, asset):
         asset_type = asset[0]
         asset_name = str(asset[1])
         quantity = asset[2]
@@ -56,7 +54,7 @@ class GetAssets:
             try:
                 avg_price = real_to_dolar(float(asset[3]))
                 current_price = real_to_dolar(
-                    float(await yf.Ticker(asset_name).get_fast_info()["lastPrice"])
+                    float(yf.Ticker(asset_name).get_fast_info()["lastPrice"])
                 )
             except Exception:
                 current_price = avg_price = 1
@@ -64,7 +62,7 @@ class GetAssets:
         else:
             avg_price = asset[3]
             try:
-                current_price = await yf.Ticker(asset_name).get_fast_info()["lastPrice"]
+                current_price = yf.Ticker(asset_name).get_fast_info()["lastPrice"]
                 print(current_price)
             except Exception:
                 current_price = avg_price
