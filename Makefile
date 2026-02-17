@@ -1,5 +1,23 @@
 test:
 	pytest
 
-run: 
-	python main.py
+run: build 
+	echo starting
+	docker compose up
+
+build:
+	echo building
+	docker build -t investment-tracker .
+	docker compose build
+	echo building finished
+
+
+run-dev: build-dev
+	echo starting development
+	docker compose -f ./docker-compose.dev.yml up
+
+build-dev:
+	echo building development
+	docker build -t investment-tracker-dev .
+	docker compose -f ./docker-compose.dev.yml build 
+	echo building finished
